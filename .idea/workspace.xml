@@ -5,8 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="51e74530-61cc-4b08-8776-0fbe738d5ecd" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/iMatApp/src/imat/imat_app_header.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/iMatApp/src/imat/ImatAppFooter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/iMatApp/src/imat/imat_app_footer.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/iMatApp/src/imat/iMatApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/iMatApp/src/imat/iMatApp.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/iMatApp/src/imat/imat_app.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/iMatApp/src/imat/imat_app.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/iMatApp/src/imat/imat_app_header.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/iMatApp/src/imat/imat_app_header.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

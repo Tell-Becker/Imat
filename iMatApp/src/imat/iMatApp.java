@@ -6,6 +6,7 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 /*
@@ -21,8 +22,11 @@ public class iMatApp extends Application {
         ResourceBundle bundle = java.util.ResourceBundle.getBundle("imat/resources/iMat");
         
         Parent root = FXMLLoader.load(getClass().getResource("imat_app.fxml"), bundle);
-        
-        Scene scene = new Scene(root, 1000, 700);
+
+        VBox rootContainer = new VBox();
+        rootContainer.getChildren().addAll(root);
+
+        Scene scene = new Scene(rootContainer, 1000, 2000);
         
         stage.setTitle(bundle.getString("application.name"));
         stage.setScene(scene);
