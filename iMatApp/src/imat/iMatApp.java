@@ -26,7 +26,7 @@ public class iMatApp extends Application {
         VBox rootContainer = new VBox();
         rootContainer.getChildren().addAll(root);
 
-        Scene scene = new Scene(rootContainer, 1000, 2000);
+        Scene scene = new Scene(rootContainer, 1000, 700);
         
         stage.setTitle(bundle.getString("application.name"));
         stage.setScene(scene);

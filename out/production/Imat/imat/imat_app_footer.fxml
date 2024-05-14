@@ -1,14 +1,66 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="imat.ImatAppFooter"
-            prefHeight="400.0" prefWidth="600.0">
 
+<AnchorPane prefHeight="80.0" prefWidth="1080.0" style="-fx-background-color: #3162BF;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="imat.ImatAppFooter">
+   <children>
+      <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="868.0" layoutY="12.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@resources/Ladda-ner-ikoner.png" />
+         </image>
+      </ImageView>
+      <Label fx:id="contactUs" layoutX="32.0" layoutY="9.0" text="Kontakta Oss" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="24.0" />
+         </font>
+      </Label>
+      <Label fx:id="aboutImat" layoutX="333.0" layoutY="9.0" text="Om Imat" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="24.0" />
+         </font>
+      </Label>
+      <Line endX="1081.2928466796875" endY="55.33332443237305" startX="1.0808308616105933E-5" startY="55.33332443237305" stroke="WHITE" />
+      <Label layoutX="4.0" layoutY="58.0" text="IMAT" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="51.0" layoutY="59.0" prefHeight="17.0" prefWidth="373.0" text="Imat Sverige  sverigevägen 18, Telefon: 108800, Org-nr: 567812-5021" textFill="WHITE" />
+      <Label fx:id="purchaseConditions" layoutX="594.0" layoutY="9.0" text="Köpvillkor" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="24.0" />
+         </font>
+      </Label>
+      <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="874.0" layoutY="59.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@resources/facebook.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="915.0" layoutY="60.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@resources/social-media.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="959.0" layoutY="60.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@resources/instagram.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="1002.0" layoutY="62.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@resources/youtube.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="1046.0" layoutY="59.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@resources/linkedin.png" />
+         </image>
+      </ImageView>
+   </children>
 </AnchorPane>

@@ -1,5 +1,17 @@
-.text-sample{
+.text-sample {
       -fx-font-size: 16px;
       -fx-font-family: "Arial";
       -fx-font-weight: bold;
   }
+
+.categories {
+    -fx-background-radius: 20px;
+}
+
+#buy_button {
+    -fx-background-radius: 15px;
+    -fx-font-weight: bold;
+    /*-fx-text-fill: white;
+
+    -fx-font-size: 18px;*/
+}

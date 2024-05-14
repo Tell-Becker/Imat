@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.text.Font?>
+
+<fx:root prefHeight="214.0" prefWidth="151.0" style="-fx-background-radius: 20;" type="javafx.scene.layout.AnchorPane" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <ImageView fx:id="productPanelImage" fitHeight="100.0" fitWidth="107.0" layoutX="32.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="101.33333333333331" AnchorPane.leftAnchor="32.0" AnchorPane.topAnchor="14.0">
+         <image>
+            <Image url="@resources/logo.png" />
+         </image></ImageView>
+      <ImageView fx:id="productPanelInfo" fitHeight="20.0" fitWidth="16.0" layoutX="141.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@resources/info.png" />
+         </image>
+      </ImageView>
+      <Button id="buy_button" fx:id="productPanelButton" layoutX="12.0" layoutY="164.0" mnemonicParsing="false" onAction="#handleAddAction" prefHeight="39.0" prefWidth="144.0" style="-fx-background-color: #3162BF;" stylesheets="@imat_app.css" text="KÖP" textFill="WHITE">
+         <font>
+            <Font name="Symbol" size="18.0" />
+         </font></Button>
+      <Label fx:id="productPanelLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="3.3333333333333335" layoutY="116.0" prefHeight="27.0" prefWidth="161.0" text="Mjölk" textAlignment="CENTER" AnchorPane.leftAnchor="3.3333333333333335">
+         <font>
+            <Font name="Yu Gothic UI Semibold" size="20.0" />
+         </font>
+      </Label>
+      <Label fx:id="productPanelPrice" alignment="CENTER" layoutX="41.0" layoutY="142.0" prefHeight="17.0" prefWidth="85.0" text="17 Kr">
+         <font>
+            <Font size="14.0" />
+         </font></Label>
+   </children>
+   <effect>
+      <DropShadow height="20.0" radius="9.5" width="20.0">
+         <color>
+            <Color opacity="0.30000001192092896" />
+         </color>
+      </DropShadow>
+   </effect>
+</fx:root>
