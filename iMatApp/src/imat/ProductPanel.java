@@ -44,12 +44,12 @@ public class ProductPanel extends AnchorPane {
     Label contentsLabel;*/
 
 
-    /*private Model model = Model.getInstance();
+    private Model model = Model.getInstance();
 
     private Product product;
     
     private final static double kImageWidth = 100.0;
-    private final static double kImageRatio = 0.75;*/
+    private final static double kImageRatio = 0.75;
 
     public ProductPanel(Product product) {
 
@@ -65,7 +65,7 @@ public class ProductPanel extends AnchorPane {
 
 
         // Setting basic product info
-        /*this.product = product;
+        this.product = product;
         nameLabel.setText(product.getName());
         prizeLabel.setText(String.format("%.2f", product.getPrice()) + " " + product.getUnit());
         imageView.setImage(model.getImage(product, kImageWidth, kImageWidth*kImageRatio));
@@ -89,7 +89,4 @@ public class ProductPanel extends AnchorPane {
     }
 
 
-}
-*/
-    }
 }

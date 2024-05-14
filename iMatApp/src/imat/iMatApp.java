@@ -39,6 +39,12 @@ public class iMatApp extends Application {
      */
     public static void main(String[] args) {
         launch(args);
+
+        Runtime.getRuntime().addShutdownHook(new Thread(new Runnable() {
+            @Override
+            public void run() {
+                Model.getInstance().shutDown();
+            }
+        }));
     }
-    
 }
