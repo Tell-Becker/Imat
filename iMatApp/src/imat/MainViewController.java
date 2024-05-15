@@ -2,10 +2,8 @@
 package imat;
 
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
-import java.util.ResourceBundle;
+import java.util.*;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -31,6 +29,8 @@ public class MainViewController implements Initializable, ShoppingCartListener {
 
     @FXML
     private FlowPane productsPanel;
+
+    private Map<String, ProductPanel> productMap = new HashMap();
 
     //Categories:
     @FXML private AnchorPane categoryList;
@@ -283,6 +283,11 @@ public class MainViewController implements Initializable, ShoppingCartListener {
                 node.getStyleClass().add("categories");
             }
         }
+        for (Product product : IMatDataHandler.getInstance().getProducts()) {
+            ProductPanel item = new ProductPanel(product);
+            productMap.put(product.getName(), item);
+        }
+
         updateProductList(model.getProducts());
         //updateBottomPanel();
     }
@@ -298,7 +303,7 @@ public class MainViewController implements Initializable, ShoppingCartListener {
         productsPanel.getChildren().clear();
 
         for( Product product : products) {
-            productsPanel.getChildren().add(new ProductPanel(product));
+            productsPanel.getChildren().add(productMap.get(product.getName()));
         }
     }
 }
