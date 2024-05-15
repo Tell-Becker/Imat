@@ -6,12 +6,18 @@
   <component name="ChangeListManager">
     <list default="true" id="51e74530-61cc-4b08-8776-0fbe738d5ecd" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/iMatApp/src/imat/ImatAppCategories.java" beforeDir="false" afterPath="$PROJECT_DIR$/iMatApp/src/imat/ImatAppCategories.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/iMatApp/src/imat/MainViewController.java" beforeDir="false" afterPath="$PROJECT_DIR$/iMatApp/src/imat/MainViewController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/iMatApp/src/imat/Model.java" beforeDir="false" afterPath="$PROJECT_DIR$/iMatApp/src/imat/Model.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/iMatApp/src/imat/ProductPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/iMatApp/src/imat/ProductPanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/iMatApp/src/imat/iMatApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/iMatApp/src/imat/iMatApp.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Imat/imat/ProductPanel.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Imat/imat/ProductPanel.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Imat/imat/iMatApp.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Imat/imat/iMatApp.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/iMatApp/src/imat/ProductPanel.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/iMatApp/src/imat/ProductPanel.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/iMatApp/src/imat/imat_app.css" beforeDir="false" afterPath="$PROJECT_DIR$/iMatApp/src/imat/imat_app.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/iMatApp/src/imat/imat_app.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/iMatApp/src/imat/imat_app.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/iMatApp/src/imat/imat_app_footer.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/iMatApp/src/imat/imat_app_footer.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Imat/imat/ImatAppCategories.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Imat/imat/ImatAppCategories.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Imat/imat/MainViewController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Imat/imat/MainViewController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Imat/imat/ProductPanel.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Imat/imat/ProductPanel.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Imat/imat/imat_app.css" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Imat/imat/imat_app.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Imat/imat/imat_app.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Imat/imat/imat_app.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Imat/imat/imat_app_footer.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Imat/imat/imat_app_footer.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -38,17 +44,17 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "main",
-    "last_opened_file_path": "C:/Users/lwtb0/Downloads/imatjoel/imatjoel",
-    "project.structure.last.edited": "Libraries",
-    "project.structure.proportion": "0.0",
-    "project.structure.side.proportion": "0.0"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/lwtb0/Downloads/imatjoel/imatjoel&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Libraries&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;
   }
-}]]></component>
+}</component>
   <component name="RunManager">
     <configuration name="iMatApp" type="Application" factoryName="Application">
       <option name="MAIN_CLASS_NAME" value="imat.iMatApp" />

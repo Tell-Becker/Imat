@@ -6,12 +6,37 @@
 
 .categories {
     -fx-background-radius: 20px;
+    -fx-background-color:  #3162BF;
+}
+
+.categories:hover {
+    -fx-background-color: #5782D5;
+}
+
+/*.categories:pressed {
+    -fx-background-color: #173979;
+}*/
+
+.selected_category {
+    -fx-background-color: #173979;
+}
+
+.selected_category:hover {
+    -fx-background-color: #173979;
 }
 
 #buy_button {
     -fx-background-radius: 15px;
-    -fx-font-weight: bold;
     /*-fx-text-fill: white;
 
     -fx-font-size: 18px;*/
 }
+
+#product {
+    -fx-background-color: #FFFFFF
+}
+
+.product_images {
+    -fx-background-radius: 10px;
+}
+

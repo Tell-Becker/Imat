@@ -6,7 +6,6 @@ import javafx.scene.layout.AnchorPane;
 import java.io.IOException;
 
 public class ImatAppCategories extends AnchorPane{
-    private AnchorPane root;
     private MainViewController mainviewcontroller;
 
     public ImatAppCategories(MainViewController mainviewcontroller) {

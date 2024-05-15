@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TextField?>
@@ -9,13 +10,14 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.FlowPane?>
 <?import javafx.scene.paint.Color?>
+<?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="700.0" maxWidth="1000.0" minHeight="700.0" minWidth="1000.0" prefHeight="700.0" prefWidth="1000.0" stylesheets="@imat_app.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="imat.MainViewController">
+<AnchorPane fx:id="shopPane" maxHeight="700.0" maxWidth="1000.0" minHeight="700.0" minWidth="1000.0" prefHeight="700.0" prefWidth="1000.0" style="-fx-background-color: #F3F3F3;" stylesheets="@imat_app.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="imat.MainViewController">
    <children>
       <AnchorPane prefHeight="100.0" prefWidth="1000.0" style="-fx-background-color: #3162BF;">
          <children>
-            <ImageView fx:id="imatHome" fitHeight="90.0" fitWidth="90.0" layoutX="5.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="imatHome" fitHeight="90.0" fitWidth="90.0" layoutX="5.0" layoutY="5.0" onMouseClicked="#home" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@resources/IMAT_logo_transparent.png" />
                </image>
@@ -27,7 +29,7 @@
                   </DropShadow>
                </effect>
             </ImageView>
-            <TextField fx:id="searchBar" focusTraversable="false" layoutX="115.0" layoutY="29.0" prefHeight="41.0" prefWidth="627.0" promptText="sök i e-handeln" style="-fx-background-radius: 20;">
+            <TextField fx:id="searchField" focusTraversable="false" layoutX="115.0" layoutY="29.0" onAction="#handleSearchAction" prefHeight="41.0" prefWidth="627.0" promptText="sök i e-handeln" style="-fx-background-radius: 20;">
                <font>
                   <Font size="18.0" />
                </font>
@@ -67,13 +69,27 @@
       </AnchorPane>
       <ScrollPane layoutX="-1.0" layoutY="100.0" prefHeight="600.0" prefWidth="1000.0">
          <content>
-            <FlowPane fx:id="mainViewFlowPane" prefHeight="599.0" prefWidth="983.0">
+            <FlowPane fx:id="mainViewFlowPane" prefHeight="599.0" prefWidth="983.0" style="-fx-background-color: #F3F3F3;">
                <children>
-                  <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                  <AnchorPane fx:id="categoriesAnchorPane" prefHeight="1010.0" prefWidth="159.0" style="-fx-background-color: #F3F3F3;">
                      <children>
-                        <AnchorPane prefHeight="1010.0" prefWidth="150.0" style="-fx-background-color: #F3F3F3;">
+                        <AnchorPane fx:id="categoryList" layoutX="10.0" prefHeight="1120.0" prefWidth="65.0" style="-fx-background-color: #F3F3F3;">
                            <children>
-                              <AnchorPane fx:id="meatCategory" layoutX="5.0" layoutY="10.0" prefHeight="90.0" prefWidth="140.0" style="-fx-background-color: #3162BF;" styleClass="categories" stylesheets="@imat_app.css">
+                              <AnchorPane fx:id="everythingCategory" layoutY="5.0" onMouseClicked="#searchEverythingCategory" prefHeight="90.0" prefWidth="140.0">
+                                 <children>
+                                    <Label layoutX="40.0" layoutY="-2.0" text="ALLT" textFill="WHITE">
+                                       <font>
+                                          <Font name="Yu Gothic UI Semibold" size="24.0" />
+                                       </font>
+                                    </Label>
+                                    <ImageView fitHeight="65.0" fitWidth="70.0" layoutX="34.0" layoutY="26.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@resources/nutritional-pyramid.png" />
+                                       </image>
+                                    </ImageView>
+                                 </children>
+                              </AnchorPane>
+                              <AnchorPane fx:id="meatCategory" layoutY="110.0" onMouseClicked="#searchMeatCategory" prefHeight="90.0" prefWidth="140.0" stylesheets="@imat_app.css">
                                  <children>
                                     <Label layoutX="40.0" layoutY="-2.0" text="KÖTT" textFill="WHITE">
                                        <font>
@@ -87,7 +103,7 @@
                                     </ImageView>
                                  </children>
                               </AnchorPane>
-                              <AnchorPane fx:id="fishCategory" layoutX="5.0" layoutY="110.0" prefHeight="90.0" prefWidth="140.0" style="-fx-background-color: #3162BF;" styleClass="categories" stylesheets="@imat_app.css">
+                              <AnchorPane fx:id="fishCategory" layoutY="216.0" onMouseClicked="#searchFishCategory" prefHeight="90.0" prefWidth="140.0" stylesheets="@imat_app.css">
                                  <children>
                                     <Label layoutX="6.0" text="FISK/SKALDJUR" textFill="WHITE">
                                        <font>
@@ -101,7 +117,7 @@
                                     </ImageView>
                                  </children>
                               </AnchorPane>
-                              <AnchorPane fx:id="dairyCategori" layoutX="5.0" layoutY="210.0" prefHeight="90.0" prefWidth="140.0" style="-fx-background-color: #3162BF;" styleClass="categories" stylesheets="@imat_app.css">
+                              <AnchorPane fx:id="dairyCategory" layoutY="316.0" onMouseClicked="#searchDairyCategory" prefHeight="90.0" prefWidth="140.0" stylesheets="@imat_app.css">
                                  <children>
                                     <Label layoutX="31.0" layoutY="-1.0" text="MEJERI" textFill="WHITE">
                                        <font>
@@ -115,7 +131,7 @@
                                     </ImageView>
                                  </children>
                               </AnchorPane>
-                              <AnchorPane fx:id="carbCategory" layoutX="5.0" layoutY="310.0" prefHeight="90.0" prefWidth="140.0" style="-fx-background-color: #3162BF;" styleClass="categories" stylesheets="@imat_app.css">
+                              <AnchorPane fx:id="carbCategory" layoutY="416.0" onMouseClicked="#searchCarbCategory" prefHeight="90.0" prefWidth="140.0" stylesheets="@imat_app.css">
                                  <children>
                                     <Label layoutX="9.0" text="KOLHYDRATER" textFill="WHITE">
                                        <font>
@@ -129,7 +145,7 @@
                                     </ImageView>
                                  </children>
                               </AnchorPane>
-                              <AnchorPane fx:id="bakeryCategory" layoutX="5.0" layoutY="410.0" prefHeight="90.0" prefWidth="140.0" style="-fx-background-color: #3162BF;" styleClass="categories" stylesheets="@imat_app.css">
+                              <AnchorPane fx:id="bakeryCategory" layoutY="516.0" onMouseClicked="#searchBakeryCategory" prefHeight="90.0" prefWidth="140.0" stylesheets="@imat_app.css">
                                  <children>
                                     <Label layoutX="29.0" layoutY="-2.0" text="BAGERI" textFill="WHITE">
                                        <font>
@@ -143,7 +159,7 @@
                                     </ImageView>
                                  </children>
                               </AnchorPane>
-                              <AnchorPane fx:id="vegetableCategory" layoutX="5.0" layoutY="510.0" prefHeight="90.0" prefWidth="140.0" style="-fx-background-color: #3162BF;" styleClass="categories" stylesheets="@imat_app.css">
+                              <AnchorPane fx:id="vegetableCategory" layoutY="616.0" onMouseClicked="#searchVegetableCategory" prefHeight="90.0" prefWidth="140.0" stylesheets="@imat_app.css">
                                  <children>
                                     <Label layoutX="18.0" text="GRÖNSAKER" textFill="WHITE">
                                        <font>
@@ -157,7 +173,7 @@
                                     </ImageView>
                                  </children>
                               </AnchorPane>
-                              <AnchorPane fx:id="fruitCategory" layoutX="5.0" layoutY="610.0" prefHeight="90.0" prefWidth="140.0" style="-fx-background-color: #3162BF;" styleClass="categories" stylesheets="@imat_app.css">
+                              <AnchorPane fx:id="fruitCategory" layoutY="716.0" onMouseClicked="#searchFruitCategory" prefHeight="90.0" prefWidth="140.0" styleClass="categories" stylesheets="@imat_app.css">
                                  <children>
                                     <Label layoutX="7.0" layoutY="-2.0" text="FRUKT/BÄR" textFill="WHITE">
                                        <font>
@@ -171,7 +187,7 @@
                                     </ImageView>
                                  </children>
                               </AnchorPane>
-                              <AnchorPane fx:id="pantryCategory" layoutX="5.0" layoutY="710.0" prefHeight="90.0" prefWidth="140.0" style="-fx-background-color: #3162BF;" styleClass="categories" stylesheets="@imat_app.css">
+                              <AnchorPane fx:id="pantryCategory" layoutY="816.0" onMouseClicked="#searchPantryCategory" prefHeight="90.0" prefWidth="140.0" styleClass="categories" stylesheets="@imat_app.css">
                                  <children>
                                     <Label layoutX="20.0" layoutY="-2.0" text="SKAFFERI" textFill="WHITE">
                                        <font>
@@ -185,7 +201,7 @@
                                     </ImageView>
                                  </children>
                               </AnchorPane>
-                              <AnchorPane fx:id="snackCategory" layoutX="5.0" layoutY="810.0" prefHeight="90.0" prefWidth="140.0" style="-fx-background-color: #3162BF;" styleClass="categories" stylesheets="@imat_app.css">
+                              <AnchorPane fx:id="snackCategory" layoutY="916.0" onMouseClicked="#searchSweetCategory" prefHeight="90.0" prefWidth="140.0" styleClass="categories" stylesheets="@imat_app.css">
                                  <children>
                                     <Label layoutX="25.0" layoutY="-2.0" text="SNACKS" textFill="WHITE">
                                        <font>
@@ -199,7 +215,7 @@
                                     </ImageView>
                                  </children>
                               </AnchorPane>
-                              <AnchorPane fx:id="drinkCategory" layoutX="5.0" layoutY="910.0" prefHeight="90.0" prefWidth="140.0" style="-fx-background-color: #3162BF;" styleClass="categories" stylesheets="@imat_app.css">
+                              <AnchorPane fx:id="drinkCategory" layoutY="1016.0" onMouseClicked="#searchDrinkCategory" prefHeight="90.0" prefWidth="140.0" styleClass="categories" stylesheets="@imat_app.css">
                                  <children>
                                     <Label layoutX="32.0" layoutY="-2.0" text="DRYCK" textFill="WHITE">
                                        <font>
@@ -216,6 +232,70 @@
                            </children>
                         </AnchorPane>
                      </children>
+                  </AnchorPane>
+                  <FlowPane fx:id="productsPanel" hgap="20.0" prefHeight="1005.0" prefWidth="798.0" style="-fx-background-color: #F3F3F3;" vgap="20.0">
+                     <FlowPane.margin>
+                        <Insets left="20.0" top="5.0" />
+                     </FlowPane.margin>
+                  </FlowPane>
+                  <AnchorPane prefHeight="87.0" prefWidth="983.25" style="-fx-background-color: #3162BF;">
+                     <children>
+                        <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="758.0" layoutY="12.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@resources/Ladda-ner-ikoner.png" />
+                           </image>
+                        </ImageView>
+                        <Label fx:id="contactUs" layoutX="32.0" layoutY="9.0" text="Kontakta Oss" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="24.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="aboutImat" layoutX="333.0" layoutY="9.0" text="Om Imat" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="24.0" />
+                           </font>
+                        </Label>
+                        <Line endX="980.0" endY="54.0" startX="2.0" startY="54.0" stroke="WHITE" />
+                        <Label layoutX="4.0" layoutY="58.0" text="IMAT" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="51.0" layoutY="59.0" prefHeight="17.0" prefWidth="373.0" text="Imat Sverige  Sverigevägen 18, Telefon: 108800, Org-nr: 567812-5021" textFill="WHITE" />
+                        <Label fx:id="purchaseConditions" layoutX="594.0" layoutY="9.0" text="Köpvillkor" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="24.0" />
+                           </font>
+                        </Label>
+                        <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="764.0" layoutY="59.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@resources/facebook.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="805.0" layoutY="60.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@resources/social-media.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="849.0" layoutY="60.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@resources/instagram.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="892.0" layoutY="62.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@resources/youtube.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="936.0" layoutY="59.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@resources/linkedin.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                     <FlowPane.margin>
+                        <Insets bottom="30.0" top="5.0" />
+                     </FlowPane.margin>
                   </AnchorPane>
                </children></FlowPane>
          </content>
