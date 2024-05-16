@@ -7,7 +7,15 @@
     <list default="true" id="51e74530-61cc-4b08-8776-0fbe738d5ecd" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/iMatApp/src/imat/MainViewController.java" beforeDir="false" afterPath="$PROJECT_DIR$/iMatApp/src/imat/MainViewController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/iMatApp/src/imat/ProductPanel.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/iMatApp/src/imat/ProductPanel.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/iMatApp/src/imat/ProductPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/iMatApp/src/imat/ProductPanel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/iMatApp/src/imat/imat_app.css" beforeDir="false" afterPath="$PROJECT_DIR$/iMatApp/src/imat/imat_app.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/iMatApp/src/imat/imat_app.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/iMatApp/src/imat/imat_app.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Imat/imat/MainViewController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Imat/imat/MainViewController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Imat/imat/ProductPanel.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Imat/imat/ProductPanel.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Imat/imat/ProductPanel.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Imat/imat/ProductPanel.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Imat/imat/imat_app.css" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Imat/imat/imat_app.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Imat/imat/imat_app.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Imat/imat/imat_app.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -84,6 +92,10 @@
           <url>file://$PROJECT_DIR$/out/production/Imat/imat/ImatAppCategories.class</url>
           <option name="timeStamp" value="2" />
         </line-breakpoint>
+        <breakpoint enabled="true" type="java-exception">
+          <properties class="java.lang.IllegalArgumentException" package="java.lang" />
+          <option name="timeStamp" value="5" />
+        </breakpoint>
       </breakpoints>
     </breakpoint-manager>
   </component>

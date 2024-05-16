@@ -40,3 +40,8 @@
     -fx-background-radius: 10px;
 }
 
+.detailView_Style {
+    -fx-background-radius: 20px;
+    -fx-background-color: #FFFFFF;
+}
+

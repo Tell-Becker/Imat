@@ -2,6 +2,7 @@ package imat;
 
 import java.io.IOException;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
@@ -25,9 +26,6 @@ public class ProductPanel extends AnchorPane {
     @FXML
     Label prizeLabel;
 
-    @FXML
-    Button buyButton;
-
     /*@FXML
     Label ecoLabel;
 
@@ -43,6 +41,9 @@ public class ProductPanel extends AnchorPane {
     @FXML
     Label contentsLabel;*/
 
+    private int quantity = 0;
+
+    private MainViewController mainController;
 
     private Model model = Model.getInstance();
 
@@ -51,7 +52,7 @@ public class ProductPanel extends AnchorPane {
     private final static double kImageWidth = 100.0;
     private final static double kImageRatio = 0.75;
 
-    public ProductPanel(Product product) {
+    public ProductPanel(Product product, MainViewController mainController) {
 
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("ProductPanel.fxml"));
         fxmlLoader.setRoot(this);
@@ -63,24 +64,14 @@ public class ProductPanel extends AnchorPane {
             throw new RuntimeException(exception);
         }
 
-
+        this.mainController = mainController;
         // Setting basic product info
         this.product = product;
         nameLabel.setText(product.getName());
         prizeLabel.setText(String.format("%.2f", product.getPrice()) + " " + product.getUnit());
         imageView.setImage(model.getImage(product, kImageWidth, kImageWidth*kImageRatio));
-        //if (!product.isEcological()) {
-         //   ecoLabel.setText("");
-        }
-        // Setting additional product info
-       // ProductDetail detail = model.getDetail(product);
-       // if (detail != null) {
-           // descriptionLabel.setText(detail.getDescription());
-           // originLabel.setText(detail.getOrigin());
-           // brandLabel.setText(detail.getBrand());
-           // contentsLabel.setText(detail.getContents());
-       // }
-   // }
+
+   }
     
     @FXML
     private void handleAddAction(ActionEvent event) {
@@ -88,5 +79,7 @@ public class ProductPanel extends AnchorPane {
         model.addToShoppingCart(product);
     }
 
-
+    @FXML protected void handleShowProductDetail(Event event) {
+        mainController.openProductDetail(product);
+    }
 }

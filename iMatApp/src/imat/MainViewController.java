@@ -10,7 +10,9 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.StackPane;
@@ -18,8 +20,9 @@ import se.chalmers.cse.dat216.project.*;
 
 public class MainViewController implements Initializable, ShoppingCartListener {
 
-    @FXML
-    private AnchorPane shopPane;
+    @FXML private AnchorPane header;
+    @FXML private AnchorPane program;
+    @FXML private ScrollPane shopPane;
 
     @FXML
     private TextField searchField;
@@ -46,15 +49,27 @@ public class MainViewController implements Initializable, ShoppingCartListener {
     @FXML private AnchorPane snackCategory;
     @FXML private AnchorPane drinkCategory;
 
+    //Detailview
+    @FXML private AnchorPane productDetailView;
+    @FXML private Label originLabel;
+    @FXML private Label descriptionLabel;
+    @FXML private Label nameLabel;
+    @FXML private ImageView detailImageView;
+    @FXML private ImageView closeDetailImageView;
+    @FXML private Label brandLabel;
+    @FXML private Label contentsLabel;
+    @FXML private Label prizeLabel;
+    @FXML private Label ecoLabel;
+
     // Other variables:
     IMatDataHandler iMatDataHandler = IMatDataHandler.getInstance();
     private final Model model = Model.getInstance();
 
     // Shop pane actions:
 
-    private void productDetail(Product product) {
+    /*private void productDetail(Product product) {
         ProductDetail detail = model.getDetail(product);
-    }
+    }*/
 
     private void selectCategory(AnchorPane categoryPane) {
         for (Node node : categoryList.getChildren()) {
@@ -84,6 +99,7 @@ public class MainViewController implements Initializable, ShoppingCartListener {
         selectCategory(everythingCategory);
         updateProductList(model.getProducts());
     }
+
     @FXML private void searchMeatCategory() {
         searchField.clear();
         selectCategory(meatCategory);
@@ -274,6 +290,49 @@ public class MainViewController implements Initializable, ShoppingCartListener {
         everythingCategory.getStyleClass().remove("selected_category");
     }
 
+    @FXML void openProductDetail(Product product) {
+        populateProductDetail(product);
+        productDetailView.toFront();
+    }
+
+    private void populateProductDetail(Product product) {
+        nameLabel.setText(product.getName());
+        detailImageView.setImage(model.getImage(product));
+        ProductDetail detail = model.getDetail(product);
+        if (detail != null) {
+            descriptionLabel.setText(detail.getDescription());
+            originLabel.setText(detail.getOrigin());
+            prizeLabel.setText(String.format("%.2f", product.getPrice()) + " " + product.getUnit());
+            if (product.isEcological()) {
+                ecoLabel.setText("Ekologisk");
+            } else {
+                ecoLabel.setText("Ej ekologisk");
+            }
+            brandLabel.setText(detail.getBrand());
+            contentsLabel.setText(detail.getContents());
+        } else {
+            descriptionLabel.setText("Beskrivning saknas");
+            originLabel.setText("Ursprungsplats saknas");
+            prizeLabel.setText("Pris saknas");
+            ecoLabel.setText("Ekologi saknas");
+            brandLabel.setText("Märke saknas");
+            contentsLabel.setText("Innehåll saknas");
+
+
+        }
+
+
+    }
+
+    @FXML private void handleDoneProductDetail() {
+        openShopPane();
+    }
+
+    void openShopPane() {
+        shopPane.toFront();
+        header.toFront();
+    }
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         model.getShoppingCart().addShoppingCartListener(this);
@@ -284,7 +343,7 @@ public class MainViewController implements Initializable, ShoppingCartListener {
             }
         }
         for (Product product : IMatDataHandler.getInstance().getProducts()) {
-            ProductPanel item = new ProductPanel(product);
+            ProductPanel item = new ProductPanel(product,this);
             productMap.put(product.getName(), item);
         }
 
