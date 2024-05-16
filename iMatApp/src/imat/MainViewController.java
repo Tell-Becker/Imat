@@ -1,37 +1,44 @@
 
 package imat;
 
-import java.net.URL;
 import java.util.*;
-
+import java.net.URL;
+import java.util.List;
+import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
-import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.StackPane;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.Node;
 import se.chalmers.cse.dat216.project.*;
+
 
 public class MainViewController implements Initializable, ShoppingCartListener {
 
     @FXML private AnchorPane header;
+    @FXML private ImageView accountLogo;
     @FXML private AnchorPane program;
-    @FXML private ScrollPane shopPane;
+    @FXML private StackPane shopPane;
+
+    @FXML private TextField searchField;
 
     @FXML
-    private TextField searchField;
-
+    private Label itemsLabel;
     @FXML
-    private FlowPane mainViewFlowPane;
+    private Label costLabel;
 
-    @FXML
-    private FlowPane productsPanel;
+    @FXML private FlowPane mainViewFlowPane;
+
+    @FXML private FlowPane productsPanel;
 
     private Map<String, ProductPanel> productMap = new HashMap();
 
@@ -60,6 +67,17 @@ public class MainViewController implements Initializable, ShoppingCartListener {
     @FXML private Label contentsLabel;
     @FXML private Label prizeLabel;
     @FXML private Label ecoLabel;
+
+    //AccountPane:
+    @FXML private AnchorPane accountPane;
+    @FXML ComboBox cardTypeCombo;
+    @FXML private TextField numberTextField;
+    @FXML private TextField nameTextField;
+    @FXML private ComboBox monthCombo;
+    @FXML private ComboBox yearCombo;
+    @FXML private TextField cvcField;
+    @FXML private Label purchasesLabel;
+    @FXML private AnchorPane dynamicPane;
 
     // Other variables:
     IMatDataHandler iMatDataHandler = IMatDataHandler.getInstance();
@@ -93,6 +111,24 @@ public class MainViewController implements Initializable, ShoppingCartListener {
         updateProductList(matches);
         System.out.println("# matching products: " + matches.size());
     }
+
+    @FXML private void handleClearCartAction(ActionEvent event) {
+        model.clearShoppingCart();
+    }
+
+    @FXML private void handleBuyItemsAction(ActionEvent event) {
+        model.placeOrder();
+        costLabel.setText("Köpet klart!");
+    }
+
+    private void handleNameAction() {
+        openNameView();
+    }
+
+    @FXML private void handleDoneAccountAction(ActionEvent event) {
+        closeAccountView();
+    }
+
 
     @FXML private void searchEverythingCategory() {
         searchField.clear();
@@ -284,8 +320,8 @@ public class MainViewController implements Initializable, ShoppingCartListener {
         updateProductList(matches);
     }
 
-    @FXML
-    public void home() {
+    @FXML public void home() {
+        shopPane.toFront();
         searchEverythingCategory();
         everythingCategory.getStyleClass().remove("selected_category");
     }
@@ -324,7 +360,35 @@ public class MainViewController implements Initializable, ShoppingCartListener {
 
     }
 
+    @FXML public void closeButtonMouseEntered(){
+        closeDetailImageView.setImage(new Image(getClass().getClassLoader().getResourceAsStream(
+                "imat/resources/icon_close_hover.png")));
+    }
+
+    @FXML public void closeButtonMouseExit(){
+        closeDetailImageView.setImage(new Image(getClass().getClassLoader().getResourceAsStream(
+                "imat/resources/icon_close.png")));
+    }
+
+    @FXML public void accountIconEntered(){
+        accountLogo.setImage(new Image(getClass().getClassLoader().getResourceAsStream(
+                "imat/resources/user_hover.png")));
+    }
+
+    @FXML public void accountIconPressed() throws InterruptedException {
+        accountLogo.setImage(new Image(getClass().getClassLoader().getResourceAsStream(
+                "imat/resources/user_pressed.png")));
+        handleNameAction();
+    }
+
+    @FXML public void accountIconExited(){
+        accountLogo.setImage(new Image(getClass().getClassLoader().getResourceAsStream(
+                "imat/resources/user.png")));
+    }
+
     @FXML private void handleDoneProductDetail() {
+        closeDetailImageView.setImage(new Image(getClass().getClassLoader().getResourceAsStream(
+                "imat/resources/icon_close_pressed.png")));
         openShopPane();
     }
 
@@ -333,8 +397,7 @@ public class MainViewController implements Initializable, ShoppingCartListener {
         header.toFront();
     }
 
-    @Override
-    public void initialize(URL url, ResourceBundle rb) {
+    @Override public void initialize(URL url, ResourceBundle rb) {
         model.getShoppingCart().addShoppingCartListener(this);
         for (Node node : categoryList.getChildren()) {
             if (node instanceof AnchorPane) {
@@ -348,11 +411,34 @@ public class MainViewController implements Initializable, ShoppingCartListener {
         }
 
         updateProductList(model.getProducts());
-        //updateBottomPanel();
+        //setupAccountPane();
+        StackPane namePane = new NamePanel(this);
+        dynamicPane.getChildren().add(namePane);
+
     }
 
-    @Override
-    public void shoppingCartChanged(CartEvent cartEvent) {
+    //Navigation:
+
+    public void openAccountView() {
+        updateAccountPanel();
+        accountPane.toFront();
+    }
+
+    public void closeAccountView() {
+        updateCreditCard();
+        shopPane.toFront();
+    }
+
+    public void openNameView() {
+        dynamicPane.toFront();
+    }
+
+    public void closeNameView() {
+        shopPane.toFront();
+    }
+
+
+    @Override public void shoppingCartChanged(CartEvent cartEvent) {
 
     }
 
@@ -364,5 +450,56 @@ public class MainViewController implements Initializable, ShoppingCartListener {
         for( Product product : products) {
             productsPanel.getChildren().add(productMap.get(product.getName()));
         }
+    }
+
+    void updateAccountPanel() {
+
+        CreditCard card = model.getCreditCard();
+
+        numberTextField.setText(card.getCardNumber());
+        nameTextField.setText(card.getHoldersName());
+
+        cardTypeCombo.getSelectionModel().select(card.getCardType());
+        monthCombo.getSelectionModel().select(""+card.getValidMonth());
+        yearCombo.getSelectionModel().select(""+card.getValidYear());
+
+        cvcField.setText(""+card.getVerificationCode());
+
+        purchasesLabel.setText(model.getNumberOfOrders()+ " tidigare inköp hos iMat");
+
+    }
+
+    private void updateCreditCard() {
+
+        CreditCard card = model.getCreditCard();
+
+        card.setCardNumber(numberTextField.getText());
+        card.setHoldersName(nameTextField.getText());
+
+        String selectedValue = (String) cardTypeCombo.getSelectionModel().getSelectedItem();
+        card.setCardType(selectedValue);
+
+        selectedValue = (String) monthCombo.getSelectionModel().getSelectedItem();
+        card.setValidMonth(Integer.parseInt(selectedValue));
+
+        selectedValue = (String) yearCombo.getSelectionModel().getSelectedItem();
+        card.setValidYear(Integer.parseInt(selectedValue));
+
+        card.setVerificationCode(Integer.parseInt(cvcField.getText()));
+
+    }
+
+    private void setupAccountPane() {
+
+        cardTypeCombo.getItems().addAll(model.getCardTypes());
+
+        monthCombo.getItems().addAll(model.getMonths());
+
+        yearCombo.getItems().addAll(model.getYears());
+
+    }
+
+    public void updateQuantity(Product product, int quantity){
+        //model.updateQuantity(product, quantity);
     }
 }

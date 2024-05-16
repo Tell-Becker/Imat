@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.text.Font?>
+
+<fx:root prefHeight="600.0" prefWidth="1000.0" type="StackPane" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <AnchorPane fx:id="accountContactPane" prefHeight="600.0" prefWidth="1000.0" style="-fx-background-color: grey;">
+         <children>
+            <AnchorPane layoutX="138.0" layoutY="132.0" prefHeight="396.0" prefWidth="706.0" style="-fx-background-color: white;">
+               <children>
+                  <Button layoutX="644.0" layoutY="14.0" mnemonicParsing="false" onAction="#openAccountPane" text="Stäng" />
+                  <Label layoutX="261.0" layoutY="63.0" prefHeight="36.0" prefWidth="183.0" text="Ring oss:">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="261.0" layoutY="105.0" text="0721895975">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="261.0" layoutY="222.0" prefHeight="36.0" prefWidth="183.0" text="Skicka E-post:">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="265.0" layoutY="258.0" text="kundtjänst@imat.se">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Label>
+               </children></AnchorPane>
+            <Label layoutX="417.0" layoutY="61.0" text="Kontakta oss!">
+               <font>
+                  <Font size="25.0" />
+               </font></Label>
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="accountHistoryPane" prefHeight="600.0" prefWidth="1000.0" style="-fx-background-color: grAY;">
+         <children>
+            <AnchorPane layoutX="126.0" layoutY="125.0" prefHeight="387.0" prefWidth="798.0" style="-fx-background-color: white;">
+               <children>
+                  <Button layoutX="737.0" layoutY="17.0" mnemonicParsing="false" onAction="#openAccountPane" text="Stäng" />
+                  <Button layoutX="301.0" layoutY="152.0" mnemonicParsing="false" prefHeight="22.0" prefWidth="194.0" text="Se Detaljer " />
+                  <Button layoutX="301.0" layoutY="254.0" mnemonicParsing="false" prefHeight="22.0" prefWidth="194.0" text="Se detaljer" />
+                  <Button layoutX="301.0" layoutY="341.0" mnemonicParsing="false" prefHeight="22.0" prefWidth="194.0" text="Se detaljer " />
+                  <Label layoutX="354.0" layoutY="51.0" text="Dina Köp:">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Label>
+               </children></AnchorPane>
+            <Label layoutX="450.0" layoutY="71.0" text="Köphistorik">
+               <font>
+                  <Font size="20.0" />
+               </font></Label>
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="accountCardPane" prefHeight="600.0" prefWidth="720.0" style="-fx-background-color: F3F3F3;">
+         <children>
+            <AnchorPane layoutX="79.0" layoutY="137.0" prefHeight="387.0" prefWidth="588.0" style="-fx-background-color: white;">
+               <children>
+                  <ComboBox fx:id="cardTypeCombo" layoutX="210.0" layoutY="30.0" prefWidth="150.0" />
+                  <TextField fx:id="numberTextField" layoutX="211.0" layoutY="67.0" />
+                  <TextField fx:id="nameTextField" layoutX="212.0" layoutY="104.0" />
+                  <ComboBox fx:id="monthCombo" layoutX="211.0" layoutY="151.0" prefHeight="26.0" prefWidth="39.0" />
+                  <ComboBox fx:id="yearCombo" layoutX="278.0" layoutY="152.0" prefHeight="26.0" prefWidth="69.0" />
+                  <TextField fx:id="cvcField" layoutX="212.0" layoutY="194.0" />
+               </children></AnchorPane>
+            <Label layoutX="338.0" layoutY="66.0" text="Kort" />
+            <Button layoutX="654.0" layoutY="20.0" mnemonicParsing="false" onAction="#closeCardPane" text="Stäng" />
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="accountDetailPane" prefHeight="600.0" prefWidth="1000.0" style="-fx-background-color: grey;">
+         <children>
+            <AnchorPane layoutX="75.0" layoutY="131.0" prefHeight="403.0" prefWidth="806.0" style="-fx-background-color: white;">
+               <children>
+                  <Button layoutX="746.0" layoutY="22.0" mnemonicParsing="false" onAction="#closeAccountDetail" text="Stäng" />
+                  <Label alignment="CENTER_RIGHT" layoutX="99.0" layoutY="97.0" prefWidth="75.0" text="Förnamn:" AnchorPane.leftAnchor="99.0" />
+                  <Label alignment="CENTER_RIGHT" layoutX="99.0" layoutY="174.0" prefWidth="75.0" text="E-mail:" AnchorPane.leftAnchor="99.0" />
+                  <Label alignment="CENTER_RIGHT" layoutX="99.0" layoutY="209.0" prefWidth="75.0" text="Telefon:" AnchorPane.leftAnchor="99.0" />
+                  <Label alignment="CENTER_RIGHT" layoutX="99.0" layoutY="262.0" prefWidth="75.0" text="Adress:" AnchorPane.leftAnchor="99.2" />
+                  <Label alignment="CENTER_RIGHT" layoutX="99.0" layoutY="311.0" prefWidth="75.0" text="Postnummer:" AnchorPane.leftAnchor="99.2" />
+                  <Label alignment="CENTER_RIGHT" layoutX="99.0" layoutY="350.0" prefWidth="75.0" text="Ort:" AnchorPane.leftAnchor="99.2" />
+                  <TextField fx:id="fNameTextField" layoutX="184.0" layoutY="93.0" AnchorPane.leftAnchor="184.00000000000003" AnchorPane.rightAnchor="472.0" />
+                  <TextField fx:id="emailTextField" layoutX="184.0" layoutY="170.0" AnchorPane.leftAnchor="184.0" AnchorPane.rightAnchor="472.0" />
+                  <TextField fx:id="phonenrTextField" layoutX="184.0" layoutY="205.0" AnchorPane.leftAnchor="184.0" AnchorPane.rightAnchor="472.0" />
+                  <TextField fx:id="adressTextField" layoutX="186.0" layoutY="258.0" AnchorPane.leftAnchor="184.0" AnchorPane.rightAnchor="472.0" />
+                  <TextField fx:id="postalnrTextField" layoutX="187.0" layoutY="298.0" AnchorPane.leftAnchor="184.0" AnchorPane.rightAnchor="472.0" />
+                  <TextField fx:id="cityTextField" layoutX="188.0" layoutY="346.0" AnchorPane.leftAnchor="184.0" AnchorPane.rightAnchor="472.0" />
+                  <TextField fx:id="lNameTextField" layoutX="184.0" layoutY="138.0" />
+                  <Label alignment="CENTER_RIGHT" layoutX="107.0" layoutY="142.0" prefWidth="75.0" text="Efternamn:" />
+               </children></AnchorPane>
+            <Label layoutX="394.0" layoutY="62.0" text="kontouppgifter">
+               <font>
+                  <Font size="25.0" />
+               </font></Label>
+         </children>
+      </AnchorPane>
+      <javafx.scene.layout.AnchorPane fx:id="accountPane" prefHeight="591.0" prefWidth="1000.0" style="-fx-background-color: #f3f3f3;">
+         <children>
+            <AnchorPane layoutX="250.0" layoutY="100.0" prefHeight="410.0" prefWidth="500.0" styleClass="detailView_Style" stylesheets="@imat_app.css">
+               <children>
+                  <Button layoutX="125.0" layoutY="310.0" mnemonicParsing="false" onAction="#openAccountContact" prefHeight="60.0" prefWidth="250.0" styleClass="selection_buttons" stylesheets="@imat_app.css" text="Kontakta oss" />
+                  <Button layoutX="125.0" layoutY="40.0" mnemonicParsing="false" onAction="#openAccountDetail" prefHeight="60.0" prefWidth="250.0" styleClass="selection_buttons" stylesheets="@imat_app.css" text="Kontouppgifter" />
+                  <Button layoutX="125.0" layoutY="130.0" mnemonicParsing="false" onAction="#openAccountHistory" prefHeight="60.0" prefWidth="250.0" styleClass="selection_buttons" stylesheets="@imat_app.css" text="Köphistorik" />
+                  <Button layoutX="125.0" layoutY="220.0" mnemonicParsing="false" onAction="#openAccountCard" prefHeight="60.0" prefWidth="250.0" styleClass="selection_buttons" stylesheets="@imat_app.css" text="Kortuppgifter" />
+               </children>
+            </AnchorPane>
+            <Label layoutX="438.0" layoutY="50.0" text="KONTO">
+               <font>
+                  <Font name="Yu Gothic UI Semibold" size="36.0" />
+               </font>
+            </Label>
+            <ImageView fx:id="accountCloseButton" fitHeight="25.0" fitWidth="28.0" layoutX="949.0" layoutY="25.0" onMouseClicked="#closeNameView" onMouseEntered="#closeAccountEntered" onMouseExited="#closeAccountExit" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@resources/icon_close.png" />
+               </image>
+            </ImageView>
+         </children>
+      </javafx.scene.layout.AnchorPane>
+   </children>
+</fx:root>

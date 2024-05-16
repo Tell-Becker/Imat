@@ -73,6 +73,14 @@ public class Model {
         //shoppingCart.addProduct(p);
     }
 
+    public void removeFromShoppingCart(Product p) {
+        ShoppingCart shoppingCart = iMatDataHandler.getShoppingCart();
+
+        ShoppingItem item = new ShoppingItem(p);
+        Model.getInstance().getShoppingCart().removeItem(item);
+
+    }
+
     public List<String> getCardTypes() {
         return availableCardTypes;
     }
@@ -129,5 +137,16 @@ public class Model {
 
     public void shutDown() {
         iMatDataHandler.shutDown();
+    }
+
+    public void updateQuantity(Product product, int quantity) {
+        ShoppingCart shoppingCart = iMatDataHandler.getShoppingCart();
+        ShoppingItem item = shoppingCart.getItems().stream()
+                .filter(i -> i.getProduct().equals(product))
+                .findFirst()
+                .orElse(null);
+        if (item != null) {
+            item.setAmount(quantity);
+        }
     }
 }

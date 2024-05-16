@@ -45,3 +45,15 @@
     -fx-background-color: #FFFFFF;
 }
 
+.selection_buttons {
+    -fx-background-radius: 10px;
+    -fx-background-color: #3162BF;
+    -fx-text-fill: white;
+    -fx-font-size: 20px;
+    -fx-font-weight: bold;
+}
+
+.selection_buttons:hover {
+    -fx-background-color: #5782D5;
+}
+
