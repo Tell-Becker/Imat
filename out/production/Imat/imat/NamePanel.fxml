@@ -3,23 +3,25 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.FlowPane?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.text.Font?>
 
 <fx:root prefHeight="600.0" prefWidth="1000.0" type="StackPane" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <AnchorPane fx:id="accountContactPane" prefHeight="600.0" prefWidth="1000.0" style="-fx-background-color: grey;">
+      <AnchorPane fx:id="accountContactPane" prefHeight="600.0" prefWidth="1000.0" style="-fx-background-color: #f3f3f3;">
          <children>
-            <AnchorPane layoutX="138.0" layoutY="132.0" prefHeight="396.0" prefWidth="706.0" style="-fx-background-color: white;">
+            <AnchorPane layoutX="147.0" layoutY="102.0" prefHeight="396.0" prefWidth="706.0" styleClass="detailView_Style" stylesheets="@imat_app.css">
                <children>
-                  <Button layoutX="644.0" layoutY="14.0" mnemonicParsing="false" onAction="#openAccountPane" text="Stäng" />
                   <Label layoutX="261.0" layoutY="63.0" prefHeight="36.0" prefWidth="183.0" text="Ring oss:">
                      <font>
-                        <Font size="20.0" />
+                        <Font name="System Bold" size="20.0" />
                      </font>
                   </Label>
                   <Label layoutX="261.0" layoutY="105.0" text="0721895975">
@@ -27,82 +29,142 @@
                         <Font size="20.0" />
                      </font>
                   </Label>
-                  <Label layoutX="261.0" layoutY="222.0" prefHeight="36.0" prefWidth="183.0" text="Skicka E-post:">
+                  <Label layoutX="260.0" layoutY="223.0" text="kundtjänst@imat.se">
                      <font>
                         <Font size="20.0" />
                      </font>
                   </Label>
-                  <Label layoutX="265.0" layoutY="258.0" text="kundtjänst@imat.se">
+                  <Label layoutX="260.0" layoutY="180.0" prefHeight="36.0" prefWidth="183.0" text="Skicka E-post:">
                      <font>
-                        <Font size="20.0" />
+                        <Font name="System Bold" size="20.0" />
                      </font>
                   </Label>
                </children></AnchorPane>
-            <Label layoutX="417.0" layoutY="61.0" text="Kontakta oss!">
+            <Label layoutX="363.0" layoutY="50.0" text="KONTAKTA OSS!">
                <font>
-                  <Font size="25.0" />
-               </font></Label>
-         </children>
-      </AnchorPane>
-      <AnchorPane fx:id="accountHistoryPane" prefHeight="600.0" prefWidth="1000.0" style="-fx-background-color: grAY;">
-         <children>
-            <AnchorPane layoutX="126.0" layoutY="125.0" prefHeight="387.0" prefWidth="798.0" style="-fx-background-color: white;">
-               <children>
-                  <Button layoutX="737.0" layoutY="17.0" mnemonicParsing="false" onAction="#openAccountPane" text="Stäng" />
-                  <Button layoutX="301.0" layoutY="152.0" mnemonicParsing="false" prefHeight="22.0" prefWidth="194.0" text="Se Detaljer " />
-                  <Button layoutX="301.0" layoutY="254.0" mnemonicParsing="false" prefHeight="22.0" prefWidth="194.0" text="Se detaljer" />
-                  <Button layoutX="301.0" layoutY="341.0" mnemonicParsing="false" prefHeight="22.0" prefWidth="194.0" text="Se detaljer " />
-                  <Label layoutX="354.0" layoutY="51.0" text="Dina Köp:">
-                     <font>
-                        <Font size="16.0" />
-                     </font>
-                  </Label>
-               </children></AnchorPane>
-            <Label layoutX="450.0" layoutY="71.0" text="Köphistorik">
-               <font>
-                  <Font size="20.0" />
-               </font></Label>
+                  <Font name="Yu Gothic UI Semibold" size="36.0" />
+               </font>
+            </Label>
+            <ImageView fx:id="accountContactCloseButton" fitHeight="25.0" fitWidth="28.0" layoutX="950.0" layoutY="25.0" onMouseClicked="#closeAccountDetail" onMouseEntered="#closeAccountContactEntered" onMouseExited="#closeAccountContactExit" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@resources/icon_close.png" />
+               </image>
+            </ImageView>
          </children>
       </AnchorPane>
       <AnchorPane fx:id="accountCardPane" prefHeight="600.0" prefWidth="720.0" style="-fx-background-color: F3F3F3;">
          <children>
-            <AnchorPane layoutX="79.0" layoutY="137.0" prefHeight="387.0" prefWidth="588.0" style="-fx-background-color: white;">
+            <AnchorPane layoutX="206.0" layoutY="103.0" prefHeight="387.0" prefWidth="588.0" styleClass="detailView_Style" stylesheets="@imat_app.css">
                <children>
-                  <ComboBox fx:id="cardTypeCombo" layoutX="210.0" layoutY="30.0" prefWidth="150.0" />
-                  <TextField fx:id="numberTextField" layoutX="211.0" layoutY="67.0" />
-                  <TextField fx:id="nameTextField" layoutX="212.0" layoutY="104.0" />
-                  <ComboBox fx:id="monthCombo" layoutX="211.0" layoutY="151.0" prefHeight="26.0" prefWidth="39.0" />
-                  <ComboBox fx:id="yearCombo" layoutX="278.0" layoutY="152.0" prefHeight="26.0" prefWidth="69.0" />
-                  <TextField fx:id="cvcField" layoutX="212.0" layoutY="194.0" />
+                  <ComboBox fx:id="cardTypeCombo" layoutX="219.0" layoutY="69.0" prefWidth="150.0" />
+                  <TextField fx:id="numberTextField" layoutX="219.0" layoutY="109.0" />
+                  <TextField fx:id="nameTextField" layoutX="219.0" layoutY="149.0" />
+                  <ComboBox fx:id="monthCombo" layoutX="219.0" layoutY="189.0" prefHeight="26.0" prefWidth="55.0" />
+                  <ComboBox fx:id="yearCombo" layoutX="292.0" layoutY="189.0" prefHeight="26.0" prefWidth="75.0" />
+                  <TextField fx:id="cvcField" layoutX="219.0" layoutY="229.0" />
                </children></AnchorPane>
-            <Label layoutX="338.0" layoutY="66.0" text="Kort" />
-            <Button layoutX="654.0" layoutY="20.0" mnemonicParsing="false" onAction="#closeCardPane" text="Stäng" />
+            <ImageView fx:id="accountCardCloseButton" fitHeight="25.0" fitWidth="28.0" layoutX="950.0" layoutY="25.0" onMouseClicked="#closeAccountDetail" onMouseEntered="#closeAccountCardEntered" onMouseExited="#closeAccountCardExit" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@resources/icon_close.png" />
+               </image>
+            </ImageView>
+            <Label layoutX="454.0" layoutY="50.0" text="KORT">
+               <font>
+                  <Font name="Yu Gothic UI Semibold" size="36.0" />
+               </font>
+            </Label>
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="accountDetailPane" prefHeight="600.0" prefWidth="1000.0" style="-fx-background-color: grey;">
+      <AnchorPane fx:id="accountHistoryPane" prefHeight="600.0" prefWidth="1000.0" style="-fx-background-color: #f3f3f3;">
          <children>
-            <AnchorPane layoutX="75.0" layoutY="131.0" prefHeight="403.0" prefWidth="806.0" style="-fx-background-color: white;">
-               <children>
-                  <Button layoutX="746.0" layoutY="22.0" mnemonicParsing="false" onAction="#closeAccountDetail" text="Stäng" />
-                  <Label alignment="CENTER_RIGHT" layoutX="99.0" layoutY="97.0" prefWidth="75.0" text="Förnamn:" AnchorPane.leftAnchor="99.0" />
-                  <Label alignment="CENTER_RIGHT" layoutX="99.0" layoutY="174.0" prefWidth="75.0" text="E-mail:" AnchorPane.leftAnchor="99.0" />
-                  <Label alignment="CENTER_RIGHT" layoutX="99.0" layoutY="209.0" prefWidth="75.0" text="Telefon:" AnchorPane.leftAnchor="99.0" />
-                  <Label alignment="CENTER_RIGHT" layoutX="99.0" layoutY="262.0" prefWidth="75.0" text="Adress:" AnchorPane.leftAnchor="99.2" />
-                  <Label alignment="CENTER_RIGHT" layoutX="99.0" layoutY="311.0" prefWidth="75.0" text="Postnummer:" AnchorPane.leftAnchor="99.2" />
-                  <Label alignment="CENTER_RIGHT" layoutX="99.0" layoutY="350.0" prefWidth="75.0" text="Ort:" AnchorPane.leftAnchor="99.2" />
-                  <TextField fx:id="fNameTextField" layoutX="184.0" layoutY="93.0" AnchorPane.leftAnchor="184.00000000000003" AnchorPane.rightAnchor="472.0" />
-                  <TextField fx:id="emailTextField" layoutX="184.0" layoutY="170.0" AnchorPane.leftAnchor="184.0" AnchorPane.rightAnchor="472.0" />
-                  <TextField fx:id="phonenrTextField" layoutX="184.0" layoutY="205.0" AnchorPane.leftAnchor="184.0" AnchorPane.rightAnchor="472.0" />
-                  <TextField fx:id="adressTextField" layoutX="186.0" layoutY="258.0" AnchorPane.leftAnchor="184.0" AnchorPane.rightAnchor="472.0" />
-                  <TextField fx:id="postalnrTextField" layoutX="187.0" layoutY="298.0" AnchorPane.leftAnchor="184.0" AnchorPane.rightAnchor="472.0" />
-                  <TextField fx:id="cityTextField" layoutX="188.0" layoutY="346.0" AnchorPane.leftAnchor="184.0" AnchorPane.rightAnchor="472.0" />
-                  <TextField fx:id="lNameTextField" layoutX="184.0" layoutY="138.0" />
-                  <Label alignment="CENTER_RIGHT" layoutX="107.0" layoutY="142.0" prefWidth="75.0" text="Efternamn:" />
-               </children></AnchorPane>
-            <Label layoutX="394.0" layoutY="62.0" text="kontouppgifter">
+            <ImageView fx:id="accountCloseHistoryButton" fitHeight="25.0" fitWidth="28.0" layoutX="950.0" layoutY="25.0" onMouseClicked="#closeAccountDetail" onMouseEntered="#closeAccountHistoryEntered" onMouseExited="#closeAccountHistoryExit" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@resources/icon_close.png" />
+               </image>
+            </ImageView>
+            <Label layoutX="385.0" layoutY="50.0" text="KÖPHISTORIK">
                <font>
-                  <Font size="25.0" />
-               </font></Label>
+                  <Font name="Yu Gothic UI Semibold" size="36.0" />
+               </font>
+            </Label>
+            <AnchorPane layoutX="100.0" layoutY="100.0" prefHeight="475.0" prefWidth="800.0" style="-fx-background-color: white;">
+               <children>
+                  <Label layoutX="354.0" layoutY="17.0" text="Dina Köp:">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Label>
+                  <ScrollPane layoutX="136.0" layoutY="53.0" prefHeight="317.0" prefWidth="539.0">
+                     <content>
+                        <FlowPane fx:id="historyFlowPane" prefHeight="315.0" prefWidth="536.0" />
+                     </content>
+                  </ScrollPane>
+               </children>
+            </AnchorPane>
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="accountDetailPane" prefHeight="600.0" prefWidth="1000.0" style="-fx-background-color: #f3f3f3;">
+         <children>
+            <AnchorPane layoutX="100.0" layoutY="100.0" prefHeight="400.0" prefWidth="800.0" style="-fx-background-color: white;" styleClass="detailView_Style" stylesheets="@imat_app.css">
+               <children>
+                  <Label alignment="CENTER_RIGHT" layoutX="244.0" layoutY="37.0" prefWidth="75.0" text="Förnamn:">
+                     <font>
+                        <Font size="16.0" />
+                     </font></Label>
+                  <Label alignment="CENTER_RIGHT" layoutX="220.0" layoutY="137.0" prefHeight="25.0" prefWidth="100.0" text="E-mail:">
+                     <font>
+                        <Font size="16.0" />
+                     </font></Label>
+                  <Label alignment="CENTER_RIGHT" layoutX="244.0" layoutY="187.0" prefWidth="75.0" text="Telefon:">
+                     <font>
+                        <Font size="16.0" />
+                     </font></Label>
+                  <Label alignment="CENTER_RIGHT" layoutX="244.0" layoutY="237.0" prefWidth="75.0" text="Adress:">
+                     <font>
+                        <Font size="16.0" />
+                     </font></Label>
+                  <Label alignment="CENTER_RIGHT" layoutX="211.0" layoutY="287.0" prefHeight="25.0" prefWidth="108.0" text="Postnummer:">
+                     <font>
+                        <Font size="16.0" />
+                     </font></Label>
+                  <Label alignment="CENTER_RIGHT" layoutX="244.0" layoutY="337.0" prefWidth="75.0" text="Ort:">
+                     <font>
+                        <Font size="16.0" />
+                     </font></Label>
+                  <TextField fx:id="fNameTextField" layoutX="325.0" layoutY="37.0" />
+                  <TextField fx:id="emailTextField" layoutX="325.0" layoutY="137.0" />
+                  <TextField fx:id="phonenrTextField" layoutX="325.0" layoutY="187.0" />
+                  <TextField fx:id="adressTextField" layoutX="325.0" layoutY="237.0" />
+                  <TextField fx:id="postalnrTextField" layoutX="325.0" layoutY="287.0" />
+                  <TextField fx:id="cityTextField" layoutX="325.0" layoutY="337.0" />
+                  <TextField fx:id="lNameTextField" layoutX="325.0" layoutY="87.0" />
+                  <Label alignment="CENTER_RIGHT" layoutX="196.0" layoutY="87.0" prefHeight="25.0" prefWidth="124.0" text="Efternamn:">
+                     <font>
+                        <Font size="16.0" />
+                     </font></Label>
+               </children></AnchorPane>
+            <Label layoutX="347.0" layoutY="50.0" text="KONTOUPPGIFTER">
+               <font>
+                  <Font name="Yu Gothic UI Semibold" size="36.0" />
+               </font>
+            </Label>
+            <ImageView fx:id="accountInfoCloseButton" fitHeight="25.0" fitWidth="28.0" layoutX="950.0" layoutY="25.0" onMouseClicked="#closeAccountDetail" onMouseEntered="#closeAccountinfoEntered" onMouseExited="#closeAccountinfoExit" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@resources/icon_close.png" />
+               </image>
+            </ImageView>
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="accountOrderDetail" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: rgba(0, 0, 0, 0.75);">
+         <children>
+            <AnchorPane layoutX="257.0" layoutY="96.0" prefHeight="428.0" prefWidth="444.0" style="-fx-background-color: #e0e0e0;">
+               <children>
+                  <Button layoutX="298.0" layoutY="388.0" mnemonicParsing="false" onAction="#handleAddToCart" text="lägg till i kundvagn" />
+                  <Label fx:id="orderDate2" layoutX="202.0" layoutY="14.0" text="Label" />
+                  <TextArea fx:id="orderDetailTextArea" layoutX="30.0" layoutY="50.0" prefHeight="318.0" prefWidth="385.0" wrapText="true" />
+                  <Button layoutX="48.0" layoutY="388.0" mnemonicParsing="false" onAction="#openAccountHistory" text="Tillbaka" />
+               </children>
+            </AnchorPane>
          </children>
       </AnchorPane>
       <javafx.scene.layout.AnchorPane fx:id="accountPane" prefHeight="591.0" prefWidth="1000.0" style="-fx-background-color: #f3f3f3;">
@@ -120,7 +182,7 @@
                   <Font name="Yu Gothic UI Semibold" size="36.0" />
                </font>
             </Label>
-            <ImageView fx:id="accountCloseButton" fitHeight="25.0" fitWidth="28.0" layoutX="949.0" layoutY="25.0" onMouseClicked="#closeNameView" onMouseEntered="#closeAccountEntered" onMouseExited="#closeAccountExit" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="accountCloseButton" fitHeight="25.0" fitWidth="28.0" layoutX="950.0" layoutY="25.0" onMouseClicked="#closeNameView" onMouseEntered="#closeAccountEntered" onMouseExited="#closeAccountExit" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@resources/icon_close.png" />
                </image>

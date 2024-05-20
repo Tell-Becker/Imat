@@ -124,6 +124,10 @@ public class Model {
 
     }
 
+    public List<Order> getOrders() {
+        return iMatDataHandler.getOrders();
+    }
+
     public double getCartAmount() {
 
         double itemCount = 0;
@@ -135,6 +139,16 @@ public class Model {
         return itemCount;
     }
 
+    public double getProductAmount() {
+
+        double itemCount = 0;
+        ShoppingCart cart = iMatDataHandler.getShoppingCart();
+
+        for (ShoppingItem item:cart.getItems()) {
+            itemCount = itemCount + item.getAmount();
+        }
+        return itemCount;
+    }
     public void shutDown() {
         iMatDataHandler.shutDown();
     }

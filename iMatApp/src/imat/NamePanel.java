@@ -15,11 +15,18 @@ import javafx.scene.control.TextArea;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.StackPane;
 import se.chalmers.cse.dat216.project.*;
+import javafx.scene.control.Label;
+
 
 import java.awt.*;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Collections;
+import java.util.List;
+import java.util.Locale;
 
 /**
  *
@@ -44,6 +51,8 @@ public class NamePanel extends StackPane {
     @FXML
     AnchorPane accountPane;
 
+    @FXML AnchorPane accountOrderDetail;
+
     @FXML
     ComboBox cardTypeCombo;
     @FXML
@@ -66,12 +75,35 @@ public class NamePanel extends StackPane {
     @FXML TextField postalnrTextField;
     @FXML TextField emailTextField;
     @FXML TextField adressTextField;
-    @FXML ImageView accountCloseButton;
+
+    @FXML private FlowPane historyFlowPane;
+
+    @FXML
+    AnchorPane orderDetail;
+
+    @FXML Label orderDate2;
+
+    @FXML TextArea orderDetailTextArea;
+
+    private Order order;
 
     private Model model = Model.getInstance();
 
+    @FXML ImageView accountCloseButton;
+    @FXML ImageView accountInfoCloseButton;
+
+    @FXML ImageView accountCloseHistoryButton;
+
+    @FXML ImageView accountCardCloseButton;
+
+    @FXML ImageView accountContactCloseButton;
+
     private Customer customer;
     private MainViewController mainController;
+
+    private CheckoutPanel checkoutPanel;
+
+    private Order currentOrder;
 
     public NamePanel(MainViewController mainController) {
 
@@ -85,8 +117,10 @@ public class NamePanel extends StackPane {
             throw new RuntimeException(exception);
         }
         this.mainController = mainController;
+        this.checkoutPanel = checkoutPanel;
         this.customer = model.getCustomer();
         updateAccountDetail();
+        updateOrderElement(model.getOrders());
 
     }
 
@@ -106,6 +140,38 @@ public class NamePanel extends StackPane {
 
     @FXML public void closeAccountExit(Event event) {
         closeExit(accountCloseButton);
+    }
+
+    @FXML public void closeAccountinfoEntered(Event event) {
+        closeEntered(accountInfoCloseButton);
+    }
+
+    @FXML public void closeAccountinfoExit(Event event) {
+        closeExit(accountInfoCloseButton);
+    }
+
+    @FXML public void closeAccountHistoryEntered(Event event) {
+        closeEntered(accountCloseHistoryButton);
+    }
+
+    @FXML public void closeAccountHistoryExit(Event event) {
+        closeExit(accountCloseHistoryButton);
+    }
+
+    @FXML public void closeAccountCardEntered(Event event) {
+        closeEntered(accountCardCloseButton);
+    }
+
+    @FXML public void closeAccountCardExit(Event event) {
+        closeExit(accountCardCloseButton);
+    }
+
+    @FXML public void closeAccountContactEntered(Event event) {
+        closeEntered(accountContactCloseButton);
+    }
+
+    @FXML public void closeAccountContactExit(Event event) {
+        closeExit(accountContactCloseButton);
     }
 
     public void closeEntered(ImageView closeButton){
@@ -147,6 +213,11 @@ public class NamePanel extends StackPane {
     private void closeCardPane(ActionEvent event) {
         updateCreditCard();
         accountPane.toFront();
+    }
+
+    @FXML
+    private void handleAddToCart(ActionEvent event){
+        addToCart();
     }
 
     void updateCardPanel() {
@@ -220,4 +291,43 @@ public class NamePanel extends StackPane {
 
     }
 
+    public void updateOrderElement(List<Order> orders) {
+        historyFlowPane.getChildren().clear();
+
+        for (Order order : orders.reversed()) {
+
+            historyFlowPane.getChildren().add(new OrderElement(order, this));
+        }
+    }
+
+    void openOrderDetail(Order order) {
+        populateOrderDetail(order);
+        accountOrderDetail.toFront();
+    }
+
+    private void populateOrderDetail(Order order) {
+        currentOrder = order;
+
+        // Skapa en SimpleDateFormat-instans med svenskt locale
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", new Locale("sv", "SE"));
+        String formattedDate = sdf.format(order.getDate());
+
+        // Sätt det formaterade datumet i TextView
+        orderDate2.setText(formattedDate);
+
+        StringBuilder stringBuilder = new StringBuilder();
+        for (ShoppingItem item : order.getItems()) {
+            stringBuilder.append(item.getProduct().getName() + " " + item.getProduct().getPrice() + "kr st\n");
+        }
+
+        orderDetailTextArea.setText(stringBuilder.toString());
+    }
+
+    private void addToCart() {
+        for (ShoppingItem item : currentOrder.getItems()) {
+            model.addToShoppingCart(item.getProduct());
+            mainController.updateShoppingCartElement(model.getShoppingCart().getItems());
+        }
+        accountHistoryPane.toFront();
+    }
 }

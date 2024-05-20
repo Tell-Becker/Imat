@@ -7,8 +7,11 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.StackPane;
+import se.chalmers.cse.dat216.project.IMatDataHandler;
 import se.chalmers.cse.dat216.project.Product;
 import se.chalmers.cse.dat216.project.ProductDetail;
 
@@ -16,7 +19,7 @@ import se.chalmers.cse.dat216.project.ProductDetail;
  *
  * @author oloft
  */
-public class ProductPanel extends AnchorPane {
+public class ProductPanel extends StackPane {
 
 
     @FXML
@@ -26,7 +29,11 @@ public class ProductPanel extends AnchorPane {
     @FXML
     Label prizeLabel;
 
-    /*@FXML
+    @FXML ImageView imageView2;
+    @FXML Label nameLabel2;
+    @FXML Label prizeLabel2;
+
+    @FXML
     Label ecoLabel;
 
     @FXML
@@ -39,11 +46,25 @@ public class ProductPanel extends AnchorPane {
     Label brandLabel;
 
     @FXML
-    Label contentsLabel;*/
+    Label contentsLabel;
+
+    @FXML AnchorPane quantityPane;
+    @FXML AnchorPane addButtonPane;
+
+    @FXML Label quantityLabel;
+
+    @FXML ImageView favoriteImageView;
+
+    @FXML ImageView favoriteImageView2;
 
     private int quantity = 0;
 
+    IMatDataHandler iMatDataHandler = IMatDataHandler.getInstance();
+
     private MainViewController mainController;
+
+    private CheckoutPanel checkoutPanel;
+
 
     private Model model = Model.getInstance();
 
@@ -65,6 +86,22 @@ public class ProductPanel extends AnchorPane {
         }
 
         this.mainController = mainController;
+        this.checkoutPanel = checkoutPanel;
+
+
+        if (iMatDataHandler.isFavorite(product)){
+            favoriteImageView2.setImage(new Image(getClass().getClassLoader().getResourceAsStream(
+                    "imat/resources/starfilld.png")));
+            favoriteImageView.setImage(new Image(getClass().getClassLoader().getResourceAsStream(
+                    "imat/resources/starfilld.png")));}
+        else{
+
+            favoriteImageView.setImage(new Image(getClass().getClassLoader().getResourceAsStream(
+                    "imat/resources/star.png")));
+            favoriteImageView2.setImage(new Image(getClass().getClassLoader().getResourceAsStream(
+                    "imat/resources/star.png")));}
+
+
         // Setting basic product info
         this.product = product;
         nameLabel.setText(product.getName());
@@ -72,14 +109,89 @@ public class ProductPanel extends AnchorPane {
         imageView.setImage(model.getImage(product, kImageWidth, kImageWidth*kImageRatio));
 
    }
+
+   public Product getProduct() {
+        return product;
+   }
     
     @FXML
     private void handleAddAction(ActionEvent event) {
-        System.out.println("Add " + product.getName());
+        quantity = 1;
+
+
+        quantityPane.toFront();
+
+        imageView2.setImage(model.getImage(product, kImageWidth, kImageWidth * kImageRatio));
+        nameLabel2.setText(product.getName());
+        prizeLabel2.setText(String.format("%.2f", product.getPrice()) + " " + product.getUnit());
+        updateQuantityLabel();
+
+        // System.out.println("Add " + product.getName());
         model.addToShoppingCart(product);
+        mainController.updateShoppingCartElement(model.getShoppingCart().getItems());
     }
 
-    @FXML protected void handleShowProductDetail(Event event) {
+    @FXML private void handleShowProductDetail(Event event) {
         mainController.openProductDetail(product);
+    }
+
+    @FXML
+    private void handlePlusAction(Event event) {
+        quantity++; // Öka antalet
+        updateQuantityLabel(); // Uppdatera etiketten för antal
+        model.addToShoppingCart(product);
+        mainController.updateShoppingCartElement(model.getShoppingCart().getItems());
+
+    }
+
+    @FXML
+    private void handleShowFavorite(Event event) {
+        if (iMatDataHandler.isFavorite(product)) {
+            iMatDataHandler.removeFavorite(product);
+            System.out.println(iMatDataHandler.favorites());
+            favoriteImageView.setImage(new Image(getClass().getClassLoader().getResourceAsStream(
+                    "imatmini/resources/star.png")));
+            favoriteImageView2.setImage(new Image(getClass().getClassLoader().getResourceAsStream(
+                    "imatmini/resources/star.png")));
+            // mainController.searchfavoriteCategory();
+
+        } else {
+            iMatDataHandler.addFavorite(product);
+
+            System.out.println(product);
+            System.out.println(iMatDataHandler.favorites());
+            favoriteImageView.setImage(new Image(getClass().getClassLoader().getResourceAsStream(
+                    "imat/resources/starfilld.png")));
+            favoriteImageView2.setImage(new Image(getClass().getClassLoader().getResourceAsStream(
+                    "imat/resources/starfilld.png")));
+            //mainController.searchfavoriteCategory();
+        }
+    }
+
+
+    @FXML
+    private void handleMinusAction(Event event) {
+        if (quantity > 1) {
+            quantity--; // Minska antalet om det är större än noll
+            model.removeFromShoppingCart(product);
+
+            for (int i = 0; i < quantity; i++) {
+                model.addToShoppingCart(product);
+            }
+
+            updateQuantityLabel(); // Uppdatera etiketten för antal
+
+        }else {
+            model.removeFromShoppingCart(product);
+
+            addButtonPane.toFront();
+
+
+        }
+        mainController.updateShoppingCartElement(model.getShoppingCart().getItems());
+
+    }
+    private void updateQuantityLabel() {
+        quantityLabel.setText(Integer.toString(quantity)); // Uppdatera antalet på etiketten
     }
 }

@@ -57,3 +57,24 @@
     -fx-background-color: #5782D5;
 }
 
+
+
+.normal-button{
+      -fx-font-size: 13px;
+      -fx-font-family: "Arial";
+      -fx-border-radius: 2px;
+      -fx-background-radius: 2px;
+      -fx-background-color: #F3F3F3;
+}
+.normal-button:hover{
+     -fx-background-color: #0000FF;
+}
+.normal-button:pressed{
+     -fx-background-color: #000000;
+}
+
+.highlighted-button {
+     -fx-font-size: 13px;
+    -fx-background-color: #3162BF;
+    -fx-text-fill: white;
+}

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TextField?>
@@ -17,6 +18,61 @@
 <AnchorPane fx:id="program" maxHeight="700.0" maxWidth="1000.0" minHeight="700.0" minWidth="1000.0" prefHeight="700.0" prefWidth="1000.0" style="-fx-background-color: #F3F3F3;" stylesheets="@imat_app.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="imat.MainViewController">
    <children>
       <AnchorPane fx:id="dynamicPane" layoutX="-1.0" layoutY="99.0" prefHeight="600.0" prefWidth="988.0" style="-fx-background-color: blue;" />
+      <AnchorPane fx:id="dynamicPane2" layoutY="100.0" prefHeight="600.0" prefWidth="1000.0" style="-fx-background-color: blue;" />
+      <AnchorPane fx:id="shoppingCart" layoutY="100.0" prefHeight="600.0" prefWidth="1000.0" style="-fx-background-color: rgba(0, 0, 0, 0.75);">
+         <children>
+            <AnchorPane layoutX="666.0" prefHeight="523.0" prefWidth="334.0" style="-fx-background-color: #3162BF;">
+               <children>
+                  <Label layoutX="135.0" layoutY="56.0" textAlignment="RIGHT" />
+                  <Label layoutX="98.0" layoutY="14.0" text="KUNDVAGN" textFill="WHITE">
+                     <font>
+                        <Font name="Yu Gothic UI Semibold" size="24.0" />
+                     </font>
+                  </Label>
+                  <Button layoutX="108.0" layoutY="480.0" mnemonicParsing="false" onAction="#handleCheckoutAction" prefHeight="35.0" prefWidth="114.0" style="-fx-background-color: #FFFFFF; -fx-background-radius: 10px;" text="KASSA">
+                     <font>
+                        <Font name="Yu Gothic UI Semibold" size="16.0" />
+                     </font>
+                  </Button>
+                  <ImageView fx:id="closeShoppingCartIcon" fitHeight="35.0" fitWidth="25.0" layoutX="295.0" layoutY="19.0" onMouseClicked="#openShopPane" onMouseEntered="#shoppingCloseIconEntered" onMouseExited="#shoppingCloseIconExited" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@resources/x-mark.png" />
+                     </image>
+                  </ImageView>
+                  <ScrollPane layoutY="57.0" prefHeight="417.0" prefWidth="334.0">
+                     <content>
+                        <FlowPane fx:id="shoppingCartFlowPane" prefHeight="415.0" prefWidth="318.0" style="-fx-background-color: #FFFFFF;" />
+                     </content>
+                  </ScrollPane>
+               </children>
+            </AnchorPane>
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="productDetailView" prefHeight="700.0" prefWidth="1000.0" style="-fx-background-color: rgba(0, 0, 0, 0.75);">
+         <children>
+            <AnchorPane layoutX="278.0" layoutY="158.0" prefHeight="340.0" prefWidth="444.0" styleClass="detailView_Style">
+               <children>
+                  <Label fx:id="originLabel" layoutX="23.0" layoutY="25.0" prefHeight="18.0" prefWidth="100.0" textAlignment="RIGHT" />
+                  <Label fx:id="descriptionLabel" alignment="TOP_LEFT" layoutX="226.0" layoutY="107.0" prefHeight="134.0" prefWidth="191.0" text="Denna produkt är god!" wrapText="true" />
+                  <ImageView fx:id="detailImageView" fitHeight="150.0" fitWidth="191.0" layoutX="14.0" layoutY="24.0" pickOnBounds="true" preserveRatio="true" />
+                  <Label fx:id="nameLabel" alignment="CENTER" layoutX="205.0" layoutY="63.0" prefHeight="35.0" prefWidth="234.0" text="Produkt">
+                     <font>
+                        <Font name="System Bold" size="24.0" />
+                     </font>
+                  </Label>
+                  <ImageView fx:id="closeDetailImageView" fitHeight="25.0" fitWidth="28.0" layoutX="405.0" layoutY="13.0" onMouseClicked="#handleDoneProductDetail" onMouseEntered="#closeButtonMouseEntered" onMouseExited="#closeButtonMouseExit" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@resources/icon_close.png" />
+                     </image>
+                  </ImageView>
+                  <Label fx:id="brandLabel" layoutX="35.0" layoutY="211.0" prefHeight="18.0" prefWidth="151.0" text="Label" />
+                  <Label fx:id="contentsLabel" layoutX="35.0" layoutY="243.0" prefHeight="18.0" prefWidth="164.0" text="Label" />
+                  <Label fx:id="prizeLabel" layoutX="35.0" layoutY="277.0" prefHeight="17.0" prefWidth="114.0" text="Label" />
+                  <Label fx:id="ecoLabel" layoutX="35.0" layoutY="183.0" prefHeight="17.0" prefWidth="123.0" text="Label" />
+               </children>
+            </AnchorPane>
+         </children>
+      </AnchorPane>
       <AnchorPane fx:id="header" prefHeight="100.0" prefWidth="1000.0" style="-fx-background-color: #3162BF;">
          <children>
             <ImageView fx:id="imatHome" fitHeight="90.0" fitWidth="90.0" layoutX="5.0" layoutY="5.0" onMouseClicked="#home" pickOnBounds="true" preserveRatio="true">
@@ -55,7 +111,7 @@
                   </DropShadow>
                </effect>
             </ImageView>
-            <ImageView fx:id="shoppingCartLogo" fitHeight="90.0" fitWidth="90.0" layoutX="896.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="shoppingCartLogo" fitHeight="90.0" fitWidth="90.0" layoutX="896.0" layoutY="7.0" onMouseClicked="#shoppingIconPressed" onMouseEntered="#shoppingIconEntered" onMouseExited="#shoppingIconExited" pickOnBounds="true" preserveRatio="true">
                <effect>
                   <DropShadow height="20.0" radius="9.5" width="20.0">
                      <color>
@@ -71,31 +127,6 @@
       </AnchorPane>
       <StackPane fx:id="shopPane" layoutY="100.0" prefHeight="600.0" prefWidth="1000.0">
          <children>
-            <AnchorPane fx:id="productDetailView" prefHeight="700.0" prefWidth="1000.0" style="-fx-background-color: rgba(0, 0, 0, 0.75);">
-               <children>
-                  <AnchorPane layoutX="278.0" layoutY="148.0" prefHeight="340.0" prefWidth="444.0" styleClass="detailView_Style">
-                     <children>
-                        <Label fx:id="originLabel" layoutX="23.0" layoutY="25.0" prefHeight="18.0" prefWidth="100.0" textAlignment="RIGHT" />
-                        <Label fx:id="descriptionLabel" alignment="TOP_LEFT" layoutX="226.0" layoutY="107.0" prefHeight="134.0" prefWidth="191.0" text="Denna produkt är god!" wrapText="true" />
-                        <ImageView fx:id="detailImageView" fitHeight="150.0" fitWidth="191.0" layoutX="14.0" layoutY="24.0" pickOnBounds="true" preserveRatio="true" />
-                        <Label fx:id="nameLabel" alignment="CENTER" layoutX="205.0" layoutY="63.0" prefHeight="35.0" prefWidth="234.0" text="Produkt">
-                           <font>
-                              <Font name="System Bold" size="24.0" />
-                           </font>
-                        </Label>
-                        <ImageView fx:id="closeDetailImageView" fitHeight="25.0" fitWidth="28.0" layoutX="405.0" layoutY="13.0" onMouseClicked="#handleDoneProductDetail" onMouseEntered="#closeButtonMouseEntered" onMouseExited="#closeButtonMouseExit" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@resources/icon_close.png" />
-                           </image>
-                        </ImageView>
-                        <Label fx:id="brandLabel" layoutX="35.0" layoutY="211.0" prefHeight="18.0" prefWidth="151.0" text="Label" />
-                        <Label fx:id="contentsLabel" layoutX="35.0" layoutY="243.0" prefHeight="18.0" prefWidth="164.0" text="Label" />
-                        <Label fx:id="prizeLabel" layoutX="35.0" layoutY="277.0" prefHeight="17.0" prefWidth="114.0" text="Label" />
-                        <Label fx:id="ecoLabel" layoutX="35.0" layoutY="183.0" prefHeight="17.0" prefWidth="123.0" text="Label" />
-                     </children>
-                  </AnchorPane>
-               </children>
-            </AnchorPane>
             <ScrollPane prefHeight="600.0" prefWidth="1000.0">
                <content>
                   <FlowPane fx:id="mainViewFlowPane" prefHeight="599.0" prefWidth="983.0" style="-fx-background-color: #F3F3F3;">

@@ -26,20 +26,14 @@ public class MainViewController implements Initializable, ShoppingCartListener {
 
     @FXML private AnchorPane header;
     @FXML private ImageView accountLogo;
+    @FXML private ImageView shoppingCartLogo;
     @FXML private AnchorPane program;
     @FXML private StackPane shopPane;
-
     @FXML private TextField searchField;
-
-    @FXML
-    private Label itemsLabel;
-    @FXML
-    private Label costLabel;
-
+    @FXML private Label itemsLabel;
+    @FXML private Label costLabel;
     @FXML private FlowPane mainViewFlowPane;
-
     @FXML private FlowPane productsPanel;
-
     private Map<String, ProductPanel> productMap = new HashMap();
 
     //Categories:
@@ -77,11 +71,23 @@ public class MainViewController implements Initializable, ShoppingCartListener {
     @FXML private ComboBox yearCombo;
     @FXML private TextField cvcField;
     @FXML private Label purchasesLabel;
+
+    @FXML public FlowPane shoppingCartFlowPane;
+
     @FXML private AnchorPane dynamicPane;
+    @FXML private AnchorPane dynamicPane2;
+
+    //Shoppingcart
+    @FXML private AnchorPane shoppingCart;
+
+    @FXML private ImageView closeShoppingCartIcon;
+    @FXML private ImageView backArrow;
 
     // Other variables:
     IMatDataHandler iMatDataHandler = IMatDataHandler.getInstance();
     private final Model model = Model.getInstance();
+
+    CheckoutPanel checkoutPanel;
 
     // Shop pane actions:
 
@@ -123,6 +129,22 @@ public class MainViewController implements Initializable, ShoppingCartListener {
 
     private void handleNameAction() {
         openNameView();
+    }
+
+    @FXML
+    private void handleCheckoutAction(ActionEvent event) {
+        openCheckoutView();
+    }
+
+    //Acount pane actions
+
+    void openProductDetail() {
+        productDetailView.toFront();
+    }
+
+    @FXML
+    private void handleDoneAction(ActionEvent event) {
+        closeAccountView();
     }
 
     @FXML private void handleDoneAccountAction(ActionEvent event) {
@@ -386,18 +408,54 @@ public class MainViewController implements Initializable, ShoppingCartListener {
                 "imat/resources/user.png")));
     }
 
+    @FXML public void shoppingIconEntered(){
+        shoppingCartLogo.setImage(new Image(getClass().getClassLoader().getResourceAsStream(
+                "imat/resources/shopping-cart_hover.png")));
+    }
+
+    @FXML public void shoppingIconPressed() throws InterruptedException {
+        shoppingCartLogo.setImage(new Image(getClass().getClassLoader().getResourceAsStream(
+                "imat/resources/shopping-cart_pressed.png")));
+        openShoppingCart();
+    }
+
+    @FXML public void shoppingIconExited(){
+        shoppingCartLogo.setImage(new Image(getClass().getClassLoader().getResourceAsStream(
+                "imat/resources/shopping-cart.png")));
+    }
+
+    @FXML public void shoppingCloseIconEntered(){
+        closeShoppingCartIcon.setImage(new Image(getClass().getClassLoader().getResourceAsStream(
+                "imat/resources/x-mark_hover.png")));
+    }
+    @FXML public void shoppingCloseIconExited(){
+        closeShoppingCartIcon.setImage(new Image(getClass().getClassLoader().getResourceAsStream(
+                "imat/resources/x-mark.png")));
+    }
+
+
     @FXML private void handleDoneProductDetail() {
         closeDetailImageView.setImage(new Image(getClass().getClassLoader().getResourceAsStream(
                 "imat/resources/icon_close_pressed.png")));
         openShopPane();
     }
 
-    void openShopPane() {
+    @FXML void openShopPane() {
         shopPane.toFront();
         header.toFront();
     }
 
+    @FXML
+    void searchfavoriteCategory() {
+        IMatDataHandler iMatDataHandler = IMatDataHandler.getInstance();
+        searchField.clear();
+        List<Product> favoriteProducts = iMatDataHandler.favorites();
+        updateProductList(favoriteProducts);
+    }
+
     @Override public void initialize(URL url, ResourceBundle rb) {
+
+        this.checkoutPanel = new CheckoutPanel(this);
         model.getShoppingCart().addShoppingCartListener(this);
         for (Node node : categoryList.getChildren()) {
             if (node instanceof AnchorPane) {
@@ -411,9 +469,13 @@ public class MainViewController implements Initializable, ShoppingCartListener {
         }
 
         updateProductList(model.getProducts());
-        //setupAccountPane();
+        updateShoppingCartElement(model.getShoppingCart().getItems());
+
         StackPane namePane = new NamePanel(this);
         dynamicPane.getChildren().add(namePane);
+
+        StackPane checkoutPane = new CheckoutPanel(this);
+        dynamicPane2.getChildren().add(checkoutPane);
 
     }
 
@@ -433,23 +495,58 @@ public class MainViewController implements Initializable, ShoppingCartListener {
         dynamicPane.toFront();
     }
 
+    public void openCheckoutView() {dynamicPane2.toFront();}
+
+    @FXML public void openShoppingCart() {
+        shoppingCart.toFront();
+    }
+
+
     public void closeNameView() {
         shopPane.toFront();
     }
 
+    public void closeCheckoutView() {shopPane.toFront();}
 
-    @Override public void shoppingCartChanged(CartEvent cartEvent) {
+
+
+    @Override
+    public void shoppingCartChanged(CartEvent cartEvent) {
+        updateLabel();
+    }
+
+    public void updateShoppingCartElement(List<ShoppingItem> items) {
+
+
+        shoppingCartFlowPane.getChildren().clear();
+
+        for (ShoppingItem item : items) {
+            shoppingCartFlowPane.getChildren().add(new imat.ShoppingCartElement(item.getProduct(), item.getAmount(),this));
+        }
+        checkoutPanel.updateCheckoutElement(items);
 
     }
 
     private void updateProductList(List<Product> products) {
-
-        System.out.println("updateProducts " + products.size());
         productsPanel.getChildren().clear();
+
+        /*Set<String> productNames = new HashSet<>();
+        for (Product product: products) {
+            productNames.add(product.getName());
+        }
+
+        for (Node node : productsPanel.getChildren()) {
+            if (node instanceof ProductPanel) {
+                ProductPanel productPanel = (ProductPanel) node;
+                productPanel.setVisible(productNames.contains(productPanel.getProduct().getName()));
+            }
+        }*/
 
         for( Product product : products) {
             productsPanel.getChildren().add(productMap.get(product.getName()));
         }
+
+
     }
 
     void updateAccountPanel() {
@@ -489,6 +586,15 @@ public class MainViewController implements Initializable, ShoppingCartListener {
 
     }
 
+    private void updateLabel() {
+
+        ShoppingCart shoppingCart = model.getShoppingCart();
+
+        //itemsLabel.setText("Antal varor: " + String.format("%.1f",model.getCartAmount()));
+        //costLabel.setText("Kostnad: " + String.format("%.2f",shoppingCart.getTotal()));
+
+    }
+
     private void setupAccountPane() {
 
         cardTypeCombo.getItems().addAll(model.getCardTypes());
@@ -500,6 +606,6 @@ public class MainViewController implements Initializable, ShoppingCartListener {
     }
 
     public void updateQuantity(Product product, int quantity){
-        //model.updateQuantity(product, quantity);
+        model.updateQuantity(product, quantity);
     }
 }

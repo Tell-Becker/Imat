@@ -15,9 +15,8 @@ import javafx.stage.Stage;
  * and open the template in the editor.
  */
 public class iMatApp extends Application {
-    
     @Override
-    public void start(Stage stage) throws Exception {
+    public void start(Stage stage) throws Exception  {
         
         ResourceBundle bundle = java.util.ResourceBundle.getBundle("imat/resources/iMat");
         
