@@ -6,6 +6,7 @@
 package imat;
 
 import imat.CheckoutElement;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.fxml.FXML;
@@ -23,9 +24,10 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.text.SimpleDateFormat;
+import java.util.function.UnaryOperator;
 
 
-public class CheckoutPanel extends StackPane {
+public class CheckoutPanel extends StackPane implements ShoppingCartListener{
 
 
     @FXML
@@ -103,6 +105,18 @@ public class CheckoutPanel extends StackPane {
         @FXML
         private Label deliverTime;
 
+        @FXML private Label productSumLabel;
+
+        @FXML private Label quantityLabel;
+
+        @FXML private Label totalLabel;
+
+        @FXML private Label totalLabel2;
+
+        @FXML private Label totalLabel3;
+
+
+
         @FXML private ImageView backArrow;
         @FXML private ImageView backArrow2;
         @FXML private ImageView backArrow3;
@@ -145,6 +159,17 @@ public class CheckoutPanel extends StackPane {
         this.customer = model.getCustomer();
         setupCardPane();
         updateCheckoutElement(model.getShoppingCart().getItems());
+
+        model.getShoppingCart().addShoppingCartListener(this);
+
+        ShoppingCart shoppingCart = model.getShoppingCart();
+
+        //numberTextField.setTextFormatter(createNumericTextFormatter(16));
+
+        numberTextField.setTextFormatter(createNumericTextFormatter(16));
+        cvcField.setTextFormatter(createNumericTextFormatter(3));
+
+        updateTotalLabels(shoppingCart.getTotal());
 
         //timepane
         lista = new ArrayList<Button>();
@@ -249,10 +274,6 @@ public class CheckoutPanel extends StackPane {
                 "imat/resources/right-arrow.png")));
     }
 
-    @FXML public void changeToBlue() {
-
-    }
-
     public List<Button> getLista() {
         return lista;
     }
@@ -260,37 +281,57 @@ public class CheckoutPanel extends StackPane {
 
     public void highlightButton(ActionEvent event) {
         Button clickedButton = (Button) event.getSource();
+        for (Button buttonRemoveStyle : getLista()) {
+            buttonRemoveStyle.getStyleClass().remove("highlighted-button");
+            buttonRemoveStyle.getStyleClass().add("normal-button");
+        }
         for (Button button : getLista()) {
             if (button == clickedButton) {
                 Labeled selectedTime = button;
                 button.getStyleClass().remove("normal-button");
                 button.getStyleClass().add("highlighted-button");
-                if(selectedTime== button0810){
+                if (selectedTime == button0810) {
                     deliverTime.setText("Din tid för leverans är: 08-10");
                 }
-                if(selectedTime== button1012){
+                if (selectedTime == button1012) {
                     deliverTime.setText("Din tid för leverans är: 10-12");
                 }
-                if(selectedTime== button1214){
+                if (selectedTime == button1214) {
                     deliverTime.setText("Din tid för leverans är: 12-14");
                 }
-                if(selectedTime== button1416){
+                if (selectedTime == button1416) {
                     deliverTime.setText("Din tid för leverans är: 14-16");
                 }
-                if(selectedTime== button1618){
+                if (selectedTime == button1618) {
                     deliverTime.setText("Din tid för leverans är: 16-18");
                 }
-                if(selectedTime== button1820){
+                if (selectedTime == button1820) {
                     deliverTime.setText("Din tid för leverans är: 18-20");
                 }
-                if(selectedTime== button2022){
+                if (selectedTime == button2022) {
                     deliverTime.setText("Din tid för leverans är: 20-22");
                 }
             } else {
-
                 button.getStyleClass().remove("highlighted-button");
                 button.getStyleClass().add("normal-button");
             }
+        }
+    }
+
+    public static void preventDoubleClick(Button button, long delayMillis, Runnable action) {
+        if (!button.isDisabled()) {
+            button.setDisable(true);
+            action.run();
+            Platform.runLater(() -> {
+                new Thread(() -> {
+                    try {
+                        Thread.sleep(delayMillis);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    Platform.runLater(() -> button.setDisable(false));
+                }).start();
+            });
         }
     }
 
@@ -384,7 +425,11 @@ public class CheckoutPanel extends StackPane {
         ///customer.setLastName(lnameTextField.getText());
         checkoutPane.toFront();
         mainController.closeCheckoutView();
+        mainController.resetAllProductPanels();
+    }
 
+    @FXML public void keepBuying() {
+        mainController.closeCheckoutView();
     }
 
     @FXML private void openCheckout(Event event) {
@@ -451,7 +496,7 @@ public class CheckoutPanel extends StackPane {
 
     }
 
-    private void updateAccountDetail() {
+    @FXML private void updateAccountDetail() {
 
 
         fNameTextField.setText(customer.getFirstName());
@@ -474,14 +519,27 @@ public class CheckoutPanel extends StackPane {
         customer.setPostCode(postalnrTextField.getText());
         customer.setEmail(emailTextField.getText());
         customer.setPostAddress(cityTextField.getText());
+        updateAccountDetail();
 
     }
+
+    private TextFormatter<String> createNumericTextFormatter(int maxLength) {
+        UnaryOperator<TextFormatter.Change> filter = change -> {
+            String newText = change.getControlNewText();
+            if (newText.matches("\\d*") && newText.length() <= maxLength) {
+                return change;
+            }
+            return null;
+        };
+        return new TextFormatter<>(filter);
+    }
+
     public void updateCheckoutElement(List<ShoppingItem> items) {
 
         checkoutFlowPane.getChildren().clear();
 
         for (ShoppingItem item : items) {
-            checkoutFlowPane.getChildren().add(new CheckoutElement(item.getProduct()));
+            checkoutFlowPane.getChildren().add(new CheckoutElement(item.getProduct(), item.getAmount()));
         }
     }
 
@@ -489,4 +547,16 @@ public class CheckoutPanel extends StackPane {
         model.placeOrder();
     }
 
+
+    private void updateTotalLabels(double total) {
+        totalLabel.setText("Kostnad: " + String.format("%.2f", total) + " Kr");
+        totalLabel2.setText("Kostnad: " + String.format("%.2f", total) + " Kr");
+        //totalLabel3.setText("Kostnad: " + String.format("%.2f", total) + " Kr");
+    }
+
+    @Override
+    public void shoppingCartChanged(CartEvent cartEvent) {
+        double total = model.getShoppingCart().getTotal();
+        updateTotalLabels(total);
+    }
 }

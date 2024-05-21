@@ -6,7 +6,6 @@ import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
-import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
@@ -15,18 +14,21 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.StackPane;
-import javafx.scene.control.ScrollPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.Node;
 import se.chalmers.cse.dat216.project.*;
+import se.chalmers.cse.dat216.project.ProductCategory;
 
 
 public class MainViewController implements Initializable, ShoppingCartListener {
 
+    private List<ProductPanel> productPanels = new ArrayList<>();
+
     @FXML private AnchorPane header;
     @FXML private ImageView accountLogo;
     @FXML private ImageView shoppingCartLogo;
+    @FXML private ImageView imatHome;
     @FXML private AnchorPane program;
     @FXML private StackPane shopPane;
     @FXML private TextField searchField;
@@ -34,11 +36,13 @@ public class MainViewController implements Initializable, ShoppingCartListener {
     @FXML private Label costLabel;
     @FXML private FlowPane mainViewFlowPane;
     @FXML private FlowPane productsPanel;
+
+    private Model model = Model.getInstance();
     private Map<String, ProductPanel> productMap = new HashMap();
 
     //Categories:
     @FXML private AnchorPane categoryList;
-    @FXML private AnchorPane everythingCategory;
+    @FXML private AnchorPane favoriteCategory;
     @FXML private AnchorPane meatCategory;
     @FXML private AnchorPane fishCategory;
     @FXML private AnchorPane dairyCategory;
@@ -85,15 +89,13 @@ public class MainViewController implements Initializable, ShoppingCartListener {
 
     // Other variables:
     IMatDataHandler iMatDataHandler = IMatDataHandler.getInstance();
-    private final Model model = Model.getInstance();
 
     CheckoutPanel checkoutPanel;
 
     // Shop pane actions:
 
-    /*private void productDetail(Product product) {
-        ProductDetail detail = model.getDetail(product);
-    }*/
+    //private int pageSize = 20;
+    //private int currentPage = 0;
 
     private void selectCategory(AnchorPane categoryPane) {
         for (Node node : categoryList.getChildren()) {
@@ -106,6 +108,21 @@ public class MainViewController implements Initializable, ShoppingCartListener {
         categoryPane.getStyleClass().add("selected_category");
     }
 
+    private void removeAllSelectedCategories() {
+        favoriteCategory.getStyleClass().remove("selected_category");;
+        meatCategory.getStyleClass().remove("selected_category");;
+        fishCategory.getStyleClass().remove("selected_category");;
+        dairyCategory.getStyleClass().remove("selected_category");;
+        carbCategory.getStyleClass().remove("selected_category");;
+        bakeryCategory.getStyleClass().remove("selected_category");;
+        vegetableCategory.getStyleClass().remove("selected_category");;
+        fruitCategory.getStyleClass().remove("selected_category");;
+        pantryCategory.getStyleClass().remove("selected_category");;
+        snackCategory.getStyleClass().remove("selected_category");;
+        drinkCategory.getStyleClass().remove("selected_category");;
+    }
+
+
     @FXML private void handleSearchAction(ActionEvent event) {
         for (Node node : categoryList.getChildren()) {
             if (node instanceof AnchorPane) {
@@ -116,15 +133,6 @@ public class MainViewController implements Initializable, ShoppingCartListener {
         List<Product> matches = model.findProducts(searchField.getText());
         updateProductList(matches);
         System.out.println("# matching products: " + matches.size());
-    }
-
-    @FXML private void handleClearCartAction(ActionEvent event) {
-        model.clearShoppingCart();
-    }
-
-    @FXML private void handleBuyItemsAction(ActionEvent event) {
-        model.placeOrder();
-        costLabel.setText("Köpet klart!");
     }
 
     private void handleNameAction() {
@@ -142,210 +150,149 @@ public class MainViewController implements Initializable, ShoppingCartListener {
         productDetailView.toFront();
     }
 
-    @FXML
-    private void handleDoneAction(ActionEvent event) {
-        closeAccountView();
+    private List<Product> filterProductsByCategory(ProductCategory category) {
+        List<Product> filteredProducts = new ArrayList<>();
+        List<Product> allProducts = model.getProducts();
+        for (Product product: allProducts) {
+            if(product.getCategory() == category) {
+                filteredProducts.add(product);
+            }
+        }
+        return filteredProducts;
     }
 
-    @FXML private void handleDoneAccountAction(ActionEvent event) {
-        closeAccountView();
-    }
-
-
-    @FXML private void searchEverythingCategory() {
+    @FXML private void searchfavoriteCategory() {
+        IMatDataHandler iMatDataHandler = IMatDataHandler.getInstance();
         searchField.clear();
-        selectCategory(everythingCategory);
-        updateProductList(model.getProducts());
+        selectCategory(favoriteCategory);
+        List<Product> favoriteProducts = iMatDataHandler.favorites();
+        updateProductList(favoriteProducts);
     }
 
     @FXML private void searchMeatCategory() {
         searchField.clear();
         selectCategory(meatCategory);
-        ArrayList<Product> matches = new ArrayList<Product>();
-        List<Product> products = model.getProducts();
-        for (Product product : products) {
-            ProductCategory category = product.getCategory();
-            if(category == ProductCategory.MEAT) {
-                matches.add(product);
-            }
-
-        }
-        updateProductList(matches);
+        List<Product> meatProducts = filterProductsByCategory(ProductCategory.MEAT);
+        updateProductList(meatProducts);
     }
-
     @FXML private void searchFishCategory() {
         searchField.clear();
         selectCategory(fishCategory);
-        ArrayList<Product> matches = new ArrayList<Product>();
-        List<Product> products = model.getProducts();
-        for (Product product : products) {
-            ProductCategory category = product.getCategory();
-            if(category == ProductCategory.FISH) {
-                matches.add(product);
-            }
-        }
-        updateProductList(matches);
+        List<Product> fishProducts = filterProductsByCategory(ProductCategory.FISH);
+        updateProductList(fishProducts);
     }
 
     @FXML private void searchDairyCategory() {
         searchField.clear();
         selectCategory(dairyCategory);
-        ArrayList<Product> matches = new ArrayList<Product>();
-        List<Product> products = model.getProducts();
-        for (Product product : products) {
-            ProductCategory category = product.getCategory();
-            if(category == ProductCategory.DAIRIES) {
-                matches.add(product);
-            }
-
-        }
-        updateProductList(matches);
+        List<Product> dairyProducts = filterProductsByCategory(ProductCategory.DAIRIES);
+        updateProductList(dairyProducts);
     }
 
     @FXML private void searchCarbCategory() {
         searchField.clear();
         selectCategory(carbCategory);
-        ArrayList<Product> matches = new ArrayList<Product>();
-        List<Product> products = model.getProducts();
-        for (Product product : products) {
-            ProductCategory category = product.getCategory();
-            if(category == ProductCategory.PASTA) {
-                matches.add(product);
-            }
-            if(category == ProductCategory.POTATO_RICE) {
-                matches.add(product);
-            }
-            if(category == ProductCategory.BREAD) {
-                matches.add(product);
-            }
-        }
-        updateProductList(matches);
+        List<Product> breadProducts = filterProductsByCategory(ProductCategory.BREAD);
+        List<Product> pastaProducts = filterProductsByCategory(ProductCategory.PASTA);
+        List<Product> potato_riceProducts = filterProductsByCategory(ProductCategory.POTATO_RICE);
+        List<Product> carbProducts = new ArrayList<>();
+        carbProducts.addAll(breadProducts);
+        carbProducts.addAll( pastaProducts);
+        carbProducts.addAll( potato_riceProducts);
+        updateProductList(carbProducts);
     }
 
     @FXML private void searchBakeryCategory() {
         searchField.clear();
         selectCategory(bakeryCategory);
-        ArrayList<Product> matches = new ArrayList<Product>();
+        List<Product> bakeryProducts = filterProductsByCategory(ProductCategory.BREAD);
+
         List<Product> products = model.getProducts();
         for (Product product : products) {
-            ProductCategory category = product.getCategory();
             if(Objects.equals(product.getName(), "Kanelbullar")) {
-                matches.add(product);
+                bakeryProducts.add(product);
             }
-            if(category == ProductCategory.BREAD) {
-                matches.add(product);
-            }
+
         }
-        updateProductList(matches);
+        updateProductList(bakeryProducts);
     }
 
     @FXML private void searchFruitCategory() {
         searchField.clear();
         selectCategory(fruitCategory);
-        ArrayList<Product> matches = new ArrayList<Product>();
-        List<Product> products = model.getProducts();
-        for (Product product : products) {
-            ProductCategory category = product.getCategory();
-            if(category == ProductCategory.FRUIT) {
-                matches.add(product);
-            }
-            if(category == ProductCategory.BERRY) {
-                matches.add(product);
-            }
-            if(category == ProductCategory.CITRUS_FRUIT) {
-                matches.add(product);
-            }
-            if(category == ProductCategory.MELONS) {
-                matches.add(product);
-            }
-            if(category == ProductCategory.EXOTIC_FRUIT) {
-                matches.add(product);
-            }
-            if(category == ProductCategory.VEGETABLE_FRUIT) {
-                matches.add(product);
-            }
-        }
-        updateProductList(matches);
+        List<Product> fruitProducts = filterProductsByCategory(ProductCategory.FRUIT);
+        List<Product> berryProducts = filterProductsByCategory(ProductCategory.BERRY);
+        List<Product> citrusProducts = filterProductsByCategory(ProductCategory.CITRUS_FRUIT);
+        List<Product> melonProducts = filterProductsByCategory(ProductCategory.MELONS);
+        List<Product> exoticProducts = filterProductsByCategory(ProductCategory.EXOTIC_FRUIT);
+        List<Product> vegetableFruitProducts = filterProductsByCategory(ProductCategory.VEGETABLE_FRUIT);
+        List<Product> allFruit = new ArrayList<>();
+        allFruit.addAll(fruitProducts);
+        allFruit.addAll(berryProducts);
+        allFruit.addAll(citrusProducts);
+        allFruit.addAll(melonProducts);
+        allFruit.addAll(exoticProducts);
+        allFruit.addAll(vegetableFruitProducts);
+        updateProductList(allFruit);
+
     }
 
     @FXML private void searchVegetableCategory() {
         searchField.clear();
         selectCategory(vegetableCategory);
-        ArrayList<Product> matches = new ArrayList<Product>();
-        List<Product> products = model.getProducts();
-        for (Product product : products) {
-            ProductCategory category = product.getCategory();
-            if(category == ProductCategory.CABBAGE) {
-                matches.add(product);
-            }
-            if(category == ProductCategory.HERB) {
-                matches.add(product);
-            }
-            if(category == ProductCategory.ROOT_VEGETABLE) {
-                matches.add(product);
-            }
-            if(category == ProductCategory.POD) {
-                matches.add(product);
-            }
-            if(category == ProductCategory.VEGETABLE_FRUIT) {
-                matches.add(product);
-            }
-        }
-        updateProductList(matches);
+        List<Product> cabbage = filterProductsByCategory(ProductCategory.CABBAGE);
+        List<Product> herb = filterProductsByCategory(ProductCategory.HERB);
+        List<Product> root = filterProductsByCategory(ProductCategory.ROOT_VEGETABLE);
+        List<Product> pod = filterProductsByCategory(ProductCategory.POD);
+        List<Product> vegetableFruit = filterProductsByCategory(ProductCategory.VEGETABLE_FRUIT);
+        List<Product> allVegetable = new ArrayList<>();
+        allVegetable.addAll(cabbage);
+        allVegetable.addAll(herb);
+        allVegetable.addAll(root);
+        allVegetable.addAll(pod);
+        allVegetable.addAll(vegetableFruit);
+        updateProductList(allVegetable);
     }
 
     @FXML private void searchPantryCategory() {
         searchField.clear();
         selectCategory(pantryCategory);
-        ArrayList<Product> matches = new ArrayList<Product>();
-        List<Product> products = model.getProducts();
-        for (Product product : products) {
-            ProductCategory category = product.getCategory();
-            if(category == ProductCategory.FLOUR_SUGAR_SALT) {
-                matches.add(product);
-            }
-        }
-        updateProductList(matches);
+        List<Product> pantryProducts = filterProductsByCategory(ProductCategory.FLOUR_SUGAR_SALT);
+        updateProductList(pantryProducts);
     }
 
     @FXML private void searchSweetCategory() {
         searchField.clear();
         selectCategory(snackCategory);
-        ArrayList<Product> matches = new ArrayList<Product>();
-        List<Product> products = model.getProducts();
-        for (Product product : products) {
-            ProductCategory category = product.getCategory();
-            if(category == ProductCategory.SWEET) {
-                matches.add(product);
-            }
-            if(category == ProductCategory.NUTS_AND_SEEDS) {
-                matches.add(product);
-            }
-        }
-        updateProductList(matches);
+        List<Product> sweetProducts = filterProductsByCategory(ProductCategory.SWEET);
+        List<Product> nutsProducts = filterProductsByCategory(ProductCategory.NUTS_AND_SEEDS);
+        List<Product> allSnacks = new ArrayList<>();
+        allSnacks.addAll(sweetProducts);
+        allSnacks.addAll(nutsProducts);
+
+        updateProductList(allSnacks);
+
+
     }
 
     @FXML private void searchDrinkCategory() {
         searchField.clear();
         selectCategory(drinkCategory);
-        ArrayList<Product> matches = new ArrayList<Product>();
-        List<Product> products = model.getProducts();
-        for (Product product : products) {
-            ProductCategory category = product.getCategory();
-            if(category == ProductCategory.HOT_DRINKS) {
-                matches.add(product);
-            }
-            if(category == ProductCategory.COLD_DRINKS) {
-                matches.add(product);
-            }
-        }
-        updateProductList(matches);
+        List<Product> coldDrinks = filterProductsByCategory(ProductCategory.COLD_DRINKS);
+        List<Product> hotDrinks = filterProductsByCategory(ProductCategory.HOT_DRINKS);
+        List<Product> allDrinks = new ArrayList<>();
+        allDrinks.addAll(coldDrinks);
+        allDrinks.addAll(hotDrinks);
+        updateProductList(allDrinks);
     }
 
     @FXML public void home() {
         shopPane.toFront();
-        searchEverythingCategory();
-        everythingCategory.getStyleClass().remove("selected_category");
+        searchField.clear();
+        removeAllSelectedCategories();
+        List<Product> allProducts = model.getProducts();
+        updateProductList(allProducts);
+        //everythingCategory.getStyleClass().remove("selected_category");
     }
 
     @FXML void openProductDetail(Product product) {
@@ -433,6 +380,22 @@ public class MainViewController implements Initializable, ShoppingCartListener {
                 "imat/resources/x-mark.png")));
     }
 
+    @FXML public void imatIconEntered(){
+        imatHome.setImage(new Image(getClass().getClassLoader().getResourceAsStream(
+                "imat/resources/imatLogo.png")));
+    }
+
+    @FXML public void imatIconPressed() throws InterruptedException {
+        imatHome.setImage(new Image(getClass().getClassLoader().getResourceAsStream(
+                "imat/resources/imatLogo_pressed.png")));
+        home();
+    }
+
+    @FXML public void imatIconExited(){
+        imatHome.setImage(new Image(getClass().getClassLoader().getResourceAsStream(
+                "imat/resources/IMAT_logo_transparent.png")));
+    }
+
 
     @FXML private void handleDoneProductDetail() {
         closeDetailImageView.setImage(new Image(getClass().getClassLoader().getResourceAsStream(
@@ -445,27 +408,23 @@ public class MainViewController implements Initializable, ShoppingCartListener {
         header.toFront();
     }
 
-    @FXML
-    void searchfavoriteCategory() {
-        IMatDataHandler iMatDataHandler = IMatDataHandler.getInstance();
-        searchField.clear();
-        List<Product> favoriteProducts = iMatDataHandler.favorites();
-        updateProductList(favoriteProducts);
-    }
-
     @Override public void initialize(URL url, ResourceBundle rb) {
-
+        //loadProducts(currentPage);
         this.checkoutPanel = new CheckoutPanel(this);
         model.getShoppingCart().addShoppingCartListener(this);
+
         for (Node node : categoryList.getChildren()) {
             if (node instanceof AnchorPane) {
                 node.getStyleClass().remove("selected_category");
                 node.getStyleClass().add("categories");
             }
         }
-        for (Product product : IMatDataHandler.getInstance().getProducts()) {
+
+        List<Product> products = model.getProducts();
+        for (Product product : products) {
             ProductPanel item = new ProductPanel(product,this);
             productMap.put(product.getName(), item);
+            productsPanel.getChildren().add(item);
         }
 
         updateProductList(model.getProducts());
@@ -474,25 +433,46 @@ public class MainViewController implements Initializable, ShoppingCartListener {
         StackPane namePane = new NamePanel(this);
         dynamicPane.getChildren().add(namePane);
 
-        StackPane checkoutPane = new CheckoutPanel(this);
+        StackPane checkoutPane = checkoutPanel;
         dynamicPane2.getChildren().add(checkoutPane);
 
     }
 
+    /*private void loadProducts(int page) {
+        int startIndex = page * pageSize;
+        int endIndex = Math.min(startIndex + pageSize, model.getProducts().size());
+
+        List<Product> products = model.getProducts().subList(startIndex, endIndex);
+        updateProductList(products);
+    }
+
+    @FXML private void nextPage() {
+        currentPage++;
+        loadProducts(currentPage);
+    }
+
+    @FXML private void previousPage() {
+        if (currentPage > 0) {
+            currentPage--;
+            loadProducts(currentPage);
+        }
+    }*/
+
     //Navigation:
 
-    public void openAccountView() {
-        updateAccountPanel();
-        accountPane.toFront();
-    }
-
-    public void closeAccountView() {
-        updateCreditCard();
-        shopPane.toFront();
-    }
 
     public void openNameView() {
         dynamicPane.toFront();
+    }
+
+    public void registerProductPanel(ProductPanel productPanel) {
+        productPanels.add(productPanel);
+    }
+
+    public void resetAllProductPanels() {
+        for (ProductPanel panel : productPanels) {
+            panel.resetQuantity();
+        }
     }
 
     public void openCheckoutView() {dynamicPane2.toFront();}
@@ -512,11 +492,15 @@ public class MainViewController implements Initializable, ShoppingCartListener {
 
     @Override
     public void shoppingCartChanged(CartEvent cartEvent) {
-        updateLabel();
+        //updateShoppingCartElement(iMatDataHandler.getShoppingCart().getItems());
     }
 
     public void updateShoppingCartElement(List<ShoppingItem> items) {
 
+        Map<String, ShoppingItem> itemMap = new HashMap<>();
+        for (ShoppingItem item : items) {
+            itemMap.put(item.getProduct().getName(), item);
+        }
 
         shoppingCartFlowPane.getChildren().clear();
 
@@ -530,82 +514,15 @@ public class MainViewController implements Initializable, ShoppingCartListener {
     private void updateProductList(List<Product> products) {
         productsPanel.getChildren().clear();
 
-        /*Set<String> productNames = new HashSet<>();
-        for (Product product: products) {
-            productNames.add(product.getName());
-        }
-
-        for (Node node : productsPanel.getChildren()) {
-            if (node instanceof ProductPanel) {
-                ProductPanel productPanel = (ProductPanel) node;
-                productPanel.setVisible(productNames.contains(productPanel.getProduct().getName()));
+        for (Product product : products) {
+            ProductPanel item = productMap.get(product.getName());
+            if (item != null) {
+                productsPanel.getChildren().add(item);
+            } else {
+                System.out.println("Fel");
             }
-        }*/
-
-        for( Product product : products) {
-            productsPanel.getChildren().add(productMap.get(product.getName()));
         }
 
-
     }
 
-    void updateAccountPanel() {
-
-        CreditCard card = model.getCreditCard();
-
-        numberTextField.setText(card.getCardNumber());
-        nameTextField.setText(card.getHoldersName());
-
-        cardTypeCombo.getSelectionModel().select(card.getCardType());
-        monthCombo.getSelectionModel().select(""+card.getValidMonth());
-        yearCombo.getSelectionModel().select(""+card.getValidYear());
-
-        cvcField.setText(""+card.getVerificationCode());
-
-        purchasesLabel.setText(model.getNumberOfOrders()+ " tidigare inköp hos iMat");
-
-    }
-
-    private void updateCreditCard() {
-
-        CreditCard card = model.getCreditCard();
-
-        card.setCardNumber(numberTextField.getText());
-        card.setHoldersName(nameTextField.getText());
-
-        String selectedValue = (String) cardTypeCombo.getSelectionModel().getSelectedItem();
-        card.setCardType(selectedValue);
-
-        selectedValue = (String) monthCombo.getSelectionModel().getSelectedItem();
-        card.setValidMonth(Integer.parseInt(selectedValue));
-
-        selectedValue = (String) yearCombo.getSelectionModel().getSelectedItem();
-        card.setValidYear(Integer.parseInt(selectedValue));
-
-        card.setVerificationCode(Integer.parseInt(cvcField.getText()));
-
-    }
-
-    private void updateLabel() {
-
-        ShoppingCart shoppingCart = model.getShoppingCart();
-
-        //itemsLabel.setText("Antal varor: " + String.format("%.1f",model.getCartAmount()));
-        //costLabel.setText("Kostnad: " + String.format("%.2f",shoppingCart.getTotal()));
-
-    }
-
-    private void setupAccountPane() {
-
-        cardTypeCombo.getItems().addAll(model.getCardTypes());
-
-        monthCombo.getItems().addAll(model.getMonths());
-
-        yearCombo.getItems().addAll(model.getYears());
-
-    }
-
-    public void updateQuantity(Product product, int quantity){
-        model.updateQuantity(product, quantity);
-    }
 }

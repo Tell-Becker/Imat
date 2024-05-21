@@ -38,7 +38,7 @@ public class CheckoutElement extends AnchorPane {
     private final static double kImageWidth = 100.0;
     private final static double kImageRatio = 0.75;
 
-    public CheckoutElement(Product product) {
+    public CheckoutElement(Product product, double amount) {
 
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("CheckoutElement.fxml"));
         fxmlLoader.setRoot(this);
@@ -57,8 +57,8 @@ public class CheckoutElement extends AnchorPane {
         nameLabel.setText(product.getName());
         prizeLabel.setText(String.format("%.2f", product.getPrice()) + " " + product.getUnit());
         imageView.setImage(model.getImage(product, kImageWidth, kImageWidth*kImageRatio));
-        //quantityLabel.setText(product.get);
-       // productSumLabel.setText();
+        quantityLabel.setText(String.valueOf((int)amount));
+        productSumLabel.setText(String.format("%.2f", product.getPrice() * amount) + " Kr");
 
         //if (!product.isEcological()) {
         //   ecoLabel.setText("");

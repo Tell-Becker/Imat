@@ -29,7 +29,7 @@
                         <Font name="Yu Gothic UI Semibold" size="24.0" />
                      </font>
                   </Label>
-                  <Button layoutX="108.0" layoutY="480.0" mnemonicParsing="false" onAction="#handleCheckoutAction" prefHeight="35.0" prefWidth="114.0" style="-fx-background-color: #FFFFFF; -fx-background-radius: 10px;" text="KASSA">
+                  <Button layoutX="108.0" layoutY="477.0" mnemonicParsing="false" onAction="#handleCheckoutAction" prefHeight="41.0" prefWidth="114.0" styleClass="shoppingcart_button" stylesheets="@imat_app.css" text="KASSA">
                      <font>
                         <Font name="Yu Gothic UI Semibold" size="16.0" />
                      </font>
@@ -75,7 +75,7 @@
       </AnchorPane>
       <AnchorPane fx:id="header" prefHeight="100.0" prefWidth="1000.0" style="-fx-background-color: #3162BF;">
          <children>
-            <ImageView fx:id="imatHome" fitHeight="90.0" fitWidth="90.0" layoutX="5.0" layoutY="5.0" onMouseClicked="#home" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="imatHome" fitHeight="90.0" fitWidth="90.0" layoutX="5.0" layoutY="5.0" onMouseClicked="#imatIconPressed" onMouseEntered="#imatIconEntered" onMouseExited="#imatIconExited" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@resources/IMAT_logo_transparent.png" />
                </image>
@@ -135,16 +135,16 @@
                            <children>
                               <AnchorPane fx:id="categoryList" layoutX="10.0" prefHeight="1120.0" prefWidth="65.0" style="-fx-background-color: #F3F3F3;">
                                  <children>
-                                    <AnchorPane fx:id="everythingCategory" layoutY="5.0" onMouseClicked="#searchEverythingCategory" prefHeight="90.0" prefWidth="140.0">
+                                    <AnchorPane fx:id="favoriteCategory" layoutY="5.0" onMouseClicked="#searchfavoriteCategory" prefHeight="90.0" prefWidth="140.0">
                                        <children>
-                                          <Label layoutX="40.0" layoutY="-2.0" text="ALLT" textFill="WHITE">
+                                          <Label layoutX="8.0" layoutY="-2.0" text="FAVORITER" textFill="WHITE">
                                              <font>
                                                 <Font name="Yu Gothic UI Semibold" size="24.0" />
                                              </font>
                                           </Label>
                                           <ImageView fitHeight="65.0" fitWidth="70.0" layoutX="34.0" layoutY="26.0" pickOnBounds="true" preserveRatio="true">
                                              <image>
-                                                <Image url="@resources/nutritional-pyramid.png" />
+                                                <Image url="@resources/white_star.png" />
                                              </image>
                                           </ImageView>
                                        </children>

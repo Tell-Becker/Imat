@@ -9,16 +9,16 @@ import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.StackPane;
 import se.chalmers.cse.dat216.project.*;
-import javafx.scene.control.Label;
 
 
 import java.awt.*;
@@ -27,6 +27,7 @@ import java.text.SimpleDateFormat;
 import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
+import java.util.function.UnaryOperator;
 
 /**
  *
@@ -117,10 +118,15 @@ public class NamePanel extends StackPane {
             throw new RuntimeException(exception);
         }
         this.mainController = mainController;
-        this.checkoutPanel = checkoutPanel;
+        //this.checkoutPanel = checkoutPanel;
         this.customer = model.getCustomer();
         updateAccountDetail();
         updateOrderElement(model.getOrders());
+
+        setupAccountPane();
+
+        numberTextField.setTextFormatter(createNumericTextFormatter(16));
+        cvcField.setTextFormatter(createNumericTextFormatter(3));
 
     }
 
@@ -192,12 +198,11 @@ public class NamePanel extends StackPane {
 
     @FXML
     private void openAccountDetail(ActionEvent event) {
-
+        updateAccountDetail();
         accountDetailPane.toFront();
     }
     @FXML
     private void openAccountCard(ActionEvent event) {
-        setupAccountPane();
         updateCardPanel();
         accountCardPane.toFront();
     }
@@ -210,10 +215,10 @@ public class NamePanel extends StackPane {
         accountPane.toFront();
     }
     @FXML
-    private void closeCardPane(ActionEvent event) {
-        updateCreditCard();
+    private void closeCardPane() {
         accountPane.toFront();
     }
+
 
     @FXML
     private void handleAddToCart(ActionEvent event){
@@ -243,7 +248,7 @@ public class NamePanel extends StackPane {
 
     }
 
-    private void updateCreditCard() {
+    @FXML private void updateCreditCard() {
 
         CreditCard card = model.getCreditCard();
 
@@ -278,6 +283,11 @@ public class NamePanel extends StackPane {
 
     @FXML
     public void closeAccountDetail(){
+        accountPane.toFront();
+
+    }
+
+    @FXML private void saveAccountDetail(ActionEvent event){
 
         // Save values
         customer.setFirstName(fNameTextField.getText());
@@ -287,9 +297,10 @@ public class NamePanel extends StackPane {
         customer.setPostCode(postalnrTextField.getText());
         customer.setEmail(emailTextField.getText());
         customer.setPostAddress(cityTextField.getText());
-        accountPane.toFront();
+        updateAccountDetail();
 
     }
+
 
     public void updateOrderElement(List<Order> orders) {
         historyFlowPane.getChildren().clear();
@@ -308,19 +319,35 @@ public class NamePanel extends StackPane {
     private void populateOrderDetail(Order order) {
         currentOrder = order;
 
-        // Skapa en SimpleDateFormat-instans med svenskt locale
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", new Locale("sv", "SE"));
         String formattedDate = sdf.format(order.getDate());
 
-        // Sätt det formaterade datumet i TextView
         orderDate2.setText(formattedDate);
 
         StringBuilder stringBuilder = new StringBuilder();
+        String headerFormat = "%-23s %-15s %-10s %-10s\n\n";
+        String rowFormat = "%-23s %-15s %-10s %-10.2f\n";
+
+        stringBuilder.append(String.format(headerFormat, "Produkt", "Pris", "Antal", "Totalt"));
+
+        double grandTotal = 0;
+
         for (ShoppingItem item : order.getItems()) {
-            stringBuilder.append(item.getProduct().getName() + " " + item.getProduct().getPrice() + "kr st\n");
+            String productName = item.getProduct().getName();
+            double price = item.getProduct().getPrice();
+            String productPrice = String.format("%.2f %s", price, item.getProduct().getUnit());
+            Integer quantity = (int)item.getAmount();
+            double total = price * quantity;
+            grandTotal += total;
+
+            stringBuilder.append(String.format(rowFormat, productName, productPrice, quantity, total));
         }
 
+        stringBuilder.append("\n");
+        stringBuilder.append(String.format("%-23s %-15s %-10s %-10.2f\n\n", "Total kostnad:", "", "", grandTotal));
+
         orderDetailTextArea.setText(stringBuilder.toString());
+
     }
 
     private void addToCart() {
@@ -329,5 +356,16 @@ public class NamePanel extends StackPane {
             mainController.updateShoppingCartElement(model.getShoppingCart().getItems());
         }
         accountHistoryPane.toFront();
+    }
+
+    private TextFormatter<String> createNumericTextFormatter(int maxLength) {
+        UnaryOperator<TextFormatter.Change> filter = change -> {
+            String newText = change.getControlNewText();
+            if (newText.matches("\\d*") && newText.length() <= maxLength) {
+                return change;
+            }
+            return null;
+        };
+        return new TextFormatter<>(filter);
     }
 }

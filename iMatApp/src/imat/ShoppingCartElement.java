@@ -66,35 +66,18 @@ public class ShoppingCartElement extends AnchorPane {
         this.product = product;
         nameLabel.setText(product.getName());
         prizeLabel.setText(String.format("%.2f", product.getPrice()) + " " + product.getUnit());
-        imageView.setImage(model.getImage(product, kImageWidth, kImageWidth*kImageRatio));
-        quantityLabel.setText(String.valueOf(amount));
+        imageView.setImage(model.getImage(product, kImageWidth, kImageWidth * kImageRatio));
+        quantityLabel.setText(String.valueOf((int)amount));
 
-/*
-        count = 0;
-        shoppingCart = model.getShoppingCart().getItems();
-        for (ShoppingItem shoppingItem : shoppingCart) {
-            System.out.println(product);
-            if (shoppingItem.equals(product)) {
-                count++;
-            }
-        }
-
-
- */
-
-
-        //if (!product.isEcological()) {
-        //   ecoLabel.setText("");
     }
-    // Setting additional product info
-    // ProductDetail detail = model.getDetail(product);
-    // if (detail != null) {
-    // descriptionLabel.setText(detail.getDescription());
-    // originLabel.setText(detail.getOrigin());
-    // brandLabel.setText(detail.getBrand());
-    // contentsLabel.setText(detail.getContents());
-    // }
-    // }
+
+    public Product getProduct() {
+        return product;
+    }
+
+    public void setAmount(double amount) {
+        quantityLabel.setText(String.valueOf(amount));
+    }
 
     @FXML
     private void handleAddAction(ActionEvent event) {

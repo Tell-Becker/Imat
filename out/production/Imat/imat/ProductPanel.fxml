@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.geometry.Rectangle2D?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
@@ -13,25 +14,9 @@
 
 <fx:root type="StackPane" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <AnchorPane fx:id="quantityPane" prefHeight="214.0" prefWidth="151.0" style="-fx-background-color: #ffffff; -fx-background-radius: 20px;">
+      <AnchorPane fx:id="quantityPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" prefHeight="59.0" prefWidth="151.0" style="-fx-background-color: #ffffff; -fx-background-radius: 20px;">
          <children>
-            <ImageView fx:id="productPanelInfo1" fitHeight="20.0" fitWidth="16.0" layoutX="150.0" layoutY="8.0" onMouseClicked="#handleShowProductDetail" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@resources/info.png" />
-               </image>
-            </ImageView>
-            <Label fx:id="nameLabel2" alignment="CENTER" contentDisplay="CENTER" layoutX="7.0" layoutY="134.0" prefHeight="27.0" prefWidth="161.0" text="Mjölk" textAlignment="CENTER">
-               <font>
-                  <Font name="Yu Gothic UI Semibold" size="20.0" />
-               </font>
-            </Label>
-            <Label fx:id="prizeLabel2" alignment="CENTER" layoutX="45.0" layoutY="160.0" prefHeight="17.0" prefWidth="85.0" text="17 Kr">
-               <font>
-                  <Font size="14.0" />
-               </font>
-            </Label>
-            <ImageView fx:id="imageView2" fitHeight="116.0" fitWidth="128.0" layoutX="24.0" layoutY="36.0" pickOnBounds="true" preserveRatio="true" />
-            <Button fx:id="minusButton" alignment="CENTER" layoutX="27.0" layoutY="186.0" maxHeight="35.0" maxWidth="35.0" minHeight="35.0" minWidth="35.0" mnemonicParsing="false" onMouseClicked="#handleMinusAction" prefHeight="16.0" prefWidth="35.0" style="-fx-background-color: #3162BF; -fx-background-radius: 15;" textAlignment="CENTER" textFill="WHITE" textOverrun="CENTER_WORD_ELLIPSIS">
+            <Button fx:id="minusButton" alignment="CENTER" layoutX="14.0" layoutY="7.0" maxHeight="35.0" maxWidth="35.0" minHeight="35.0" minWidth="35.0" mnemonicParsing="false" onMouseClicked="#handleMinusAction" prefHeight="16.0" prefWidth="35.0" styleClass="selection_buttons" stylesheets="@imat_app.css" textAlignment="CENTER" textFill="WHITE" textOverrun="CENTER_WORD_ELLIPSIS">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font>
@@ -46,7 +31,7 @@
                   </ImageView>
                </graphic>
             </Button>
-            <Button fx:id="plusButton" alignment="CENTER" contentDisplay="BOTTOM" layoutX="112.0" layoutY="186.0" minHeight="35.0" minWidth="35.0" mnemonicParsing="false" onMouseClicked="#handlePlusAction" prefHeight="35.0" prefWidth="35.0" scaleShape="false" style="-fx-background-color: #3162BF; -fx-background-radius: 15;" textAlignment="CENTER" textFill="WHITE" textOverrun="CLIP">
+            <Button fx:id="plusButton" alignment="CENTER" contentDisplay="BOTTOM" layoutX="102.0" layoutY="7.0" minHeight="35.0" minWidth="35.0" mnemonicParsing="false" onMouseClicked="#handlePlusAction" prefHeight="35.0" prefWidth="35.0" scaleShape="false" styleClass="selection_buttons" stylesheets="@imat_app.css" textAlignment="CENTER" textFill="WHITE" textOverrun="CLIP">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font>
@@ -61,13 +46,15 @@
                   </ImageView>
                </graphic>
             </Button>
-            <Label fx:id="quantityLabel" layoutX="84.0" layoutY="191.0" text="5">
+            <Label fx:id="quantityLabel" layoutX="71.0" layoutY="11.0" text="5">
                <font>
-                  <Font size="16.0" />
+                  <Font size="18.0" />
                </font>
             </Label>
-            <ImageView fx:id="favoriteImageView2" fitHeight="16.0" fitWidth="16.0" layoutX="15.0" layoutY="8.0" onMouseClicked="#handleShowFavorite" pickOnBounds="true" preserveRatio="true" />
          </children>
+         <StackPane.margin>
+            <Insets top="175.0" />
+         </StackPane.margin>
       </AnchorPane>
       <AnchorPane id="product" fx:id="addButtonPane" prefHeight="240.0" prefWidth="175.0" style="-fx-background-radius: 20;" stylesheets="@imat_app.css">
          <children>
@@ -77,7 +64,7 @@
                   <Image url="@resources/info.png" />
                </image>
             </ImageView>
-            <Button id="buy_button" fx:id="buyButton" layoutX="16.0" layoutY="186.0" mnemonicParsing="false" onAction="#handleAddAction" prefHeight="39.0" prefWidth="144.0" style="-fx-background-color: #3162BF;" stylesheets="@imat_app.css" text="KÖP" textFill="WHITE">
+            <Button fx:id="buyButton" layoutX="16.0" layoutY="186.0" mnemonicParsing="false" onAction="#handleAddAction" prefHeight="39.0" prefWidth="144.0" styleClass="selection_buttons" stylesheets="@imat_app.css" text="KÖP" textFill="WHITE">
                <font>
                   <Font name="Verdana Bold" size="18.0" />
                </font>

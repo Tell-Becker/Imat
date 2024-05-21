@@ -57,6 +57,64 @@
     -fx-background-color: #5782D5;
 }
 
+.next_buttons {
+    -fx-background-radius: 10px;
+    -fx-background-color: #3162BF;
+    -fx-text-fill: white;
+    -fx-font-size: 15px;
+    -fx-font-weight: bold;
+}
+
+.next_buttons:hover {
+    -fx-background-color: #5782D5;
+}
+
+.done_button {
+    -fx-background-radius: 10px;
+    -fx-background-color: #3162BF;
+    -fx-text-fill: white;
+    -fx-font-size: 25px;
+    -fx-font-weight: bold;
+}
+
+.done_button:hover {
+    -fx-background-color: #5782D5;
+}
+
+.keep_buying {
+    -fx-background-radius: 10px;
+    -fx-background-color: orange;
+    -fx-text-fill: white;
+    -fx-font-size: 15px;
+    -fx-font-weight: bold;
+}
+
+.keep_buying:hover {
+    -fx-background-color: FFCB6B;
+}
+
+.save_info {
+    -fx-background-radius: 10px;
+    -fx-background-color:  #2BAB23;
+    -fx-text-fill: white;
+    -fx-font-size: 15px;
+    -fx-font-weight: bold;
+}
+
+.save_info:hover {
+    -fx-background-color: #37E02D;
+}
+.shoppingcart_button {
+    -fx-background-color: white;
+    -fx-font-size:15px;
+    -fx-font-weight:bold;
+    -fx-background-radius:15px;
+}
+
+.shoppingcart_button:hover {
+    -fx-background-color: #A3A3A3;
+}
+
 
 
 .normal-button{
@@ -67,14 +125,18 @@
       -fx-background-color: #F3F3F3;
 }
 .normal-button:hover{
-     -fx-background-color: #0000FF;
+     -fx-background-color: #5782D5;
 }
 .normal-button:pressed{
-     -fx-background-color: #000000;
+     -fx-background-color: #173979;
 }
 
 .highlighted-button {
      -fx-font-size: 13px;
     -fx-background-color: #3162BF;
     -fx-text-fill: white;
+}
+
+.margin-item {
+    -fx-margin: 10 0 0 10;
 }

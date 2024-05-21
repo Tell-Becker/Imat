@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
@@ -23,7 +24,7 @@
                         <Font size="40.0" />
                      </font>
                   </Label>
-                  <Button layoutX="298.0" layoutY="258.0" mnemonicParsing="false" onAction="#closeCheckoutPanel" prefHeight="60.0" prefWidth="220.0" style="-fx-background-color: #3162BF; -fx-background-radius: 10px;" styleClass="next-button-checkout" text="Tillbaka till Imat" textFill="WHITE">
+                  <Button layoutX="290.0" layoutY="258.0" mnemonicParsing="false" onAction="#closeCheckoutPanel" prefHeight="60.0" prefWidth="235.0" styleClass="done_button" stylesheets="@imat_app.css" text="Tillbaka till Imat" textFill="WHITE">
                      <font>
                         <Font name="Yu Gothic UI Semibold" size="25.0" />
                      </font>
@@ -35,84 +36,6 @@
                   </Label>
                </children>
             </AnchorPane>
-         </children>
-      </AnchorPane>
-      <AnchorPane fx:id="checkoutCardPane" prefHeight="600.0" prefWidth="1000.0" style="-fx-background-color: f3f3f3;">
-         <children>
-            <AnchorPane layoutX="100.0" layoutY="60.0" prefHeight="475.0" prefWidth="800.0" styleClass="detailView_Style">
-               <children>
-                  <ComboBox fx:id="cardTypeCombo" layoutX="344.0" layoutY="78.0" prefWidth="150.0" />
-                  <TextField fx:id="numberTextField" layoutX="344.0" layoutY="123.0" />
-                  <TextField fx:id="nameTextField" layoutX="344.0" layoutY="168.0" />
-                  <ComboBox fx:id="monthCombo" layoutX="344.0" layoutY="213.0" prefHeight="26.0" prefWidth="39.0" />
-                  <ComboBox fx:id="yearCombo" layoutX="422.0" layoutY="213.0" prefHeight="26.0" prefWidth="69.0" />
-                  <TextField fx:id="cvcField" layoutX="344.0" layoutY="258.0" prefHeight="25.0" prefWidth="72.0" />
-                  <Button alignment="CENTER" layoutX="303.0" layoutY="305.0" mnemonicParsing="false" onAction="#updateCreditCard" prefHeight="38.0" prefWidth="191.0" style="-fx-background-color: #2BAB23; -fx-background-radius: 10px;" text="Spara kortuppgifter" textFill="WHITE">
-                     <font>
-                        <Font name="Yu Gothic UI Semibold" size="16.0" />
-                     </font></Button>
-                  <Label alignment="CENTER_RIGHT" layoutX="168.0" layoutY="78.0" prefHeight="25.0" prefWidth="174.0" text="Korttyp:">
-                     <font>
-                        <Font size="15.0" />
-                     </font>
-                  </Label>
-                  <Label alignment="CENTER_RIGHT" layoutX="168.0" layoutY="123.0" prefHeight="25.0" prefWidth="174.0" text="Kortnummer:">
-                     <font>
-                        <Font size="15.0" />
-                     </font>
-                  </Label>
-                  <Label alignment="CENTER_RIGHT" layoutX="168.0" layoutY="168.0" prefHeight="25.0" prefWidth="174.0" text="Kortinnehavarens namn:">
-                     <font>
-                        <Font size="15.0" />
-                     </font>
-                  </Label>
-                  <Label alignment="CENTER_RIGHT" layoutX="168.0" layoutY="213.0" prefHeight="25.0" prefWidth="174.0" text="Giltighetsdatum:">
-                     <font>
-                        <Font size="15.0" />
-                     </font>
-                  </Label>
-                  <Label alignment="CENTER_RIGHT" layoutX="168.0" layoutY="258.0" prefHeight="25.0" prefWidth="174.0" text="CVC:">
-                     <font>
-                        <Font size="15.0" />
-                     </font>
-                  </Label>
-                  <Label layoutX="403.0" layoutY="213.0" text="/">
-                     <font>
-                        <Font size="20.0" />
-                     </font>
-                  </Label>
-                  <Label alignment="CENTER_RIGHT" layoutX="250.0" layoutY="391.0" prefHeight="57.0" prefWidth="174.0" text="Totalbelopp:">
-                     <font>
-                        <Font size="20.0" />
-                     </font>
-                  </Label>
-                  <Label alignment="CENTER" layoutX="424.0" layoutY="391.0" prefHeight="57.0" prefWidth="63.0" text="20 kr">
-                     <font>
-                        <Font size="20.0" />
-                     </font>
-                  </Label>
-                  <ImageView fx:id="backArrow4" fitHeight="30.0" fitWidth="44.0" layoutX="750.0" layoutY="15.0" onMouseClicked="#openCheckoutDetail" onMouseEntered="#backArrow4Entered" onMouseExited="#backArrow4Exit" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@resources/back-arrow.png" />
-                     </image>
-                  </ImageView>
-                  <Button alignment="CENTER" layoutX="60.0" layoutY="400.0" mnemonicParsing="false" onMouseClicked="#closeCheckoutPanel" prefHeight="40.0" prefWidth="140.0" style="-fx-background-color: orange; -fx-background-radius: 10px;" styleClass="next-button-checkout" text="Fortsätt handla">
-                     <font>
-                        <Font name="Yu Gothic UI Semibold" size="16.0" />
-                     </font>
-                  </Button>
-                  <Button layoutX="600.0" layoutY="400.0" mnemonicParsing="false" onAction="#openCheckoutFinished" prefHeight="40.0" prefWidth="140.0" style="-fx-background-color: #3162BF; -fx-background-radius: 10px;" styleClass="next-button-checkout" text="Slutför Köp" textFill="WHITE">
-                     <font>
-                        <Font name="Yu Gothic UI Semibold" size="16.0" />
-                     </font>
-                  </Button>
-               </children>
-            </AnchorPane>
-            <Label layoutX="363.0" layoutY="10.0" text="KORTUPPGIFTER">
-               <font>
-                  <Font name="Yu Gothic UI Semibold" size="36.0" />
-               </font>
-            </Label>
          </children>
       </AnchorPane>
       <AnchorPane fx:id="checkoutDetailPane" prefHeight="600.0" prefWidth="1000.0" style="-fx-background-color: f3f3f3;">
@@ -161,7 +84,7 @@
                         <Font size="15.0" />
                      </font>
                   </Label>
-                  <Button alignment="CENTER" layoutX="293.0" layoutY="354.0" mnemonicParsing="false" onAction="#saveAccountDetail" prefHeight="38.0" prefWidth="213.0" style="-fx-background-color: #2BAB23;" text="Spara Användaruppgifter" textFill="WHITE">
+                  <Button alignment="CENTER" layoutX="293.0" layoutY="354.0" mnemonicParsing="false" onAction="#saveAccountDetail" prefHeight="38.0" prefWidth="213.0" styleClass="save_info" stylesheets="@imat_app.css" text="Spara Användaruppgifter" textFill="WHITE">
                      <font>
                         <Font name="Yu Gothic UI Semibold" size="16.0" />
                      </font></Button>
@@ -170,12 +93,12 @@
                         <Image url="@resources/back-arrow.png" />
                      </image>
                   </ImageView>
-                  <Button alignment="CENTER" layoutX="60.0" layoutY="400.0" mnemonicParsing="false" onMouseClicked="#closeCheckoutPanel" prefHeight="40.0" prefWidth="140.0" style="-fx-background-color: orange; -fx-background-radius: 10px;" styleClass="next-button-checkout" text="Fortsätt handla">
+                  <Button alignment="CENTER" layoutX="60.0" layoutY="400.0" mnemonicParsing="false" onAction="#keepBuying" onMouseClicked="#closeCheckoutPanel" prefHeight="40.0" prefWidth="140.0" styleClass="keep_buying" stylesheets="@imat_app.css" text="Fortsätt handla">
                      <font>
                         <Font name="Yu Gothic UI Semibold" size="16.0" />
                      </font>
                   </Button>
-                  <Button layoutX="600.0" layoutY="400.0" mnemonicParsing="false" onAction="#openCheckoutCard" prefHeight="40.0" prefWidth="140.0" style="-fx-background-color: #3162BF; -fx-background-radius: 10px;" styleClass="next-button-checkout" text="Till Betalning" textFill="WHITE">
+                  <Button layoutX="600.0" layoutY="400.0" mnemonicParsing="false" onAction="#openCheckoutCard" prefHeight="40.0" prefWidth="140.0" styleClass="next_buttons" stylesheets="@imat_app.css" text="Till Betalning" textFill="WHITE">
                      <font>
                         <Font name="Yu Gothic UI Semibold" size="16.0" />
                      </font>
@@ -225,7 +148,7 @@
                         <Image url="@resources/right-arrow.png" />
                      </image>
                   </ImageView>
-                  <Button layoutX="600.0" layoutY="400.0" mnemonicParsing="false" onAction="#openCheckoutDetail" prefHeight="40.0" prefWidth="140.0" style="-fx-background-color: #3162BF; -fx-background-radius: 10px;" styleClass="next-button-checkout" text="Nästa" textFill="WHITE">
+                  <Button layoutX="600.0" layoutY="400.0" mnemonicParsing="false" onAction="#openCheckoutDetail" prefHeight="40.0" prefWidth="140.0" styleClass="next_buttons" text="Nästa" textFill="WHITE">
                      <font>
                         <Font name="Yu Gothic UI Semibold" size="16.0" />
                      </font>
@@ -240,13 +163,86 @@
                         <Image url="@resources/left-arrow.png" />
                      </image>
                   </ImageView>
-                  <Button alignment="CENTER" layoutX="60.0" layoutY="400.0" mnemonicParsing="false" onMouseClicked="#closeCheckoutPanel" prefHeight="40.0" prefWidth="140.0" style="-fx-background-color: orange; -fx-background-radius: 10px;" styleClass="next-button-checkout" text="Fortsätt handla">
+                  <Button alignment="CENTER" layoutX="60.0" layoutY="400.0" mnemonicParsing="false" onAction="#keepBuying" onMouseClicked="#closeCheckoutPanel" prefHeight="40.0" prefWidth="140.0" styleClass="keep_buying" stylesheets="@imat_app.css" text="Fortsätt handla">
                      <font>
                         <Font name="Yu Gothic UI Semibold" size="16.0" />
                      </font>
                   </Button>
                </children>
             </AnchorPane>
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="checkoutCardPane" prefHeight="600.0" prefWidth="1000.0" style="-fx-background-color: f3f3f3;">
+         <children>
+            <AnchorPane layoutX="100.0" layoutY="60.0" prefHeight="475.0" prefWidth="800.0" styleClass="detailView_Style">
+               <children>
+                  <ComboBox fx:id="cardTypeCombo" layoutX="344.0" layoutY="78.0" prefWidth="150.0" />
+                  <TextField fx:id="numberTextField" layoutX="344.0" layoutY="123.0" />
+                  <TextField fx:id="nameTextField" layoutX="344.0" layoutY="168.0" />
+                  <ComboBox fx:id="monthCombo" layoutX="344.0" layoutY="213.0" prefHeight="26.0" prefWidth="51.0" />
+                  <ComboBox fx:id="yearCombo" layoutX="422.0" layoutY="213.0" prefHeight="26.0" prefWidth="69.0" />
+                  <TextField fx:id="cvcField" layoutX="344.0" layoutY="258.0" prefHeight="25.0" prefWidth="72.0" />
+                  <Button alignment="CENTER" layoutX="303.0" layoutY="305.0" mnemonicParsing="false" onAction="#updateCreditCard" prefHeight="38.0" prefWidth="191.0" style="-fx-background-radius: ;" styleClass="save_info" stylesheets="@imat_app.css" text="Spara kortuppgifter" textFill="WHITE">
+                     <font>
+                        <Font name="Yu Gothic UI Semibold" size="16.0" />
+                     </font></Button>
+                  <Label alignment="CENTER_RIGHT" layoutX="168.0" layoutY="78.0" prefHeight="25.0" prefWidth="174.0" text="Korttyp:">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </Label>
+                  <Label alignment="CENTER_RIGHT" layoutX="168.0" layoutY="123.0" prefHeight="25.0" prefWidth="174.0" text="Kortnummer:">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </Label>
+                  <Label alignment="CENTER_RIGHT" layoutX="168.0" layoutY="168.0" prefHeight="25.0" prefWidth="174.0" text="Kortinnehavarens namn:">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </Label>
+                  <Label alignment="CENTER_RIGHT" layoutX="168.0" layoutY="213.0" prefHeight="25.0" prefWidth="174.0" text="Giltighetsdatum:">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </Label>
+                  <Label alignment="CENTER_RIGHT" layoutX="168.0" layoutY="258.0" prefHeight="25.0" prefWidth="174.0" text="CVC:">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="403.0" layoutY="213.0" text="/">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="totalLabel2" layoutX="276.0" layoutY="391.0" prefHeight="57.0" prefWidth="253.0" text="Totalbelopp:">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Label>
+                  <ImageView fx:id="backArrow4" fitHeight="30.0" fitWidth="44.0" layoutX="750.0" layoutY="15.0" onMouseClicked="#openCheckoutDetail" onMouseEntered="#backArrow4Entered" onMouseExited="#backArrow4Exit" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@resources/back-arrow.png" />
+                     </image>
+                  </ImageView>
+                  <Button alignment="CENTER" layoutX="60.0" layoutY="400.0" mnemonicParsing="false" onAction="#keepBuying" onMouseClicked="#closeCheckoutPanel" prefHeight="40.0" prefWidth="140.0" styleClass="keep_buying" stylesheets="@imat_app.css" text="Fortsätt handla">
+                     <font>
+                        <Font name="Yu Gothic UI Semibold" size="16.0" />
+                     </font>
+                  </Button>
+                  <Button layoutX="600.0" layoutY="400.0" mnemonicParsing="false" onAction="#openCheckoutFinished" prefHeight="40.0" prefWidth="140.0" styleClass="next_buttons" stylesheets="@imat_app.css" text="Slutför Köp" textFill="WHITE">
+                     <font>
+                        <Font name="Yu Gothic UI Semibold" size="16.0" />
+                     </font>
+                  </Button>
+               </children>
+            </AnchorPane>
+            <Label layoutX="363.0" layoutY="10.0" text="KORTUPPGIFTER">
+               <font>
+                  <Font name="Yu Gothic UI Semibold" size="36.0" />
+               </font>
+            </Label>
          </children>
       </AnchorPane>
       <AnchorPane fx:id="checkoutPane" prefHeight="600.0" prefWidth="1000.0" style="-fx-background-color: F3F3F3;">
@@ -258,15 +254,21 @@
                         <Image url="@resources/back-arrow.png" />
                      </image>
                   </ImageView>
-                  <Button layoutX="600.0" layoutY="400.0" mnemonicParsing="false" onAction="#openCheckoutTime" prefHeight="40.0" prefWidth="140.0" style="-fx-background-color: #3162BF; -fx-background-radius: 10px;" styleClass="next-button-checkout" text="Nästa" textFill="WHITE">
+                  <Button layoutX="600.0" layoutY="400.0" mnemonicParsing="false" onAction="#openCheckoutTime" prefHeight="40.0" prefWidth="140.0" styleClass="next_buttons" stylesheets="@imat_app.css" text="Nästa" textFill="WHITE">
                      <font>
                         <Font name="Yu Gothic UI Semibold" size="16.0" />
                      </font>
                   </Button>
                   <ScrollPane layoutX="61.0" layoutY="75.0" prefHeight="319.0" prefWidth="678.0">
                      <content>
-                        <FlowPane fx:id="checkoutFlowPane" prefHeight="316.0" prefWidth="680.0" />
+                        <FlowPane fx:id="checkoutFlowPane" alignment="CENTER" columnHalignment="CENTER" prefHeight="299.0" prefWidth="643.0" styleClass="margin-item" stylesheets="@imat_app.css" vgap="10.0">
+                           <opaqueInsets>
+                              <Insets />
+                           </opaqueInsets></FlowPane>
                      </content>
+                     <padding>
+                        <Insets bottom="10.0" left="10.0" top="10.0" />
+                     </padding>
                   </ScrollPane>
                   <Label alignment="CENTER" layoutX="239.0" layoutY="37.0" prefHeight="20.0" prefWidth="60.0" text="Vara">
                      <font>
@@ -288,17 +290,12 @@
                         <Font size="15.0" />
                      </font>
                   </Label>
-                  <Label alignment="CENTER_RIGHT" layoutX="318.0" layoutY="412.0" prefHeight="30.0" prefWidth="120.0" text="Totalbelopp:">
+                  <Label fx:id="totalLabel" layoutX="282.0" layoutY="405.0" prefHeight="30.0" prefWidth="235.0" text="Totalbelopp:">
                      <font>
                         <Font size="20.0" />
                      </font>
                   </Label>
-                  <Label layoutX="438.0" layoutY="412.0" text="20 kr">
-                     <font>
-                        <Font size="20.0" />
-                     </font>
-                  </Label>
-                  <Button alignment="CENTER" layoutX="60.0" layoutY="400.0" mnemonicParsing="false" onMouseClicked="#closeCheckoutPanel" prefHeight="40.0" prefWidth="140.0" style="-fx-background-color: orange; -fx-background-radius: 10px;" styleClass="next-button-checkout" text="Fortsätt handla">
+                  <Button alignment="CENTER" layoutX="60.0" layoutY="400.0" mnemonicParsing="false" onAction="#keepBuying" onMouseClicked="#closeCheckoutPanel" prefHeight="40.0" prefWidth="140.0" styleClass="keep_buying" stylesheets="@imat_app.css" text="Fortsätt handla">
                      <font>
                         <Font name="Yu Gothic UI Semibold" size="16.0" />
                      </font>
