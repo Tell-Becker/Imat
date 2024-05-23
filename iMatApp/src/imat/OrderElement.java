@@ -35,10 +35,8 @@ public class OrderElement extends AnchorPane {
         this.order = order;
         this.namePanel = namePanel;
 
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", new Locale("sv", "SE"));
-        String formattedDate = sdf.format(order.getDate());
-
-        // Sätt det formaterade datumet i TextView
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd       HH:mm");
+        String formattedDate = dateFormat.format(order.getDate());
         orderDate.setText(formattedDate);
 
     }

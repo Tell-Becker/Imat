@@ -12,16 +12,102 @@
 <?import javafx.scene.layout.FlowPane?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.paint.Color?>
+<?import javafx.scene.shape.Circle?>
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
 <AnchorPane fx:id="program" maxHeight="700.0" maxWidth="1000.0" minHeight="700.0" minWidth="1000.0" prefHeight="700.0" prefWidth="1000.0" style="-fx-background-color: #F3F3F3;" stylesheets="@imat_app.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="imat.MainViewController">
    <children>
+      <AnchorPane fx:id="buyInfo" layoutY="100.0" prefHeight="600.0" prefWidth="1000.0" style="-fx-background-color: #f3f3f3;">
+         <children>
+            <AnchorPane layoutX="147.0" layoutY="102.0" prefHeight="396.0" prefWidth="706.0" styleClass="detailView_Style" stylesheets="@imat_app.css">
+               <children>
+                  <Text layoutX="261.0" layoutY="104.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Handla på egen risk, köp inte saker du är allergisk mot. Du kan inte lämna tillbaka mat efter 1 månad. " wrappingWidth="183.20000000000005">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Text>
+               </children>
+            </AnchorPane>
+            <Label layoutX="417.0" layoutY="50.0" text="Köpvillkor">
+               <font>
+                  <Font name="Yu Gothic UI Semibold" size="36.0" />
+               </font>
+            </Label>
+            <ImageView fx:id="buyInfoClose" fitHeight="25.0" fitWidth="28.0" layoutX="950.0" layoutY="25.0" onMouseClicked="#openShopPane" onMouseEntered="#closeBuyInfoIconEntered" onMouseExited="#closeBuyInfoIconExited" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@resources/icon_close.png" />
+               </image>
+            </ImageView>
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="aboutImat" layoutY="100.0" prefHeight="600.0" prefWidth="1000.0" style="-fx-background-color: #f3f3f3;">
+         <children>
+            <AnchorPane layoutX="147.0" layoutY="102.0" prefHeight="396.0" prefWidth="706.0" styleClass="detailView_Style" stylesheets="@imat_app.css">
+               <children>
+                  <Text layoutX="261.0" layoutY="104.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Vi är imat och vi har billig och bra mat för dig! Köp hoss oss om du gillar bra priser, om inte kan du handla hoss coop. Vi grundades 2024 och har sedan dess blivit 150 största matkedjan i Sverige." wrappingWidth="183.20000000000005">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Text>
+               </children>
+            </AnchorPane>
+            <Label layoutX="432.0" layoutY="50.0" text="OM OSS">
+               <font>
+                  <Font name="Yu Gothic UI Semibold" size="36.0" />
+               </font>
+            </Label>
+            <ImageView fx:id="aboutImatClose" fitHeight="25.0" fitWidth="28.0" layoutX="950.0" layoutY="25.0" onMouseClicked="#openShopPane" onMouseEntered="#closeAboutImatIconEntered" onMouseExited="#closeAboutImatIconExited" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@resources/icon_close.png" />
+               </image>
+            </ImageView>
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="accountContactPane" layoutY="100.0" prefHeight="600.0" prefWidth="1000.0" style="-fx-background-color: #f3f3f3;">
+         <children>
+            <AnchorPane layoutX="147.0" layoutY="102.0" prefHeight="396.0" prefWidth="706.0" styleClass="detailView_Style" stylesheets="@imat_app.css">
+               <children>
+                  <Label layoutX="261.0" layoutY="63.0" prefHeight="36.0" prefWidth="183.0" text="Ring oss:">
+                     <font>
+                        <Font name="System Bold" size="20.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="261.0" layoutY="105.0" text="0721895975">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="260.0" layoutY="223.0" text="kundtjänst@imat.se">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="260.0" layoutY="180.0" prefHeight="36.0" prefWidth="183.0" text="Skicka E-post:">
+                     <font>
+                        <Font name="System Bold" size="20.0" />
+                     </font>
+                  </Label>
+               </children>
+            </AnchorPane>
+            <Label layoutX="363.0" layoutY="50.0" text="KONTAKTA OSS!">
+               <font>
+                  <Font name="Yu Gothic UI Semibold" size="36.0" />
+               </font>
+            </Label>
+            <ImageView fx:id="ContactUsClose" fitHeight="25.0" fitWidth="28.0" layoutX="950.0" layoutY="25.0" onMouseClicked="#openShopPane" onMouseEntered="#closeContactIconEntered" onMouseExited="#closeContactIconExited" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@resources/icon_close.png" />
+               </image>
+            </ImageView>
+         </children>
+      </AnchorPane>
       <AnchorPane fx:id="dynamicPane" layoutX="-1.0" layoutY="99.0" prefHeight="600.0" prefWidth="988.0" style="-fx-background-color: blue;" />
       <AnchorPane fx:id="dynamicPane2" layoutY="100.0" prefHeight="600.0" prefWidth="1000.0" style="-fx-background-color: blue;" />
-      <AnchorPane fx:id="shoppingCart" layoutY="100.0" prefHeight="600.0" prefWidth="1000.0" style="-fx-background-color: rgba(0, 0, 0, 0.75);">
+      <AnchorPane fx:id="shoppingCart" layoutY="100.0" onMouseClicked="#handleDoneShoppingCart" prefHeight="600.0" prefWidth="1000.0" style="-fx-background-color: rgba(0, 0, 0, 0.75);">
          <children>
-            <AnchorPane layoutX="666.0" prefHeight="523.0" prefWidth="334.0" style="-fx-background-color: #3162BF;">
+            <AnchorPane layoutX="666.0" onMouseClicked="#mouseTrap" prefHeight="523.0" prefWidth="334.0" style="-fx-background-color: #3162BF;">
                <children>
                   <Label layoutX="135.0" layoutY="56.0" textAlignment="RIGHT" />
                   <Label layoutX="98.0" layoutY="14.0" text="KUNDVAGN" textFill="WHITE">
@@ -29,33 +115,52 @@
                         <Font name="Yu Gothic UI Semibold" size="24.0" />
                      </font>
                   </Label>
-                  <Button layoutX="108.0" layoutY="477.0" mnemonicParsing="false" onAction="#handleCheckoutAction" prefHeight="41.0" prefWidth="114.0" styleClass="shoppingcart_button" stylesheets="@imat_app.css" text="KASSA">
+                  <Button alignment="CENTER" layoutX="115.0" layoutY="477.0" mnemonicParsing="false" onAction="#handleCheckoutAction" prefHeight="42.0" prefWidth="100.0" styleClass="shoppingcart_button" stylesheets="@imat_app.css" text="KASSA">
                      <font>
                         <Font name="Yu Gothic UI Semibold" size="16.0" />
                      </font>
                   </Button>
-                  <ImageView fx:id="closeShoppingCartIcon" fitHeight="35.0" fitWidth="25.0" layoutX="295.0" layoutY="19.0" onMouseClicked="#openShopPane" onMouseEntered="#shoppingCloseIconEntered" onMouseExited="#shoppingCloseIconExited" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="closeShoppingCartIcon" fitHeight="35.0" fitWidth="25.0" layoutX="295.0" layoutY="19.0" onMouseClicked="#handleDoneShoppingCart" onMouseEntered="#shoppingCloseIconEntered" onMouseExited="#shoppingCloseIconExited" pickOnBounds="true" preserveRatio="true" styleClass="images">
                      <image>
                         <Image url="@resources/x-mark.png" />
                      </image>
                   </ImageView>
-                  <ScrollPane layoutY="57.0" prefHeight="417.0" prefWidth="334.0">
+                  <ScrollPane layoutY="57.0" prefHeight="417.0" prefWidth="334.0" style="-fx-background-color: #FFFFFF;">
                      <content>
-                        <FlowPane fx:id="shoppingCartFlowPane" prefHeight="415.0" prefWidth="318.0" style="-fx-background-color: #FFFFFF;" />
+                        <FlowPane fx:id="shoppingCartFlowPane" prefHeight="415.0" prefWidth="302.0" style="-fx-background-color: #FFFFFF;" vgap="8.0" />
                      </content>
+                     <padding>
+                        <Insets bottom="10.0" left="10.0" right="8.0" top="10.0" />
+                     </padding>
                   </ScrollPane>
+                  <Label fx:id="errorLabel" alignment="TOP_LEFT" layoutX="222.0" layoutY="482.0" prefHeight="35.0" prefWidth="106.0" textFill="#f2cccc" wrapText="true">
+                     <font>
+                        <Font name="System Bold" size="10.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="costLabel" layoutX="3.0" layoutY="490.0" prefHeight="18.0" prefWidth="106.0" text="Kostnad: 500.99" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Label>
                </children>
             </AnchorPane>
+            <AnchorPane onMouseClicked="#handleDoneShoppingCart" prefHeight="600.0" prefWidth="666.0" />
+            <AnchorPane layoutX="326.0" layoutY="523.0" onMouseClicked="#handleDoneShoppingCart" prefHeight="80.0" prefWidth="666.0" />
          </children>
       </AnchorPane>
       <AnchorPane fx:id="productDetailView" prefHeight="700.0" prefWidth="1000.0" style="-fx-background-color: rgba(0, 0, 0, 0.75);">
          <children>
+            <AnchorPane onMouseClicked="#handleDoneProductDetail" prefHeight="700.0" prefWidth="278.0" />
+            <AnchorPane layoutX="722.0" layoutY="1.0" onMouseClicked="#handleDoneProductDetail" prefHeight="710.0" prefWidth="278.0" />
+            <AnchorPane layoutX="277.0" layoutY="498.0" onMouseClicked="#handleDoneProductDetail" prefHeight="214.0" prefWidth="444.0" />
+            <AnchorPane layoutX="278.0" layoutY="-1.0" onMouseClicked="#handleDoneProductDetail" prefHeight="158.0" prefWidth="444.0" />
             <AnchorPane layoutX="278.0" layoutY="158.0" prefHeight="340.0" prefWidth="444.0" styleClass="detailView_Style">
                <children>
                   <Label fx:id="originLabel" layoutX="23.0" layoutY="25.0" prefHeight="18.0" prefWidth="100.0" textAlignment="RIGHT" />
-                  <Label fx:id="descriptionLabel" alignment="TOP_LEFT" layoutX="226.0" layoutY="107.0" prefHeight="134.0" prefWidth="191.0" text="Denna produkt är god!" wrapText="true" />
+                  <Label fx:id="descriptionLabel" alignment="TOP_LEFT" layoutX="226.0" layoutY="125.0" prefHeight="140.0" prefWidth="191.0" text="Denna produkt är god!" wrapText="true" />
                   <ImageView fx:id="detailImageView" fitHeight="150.0" fitWidth="191.0" layoutX="14.0" layoutY="24.0" pickOnBounds="true" preserveRatio="true" />
-                  <Label fx:id="nameLabel" alignment="CENTER" layoutX="205.0" layoutY="63.0" prefHeight="35.0" prefWidth="234.0" text="Produkt">
+                  <Label fx:id="nameLabel" alignment="TOP_CENTER" layoutX="205.0" layoutY="43.0" prefHeight="72.0" prefWidth="234.0" text="Produkt" wrapText="true">
                      <font>
                         <Font name="System Bold" size="24.0" />
                      </font>
@@ -66,8 +171,8 @@
                      </image>
                   </ImageView>
                   <Label fx:id="brandLabel" layoutX="35.0" layoutY="211.0" prefHeight="18.0" prefWidth="151.0" text="Label" />
-                  <Label fx:id="contentsLabel" layoutX="35.0" layoutY="243.0" prefHeight="18.0" prefWidth="164.0" text="Label" />
-                  <Label fx:id="prizeLabel" layoutX="35.0" layoutY="277.0" prefHeight="17.0" prefWidth="114.0" text="Label" />
+                  <Label fx:id="contentsLabel" alignment="TOP_LEFT" layoutX="35.0" layoutY="271.0" prefHeight="54.0" prefWidth="370.0" text="Label" wrapText="true" />
+                  <Label fx:id="prizeLabel" layoutX="35.0" layoutY="242.0" prefHeight="17.0" prefWidth="114.0" text="Label" />
                   <Label fx:id="ecoLabel" layoutX="35.0" layoutY="183.0" prefHeight="17.0" prefWidth="123.0" text="Label" />
                </children>
             </AnchorPane>
@@ -75,7 +180,7 @@
       </AnchorPane>
       <AnchorPane fx:id="header" prefHeight="100.0" prefWidth="1000.0" style="-fx-background-color: #3162BF;">
          <children>
-            <ImageView fx:id="imatHome" fitHeight="90.0" fitWidth="90.0" layoutX="5.0" layoutY="5.0" onMouseClicked="#imatIconPressed" onMouseEntered="#imatIconEntered" onMouseExited="#imatIconExited" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="imatHome" fitHeight="90.0" fitWidth="90.0" layoutX="5.0" layoutY="5.0" onMouseClicked="#imatIconPressed" onMouseEntered="#imatIconEntered" onMouseExited="#imatIconExited" pickOnBounds="true" preserveRatio="true" styleClass="images">
                <image>
                   <Image url="@resources/IMAT_logo_transparent.png" />
                </image>
@@ -99,7 +204,7 @@
                   </DropShadow>
                </effect>
             </TextField>
-            <ImageView fx:id="accountLogo" fitHeight="90.0" fitWidth="90.0" layoutX="775.0" layoutY="7.0" onMouseClicked="#accountIconPressed" onMouseEntered="#accountIconEntered" onMouseExited="#accountIconExited" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="accountLogo" fitHeight="90.0" fitWidth="90.0" layoutX="775.0" layoutY="7.0" onMouseClicked="#accountIconPressed" onMouseEntered="#accountIconEntered" onMouseExited="#accountIconExited" pickOnBounds="true" preserveRatio="true" styleClass="images">
                <image>
                   <Image url="@resources/user.png" />
                </image>
@@ -111,7 +216,7 @@
                   </DropShadow>
                </effect>
             </ImageView>
-            <ImageView fx:id="shoppingCartLogo" fitHeight="90.0" fitWidth="90.0" layoutX="896.0" layoutY="7.0" onMouseClicked="#shoppingIconPressed" onMouseEntered="#shoppingIconEntered" onMouseExited="#shoppingIconExited" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="shoppingCartLogo" fitHeight="90.0" fitWidth="90.0" layoutX="896.0" layoutY="7.0" onMouseClicked="#shoppingIconPressed" onMouseEntered="#shoppingIconEntered" onMouseExited="#shoppingIconExited" pickOnBounds="true" preserveRatio="true" styleClass="images">
                <effect>
                   <DropShadow height="20.0" radius="9.5" width="20.0">
                      <color>
@@ -123,11 +228,17 @@
                   <Image url="@resources/shopping-cart.png" />
                </image>
             </ImageView>
+            <Circle fill="WHITE" layoutX="978.0" layoutY="20.0" radius="18.0" stroke="TRANSPARENT" strokeType="INSIDE" />
+            <Label fx:id="itemsLabel" alignment="CENTER" layoutX="965.0" layoutY="11.0" prefHeight="18.0" prefWidth="25.0" text="0">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Label>
          </children>
       </AnchorPane>
       <StackPane fx:id="shopPane" layoutY="100.0" prefHeight="600.0" prefWidth="1000.0">
          <children>
-            <ScrollPane prefHeight="600.0" prefWidth="1000.0">
+            <ScrollPane fx:id="shop" prefHeight="600.0" prefWidth="1000.0">
                <content>
                   <FlowPane fx:id="mainViewFlowPane" prefHeight="599.0" prefWidth="983.0" style="-fx-background-color: #F3F3F3;">
                      <children>
@@ -293,7 +404,7 @@
                               </AnchorPane>
                            </children>
                         </AnchorPane>
-                        <FlowPane fx:id="productsPanel" hgap="20.0" prefHeight="1005.0" prefWidth="798.0" style="-fx-background-color: #F3F3F3;" vgap="20.0">
+                        <FlowPane fx:id="productsPanel" hgap="20.0" prefHeight="1005.0" prefWidth="797.0" style="-fx-background-color: #F3F3F3;" vgap="20.0">
                            <FlowPane.margin>
                               <Insets left="20.0" top="5.0" />
                            </FlowPane.margin>
@@ -305,12 +416,12 @@
                                     <Image url="@resources/Ladda-ner-ikoner.png" />
                                  </image>
                               </ImageView>
-                              <Label fx:id="contactUs" layoutX="32.0" layoutY="9.0" text="Kontakta Oss" textFill="WHITE">
+                              <Label fx:id="contactUs" layoutX="30.0" layoutY="9.0" onMouseClicked="#contactUs" styleClass="footer_text" stylesheets="@imat_app.css" text="Kontakta Oss" textFill="WHITE">
                                  <font>
                                     <Font name="System Bold" size="24.0" />
                                  </font>
                               </Label>
-                              <Label fx:id="aboutImat" layoutX="333.0" layoutY="9.0" text="Om Imat" textFill="WHITE">
+                              <Label fx:id="imatAbout" layoutX="250.0" layoutY="9.0" onMousePressed="#aboutUs" styleClass="footer_text" stylesheets="@imat_app.css" text="Om Imat" textFill="WHITE">
                                  <font>
                                     <Font name="System Bold" size="24.0" />
                                  </font>
@@ -322,7 +433,12 @@
                                  </font>
                               </Label>
                               <Label layoutX="51.0" layoutY="59.0" prefHeight="17.0" prefWidth="373.0" text="Imat Sverige  Sverigevägen 18, Telefon: 108800, Org-nr: 567812-5021" textFill="WHITE" />
-                              <Label fx:id="purchaseConditions" layoutX="594.0" layoutY="9.0" text="Köpvillkor" textFill="WHITE">
+                              <Label fx:id="purchaseConditions" layoutX="400.0" layoutY="9.0" onMouseClicked="#buyInfo" styleClass="footer_text" stylesheets="@imat_app.css" text="Köpvillkor" textFill="WHITE">
+                                 <font>
+                                    <Font name="System Bold" size="24.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="570.0" layoutY="9.0" onMousePressed="#advertisment" styleClass="footer_text" stylesheets="@imat_app.css" text="Erbjudanden" textFill="WHITE">
                                  <font>
                                     <Font name="System Bold" size="24.0" />
                                  </font>
@@ -354,9 +470,88 @@
                               </ImageView>
                            </children>
                            <FlowPane.margin>
-                              <Insets bottom="30.0" top="5.0" />
+                              <Insets top="5.0" />
                            </FlowPane.margin>
                         </AnchorPane>
+                     </children>
+                  </FlowPane>
+               </content>
+            </ScrollPane>
+            <ScrollPane fx:id="home" prefHeight="610.0" prefWidth="1000.0">
+               <content>
+                  <FlowPane fx:id="closeHome" prefHeight="594.0" prefWidth="998.0">
+                     <children>
+                        <AnchorPane prefHeight="349.0" prefWidth="900.0" style="-fx-background-color: #3162BF; -fx-background-radius: 20;">
+                           <FlowPane.margin>
+                              <Insets left="50.0" right="50.0" top="30.0" />
+                           </FlowPane.margin>
+                           <children>
+                              <Circle fill="#2150a8" layoutX="80.0" layoutY="51.0" radius="30.0" stroke="TRANSPARENT" strokeType="INSIDE" />
+                              <Circle fill="#2150a8" layoutX="161.0" layoutY="190.0" radius="45.0" stroke="TRANSPARENT" strokeType="INSIDE" />
+                              <Circle fill="#2150a8" layoutX="321.0" layoutY="71.0" radius="57.0" stroke="TRANSPARENT" strokeType="INSIDE" />
+                              <Circle fill="#2150a8" layoutX="803.0" layoutY="221.0" radius="45.0" stroke="TRANSPARENT" strokeType="INSIDE" />
+                              <Circle fill="#2150a8" layoutX="752.0" layoutY="139.0" radius="18.0" stroke="TRANSPARENT" strokeType="INSIDE" />
+                              <Circle fill="#2150a8" layoutX="625.0" layoutY="258.0" radius="50.0" stroke="TRANSPARENT" strokeType="INSIDE" />
+                              <Circle fill="#2150a8" layoutX="470.0" layoutY="225.0" radius="33.0" stroke="TRANSPARENT" strokeType="INSIDE" />
+                              <Circle fill="#2150a8" layoutX="327.0" layoutY="262.0" radius="39.0" stroke="TRANSPARENT" strokeType="INSIDE" />
+                              <Circle fill="#2150a8" layoutX="80.0" layoutY="291.0" radius="25.0" stroke="TRANSPARENT" strokeType="INSIDE" />
+                              <Circle fill="#2150a8" layoutX="495.0" layoutY="106.0" radius="45.0" stroke="TRANSPARENT" strokeType="INSIDE" />
+                              <Circle fill="#2150a8" layoutX="656.0" layoutY="78.0" radius="57.0" stroke="TRANSPARENT" strokeType="INSIDE" />
+                              <Circle fill="#2150a8" layoutX="835.0" layoutY="86.0" radius="32.0" stroke="TRANSPARENT" strokeType="INSIDE" />
+                              <Label layoutX="50.0" layoutY="12.0" text="VÄLKOMMEN TILL IMAT" textFill="WHITE">
+                                 <font>
+                                    <Font name="Yu Gothic UI Semibold" size="72.0" />
+                                 </font>
+                              </Label>
+                              <Circle fill="#2150a8" layoutX="208.0" layoutY="356.0" radius="39.0" stroke="TRANSPARENT" strokeType="INSIDE" />
+                              <Circle fill="#2150a8" layoutX="758.0" layoutY="382.0" radius="39.0" stroke="TRANSPARENT" strokeType="INSIDE" />
+                              <Circle fill="#2150a8" layoutX="475.0" layoutY="344.0" radius="38.0" stroke="TRANSPARENT" strokeType="INSIDE" />
+                              <Circle fill="#2150a8" layoutX="589.0" layoutY="374.0" radius="21.0" stroke="TRANSPARENT" strokeType="INSIDE" />
+                              <Circle fill="#2150a8" layoutX="841.0" layoutY="314.0" radius="27.0" stroke="TRANSPARENT" strokeType="INSIDE" />
+                              <Circle fill="#2150a8" layoutX="378.0" layoutY="344.0" radius="27.0" stroke="TRANSPARENT" strokeType="INSIDE" />
+                              <Circle fill="#2150a8" layoutX="264.0" layoutY="176.0" radius="26.0" stroke="TRANSPARENT" strokeType="INSIDE" />
+                              <Circle fill="#2150a8" layoutX="70.0" layoutY="368.0" radius="31.0" stroke="TRANSPARENT" strokeType="INSIDE" />
+                              <FlowPane fx:id="advertisementFlowPane" alignment="CENTER" hgap="45.0" layoutX="103.0" layoutY="106.0" prefHeight="290.0" prefWidth="694.0" />
+                              <ImageView fitHeight="75.0" fitWidth="82.0" layoutX="282.0" layoutY="271.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@resources/discount.png" />
+                                 </image>
+                              </ImageView>
+                              <ImageView fitHeight="75.0" fitWidth="82.0" layoutX="503.0" layoutY="270.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@resources/discount.png" />
+                                 </image>
+                              </ImageView>
+                              <ImageView fitHeight="75.0" fitWidth="82.0" layoutX="727.0" layoutY="271.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@resources/discount.png" />
+                                 </image>
+                              </ImageView>
+                              <Label layoutX="301.0" layoutY="295.0" text="20%" textFill="#ff2700">
+                                 <font>
+                                    <Font name="System Bold" size="20.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="522.0" layoutY="295.0" text="25%" textFill="#ff2700">
+                                 <font>
+                                    <Font name="System Bold" size="20.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="745.0" layoutY="295.0" text="15%" textFill="#ff2700">
+                                 <font>
+                                    <Font name="System Bold" size="20.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </AnchorPane>
+                        <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#closeHome" prefHeight="90.0" prefWidth="250.0" styleClass="home" stylesheets="@imat_app.css" text="BÖRJA HANDLA" textAlignment="CENTER" textFill="WHITE">
+                           <FlowPane.margin>
+                              <Insets left="375.0" top="25.0" />
+                           </FlowPane.margin>
+                           <font>
+                              <Font name="Yu Gothic UI Semibold" size="24.0" />
+                           </font>
+                        </Button>
                      </children>
                   </FlowPane>
                </content>

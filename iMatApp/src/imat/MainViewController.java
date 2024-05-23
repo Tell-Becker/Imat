@@ -6,10 +6,12 @@ import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
@@ -19,6 +21,8 @@ import javafx.scene.image.ImageView;
 import javafx.scene.Node;
 import se.chalmers.cse.dat216.project.*;
 import se.chalmers.cse.dat216.project.ProductCategory;
+
+import javax.swing.*;
 
 
 public class MainViewController implements Initializable, ShoppingCartListener {
@@ -36,6 +40,11 @@ public class MainViewController implements Initializable, ShoppingCartListener {
     @FXML private Label costLabel;
     @FXML private FlowPane mainViewFlowPane;
     @FXML private FlowPane productsPanel;
+    @FXML private FlowPane advertisementFlowPane;
+    @FXML private AnchorPane accountContactPane;
+
+    @FXML private ScrollPane home;
+    @FXML private ScrollPane shop;
 
     private Model model = Model.getInstance();
     private Map<String, ProductPanel> productMap = new HashMap();
@@ -76,6 +85,8 @@ public class MainViewController implements Initializable, ShoppingCartListener {
     @FXML private TextField cvcField;
     @FXML private Label purchasesLabel;
 
+    private NamePanel namepanel;
+
     @FXML public FlowPane shoppingCartFlowPane;
 
     @FXML private AnchorPane dynamicPane;
@@ -86,6 +97,19 @@ public class MainViewController implements Initializable, ShoppingCartListener {
 
     @FXML private ImageView closeShoppingCartIcon;
     @FXML private ImageView backArrow;
+
+    @FXML private ImageView ContactUsClose;
+
+    @FXML private ImageView aboutImatClose;
+
+    @FXML private AnchorPane aboutImat;
+
+    @FXML private ImageView buyInfoClose;
+    @FXML private AnchorPane buyInfo;
+
+    @FXML private Label errorLabel;
+
+    private ShoppingCart shoppingCartInstance;
 
     // Other variables:
     IMatDataHandler iMatDataHandler = IMatDataHandler.getInstance();
@@ -124,6 +148,8 @@ public class MainViewController implements Initializable, ShoppingCartListener {
 
 
     @FXML private void handleSearchAction(ActionEvent event) {
+        shop.toFront();
+        header.toFront();
         for (Node node : categoryList.getChildren()) {
             if (node instanceof AnchorPane) {
                 node.getStyleClass().remove("selected_category");
@@ -133,9 +159,12 @@ public class MainViewController implements Initializable, ShoppingCartListener {
         List<Product> matches = model.findProducts(searchField.getText());
         updateProductList(matches);
         System.out.println("# matching products: " + matches.size());
+
+        shop.setVvalue(0.0);
     }
 
     private void handleNameAction() {
+        namepanel.openAccountPanel();
         openNameView();
     }
 
@@ -162,6 +191,8 @@ public class MainViewController implements Initializable, ShoppingCartListener {
     }
 
     @FXML private void searchfavoriteCategory() {
+        shop.setVvalue(0.0);
+
         IMatDataHandler iMatDataHandler = IMatDataHandler.getInstance();
         searchField.clear();
         selectCategory(favoriteCategory);
@@ -170,12 +201,16 @@ public class MainViewController implements Initializable, ShoppingCartListener {
     }
 
     @FXML private void searchMeatCategory() {
+        shop.setVvalue(0.0);
+
         searchField.clear();
         selectCategory(meatCategory);
         List<Product> meatProducts = filterProductsByCategory(ProductCategory.MEAT);
         updateProductList(meatProducts);
     }
     @FXML private void searchFishCategory() {
+        shop.setVvalue(0.0);
+
         searchField.clear();
         selectCategory(fishCategory);
         List<Product> fishProducts = filterProductsByCategory(ProductCategory.FISH);
@@ -183,6 +218,8 @@ public class MainViewController implements Initializable, ShoppingCartListener {
     }
 
     @FXML private void searchDairyCategory() {
+        shop.setVvalue(0.0);
+
         searchField.clear();
         selectCategory(dairyCategory);
         List<Product> dairyProducts = filterProductsByCategory(ProductCategory.DAIRIES);
@@ -190,6 +227,8 @@ public class MainViewController implements Initializable, ShoppingCartListener {
     }
 
     @FXML private void searchCarbCategory() {
+        shop.setVvalue(0.0);
+
         searchField.clear();
         selectCategory(carbCategory);
         List<Product> breadProducts = filterProductsByCategory(ProductCategory.BREAD);
@@ -203,6 +242,8 @@ public class MainViewController implements Initializable, ShoppingCartListener {
     }
 
     @FXML private void searchBakeryCategory() {
+        shop.setVvalue(0.0);
+
         searchField.clear();
         selectCategory(bakeryCategory);
         List<Product> bakeryProducts = filterProductsByCategory(ProductCategory.BREAD);
@@ -218,6 +259,8 @@ public class MainViewController implements Initializable, ShoppingCartListener {
     }
 
     @FXML private void searchFruitCategory() {
+        shop.setVvalue(0.0);
+
         searchField.clear();
         selectCategory(fruitCategory);
         List<Product> fruitProducts = filterProductsByCategory(ProductCategory.FRUIT);
@@ -238,6 +281,8 @@ public class MainViewController implements Initializable, ShoppingCartListener {
     }
 
     @FXML private void searchVegetableCategory() {
+        shop.setVvalue(0.0);
+
         searchField.clear();
         selectCategory(vegetableCategory);
         List<Product> cabbage = filterProductsByCategory(ProductCategory.CABBAGE);
@@ -255,6 +300,8 @@ public class MainViewController implements Initializable, ShoppingCartListener {
     }
 
     @FXML private void searchPantryCategory() {
+        shop.setVvalue(0.0);
+
         searchField.clear();
         selectCategory(pantryCategory);
         List<Product> pantryProducts = filterProductsByCategory(ProductCategory.FLOUR_SUGAR_SALT);
@@ -262,6 +309,8 @@ public class MainViewController implements Initializable, ShoppingCartListener {
     }
 
     @FXML private void searchSweetCategory() {
+        shop.setVvalue(0.0);
+
         searchField.clear();
         selectCategory(snackCategory);
         List<Product> sweetProducts = filterProductsByCategory(ProductCategory.SWEET);
@@ -276,6 +325,9 @@ public class MainViewController implements Initializable, ShoppingCartListener {
     }
 
     @FXML private void searchDrinkCategory() {
+        shop.setVvalue(0.0);
+
+        shop.setVvalue(0.0);
         searchField.clear();
         selectCategory(drinkCategory);
         List<Product> coldDrinks = filterProductsByCategory(ProductCategory.COLD_DRINKS);
@@ -286,12 +338,20 @@ public class MainViewController implements Initializable, ShoppingCartListener {
         updateProductList(allDrinks);
     }
 
+    @FXML public void closeHome(ActionEvent event) {
+        shop.toFront();
+        header.toFront();
+        searchfavoriteCategory();
+    }
+
     @FXML public void home() {
         shopPane.toFront();
-        searchField.clear();
-        removeAllSelectedCategories();
-        List<Product> allProducts = model.getProducts();
-        updateProductList(allProducts);
+        shop.toFront();
+        //home.toFront();
+        //searchField.clear();
+        //removeAllSelectedCategories();
+        //List<Product> allProducts = model.getProducts();
+        //updateProductList(allProducts);
         //everythingCategory.getStyleClass().remove("selected_category");
     }
 
@@ -395,6 +455,34 @@ public class MainViewController implements Initializable, ShoppingCartListener {
         imatHome.setImage(new Image(getClass().getClassLoader().getResourceAsStream(
                 "imat/resources/IMAT_logo_transparent.png")));
     }
+    @FXML public void closeContactIconEntered(){
+        ContactUsClose.setImage(new Image(getClass().getClassLoader().getResourceAsStream(
+                "imat/resources/icon_close_hover.png")));
+    }
+    @FXML public void closeContactIconExited(){
+        ContactUsClose.setImage(new Image(getClass().getClassLoader().getResourceAsStream(
+                "imat/resources/icon_close.png")));
+    }
+
+    @FXML public void closeAboutImatIconEntered(){
+        aboutImatClose.setImage(new Image(getClass().getClassLoader().getResourceAsStream(
+                "imat/resources/icon_close_hover.png")));
+    }
+    @FXML public void closeAboutImatIconExited(){
+        aboutImatClose.setImage(new Image(getClass().getClassLoader().getResourceAsStream(
+                "imat/resources/icon_close.png")));
+    }
+
+    @FXML public void closeBuyInfoIconEntered(){
+        buyInfoClose.setImage(new Image(getClass().getClassLoader().getResourceAsStream(
+                "imat/resources/icon_close_hover.png")));
+    }
+    @FXML public void closeBuyInfoIconExited(){
+        buyInfoClose.setImage(new Image(getClass().getClassLoader().getResourceAsStream(
+                "imat/resources/icon_close.png")));
+    }
+
+
 
 
     @FXML private void handleDoneProductDetail() {
@@ -421,20 +509,45 @@ public class MainViewController implements Initializable, ShoppingCartListener {
         }
 
         List<Product> products = model.getProducts();
+        int amount = 0;
         for (Product product : products) {
             ProductPanel item = new ProductPanel(product,this);
-            productMap.put(product.getName(), item);
-            productsPanel.getChildren().add(item);
-        }
 
-        updateProductList(model.getProducts());
+            item.getProduct();
+            productMap.put(product.getName(), item);
+            //productsPanel.getChildren().add(item);
+        }
+        searchfavoriteCategory();
+        updateLabel();
+        model.getShoppingCart().addShoppingCartListener(this::shoppingCartChanged);
+        shoppingCartInstance = model.getShoppingCart();
+
+        //updateProductList(model.getProducts());
         updateShoppingCartElement(model.getShoppingCart().getItems());
 
-        StackPane namePane = new NamePanel(this);
+        namepanel = new NamePanel(this);
+
+
+        StackPane namePane = namepanel;
         dynamicPane.getChildren().add(namePane);
 
         StackPane checkoutPane = checkoutPanel;
         dynamicPane2.getChildren().add(checkoutPane);
+
+        List<Product> homeproducts = model.getProducts();
+        for (Product product : products) {
+            ProductPanel item = productMap.get(product.getName());
+            if(Objects.equals(product.getName(), "Kanelbullar")) {
+                advertisementFlowPane.getChildren().add(item);
+            }
+            if(Objects.equals(product.getName(), "Mjölk")) {
+                advertisementFlowPane.getChildren().add(item);
+            }
+            if(Objects.equals(product.getName(), "Ägg")) {
+                advertisementFlowPane.getChildren().add(item);
+            }
+
+        }
 
     }
 
@@ -463,6 +576,7 @@ public class MainViewController implements Initializable, ShoppingCartListener {
 
     public void openNameView() {
         dynamicPane.toFront();
+        header.toFront();
     }
 
     public void registerProductPanel(ProductPanel productPanel) {
@@ -475,24 +589,55 @@ public class MainViewController implements Initializable, ShoppingCartListener {
         }
     }
 
-    public void openCheckoutView() {dynamicPane2.toFront();}
-
     @FXML public void openShoppingCart() {
         shoppingCart.toFront();
+        header.toFront();
+    }
+
+    @FXML void mouseTrap(Event event){
+        event.consume();
     }
 
 
     public void closeNameView() {
         shopPane.toFront();
+        header.toFront();
     }
 
-    public void closeCheckoutView() {shopPane.toFront();}
+    public void closeCheckoutView() {
+        shopPane.toFront();
+        header.toFront();
+    }
 
 
 
     @Override
     public void shoppingCartChanged(CartEvent cartEvent) {
         //updateShoppingCartElement(iMatDataHandler.getShoppingCart().getItems());
+        //updateLabel();
+        //updateShoppingCartElement(model.getShoppingCart().getItems());
+        //updateLabel();
+        //updateProductQuantities();
+
+        //updateLabel();
+        //updateProductQuantities();
+
+    }
+
+    public void updateProductQuantities() {
+        Map<Product, Integer> productQuantities = new HashMap<>();
+        for (ShoppingItem item : model.getShoppingCart().getItems()) {
+            productQuantities.put(item.getProduct(), (int) item.getAmount());
+        }
+
+        for (ProductPanel panel : productPanels) {
+            Integer quantity = productQuantities.get(panel.getProduct());
+            if (quantity != null) {
+                panel.updateQuantity(quantity);
+            } else {
+                panel.resetQuantity();
+            }
+        }
     }
 
     public void updateShoppingCartElement(List<ShoppingItem> items) {
@@ -505,9 +650,28 @@ public class MainViewController implements Initializable, ShoppingCartListener {
         shoppingCartFlowPane.getChildren().clear();
 
         for (ShoppingItem item : items) {
-            shoppingCartFlowPane.getChildren().add(new imat.ShoppingCartElement(item.getProduct(), item.getAmount(),this));
+            shoppingCartFlowPane.getChildren().add(new ShoppingCartElement(item.getProduct(), item.getAmount(),this, checkoutPanel));
         }
         checkoutPanel.updateCheckoutElement(items);
+        updatePriceLabel();
+
+    }
+    public void updatePriceLabel(){
+        costLabel.setText(String.valueOf("Kostnad: " + String.format("%.2f", shoppingCartInstance.getTotal()) + " kr"));
+    }
+
+    public void checkoutElementUpdateShoppingCartElement(List<ShoppingItem> items) {
+
+        Map<String, ShoppingItem> itemMap = new HashMap<>();
+        for (ShoppingItem item : items) {
+            itemMap.put(item.getProduct().getName(), item);
+        }
+
+        shoppingCartFlowPane.getChildren().clear();
+
+        for (ShoppingItem item : items) {
+            shoppingCartFlowPane.getChildren().add(new ShoppingCartElement(item.getProduct(), item.getAmount(),this, checkoutPanel));
+        }
 
     }
 
@@ -523,6 +687,72 @@ public class MainViewController implements Initializable, ShoppingCartListener {
             }
         }
 
+    }
+
+    @FXML
+    private void handleDoneShoppingCart() {
+        shoppingcartback();
+        errorLabel.setText("");
+    }
+
+    public void shoppingcartback() {
+        shoppingCart.toBack();
+
+        //updateProductList();
+    }
+
+    public void openCheckoutView() {
+
+        if (model.getCartAmount() != 0){
+            dynamicPane2.toFront();
+            header.toFront();
+        }
+        else {
+            errorLabel.setText("Vänligen lägg till en produkt i kundvagnen");
+        }
+
+    }
+
+
+    public void updateLabel() {
+        itemsLabel.setText( String.format("%d",(int) model.getCartAmount()));
+
+    }
+
+    @FXML public void contactUs() {
+        accountContactPane.toFront();
+        header.toFront();
+    }
+
+    @FXML public void aboutUs() {
+        aboutImat.toFront();
+        header.toFront();
+    }
+
+    @FXML public void buyInfo() {
+        buyInfo.toFront();
+        header.toFront();
+    }
+
+    @FXML public void advertisment() {
+        advertisementFlowPane.getChildren().clear();
+        List<Product> homeproducts = model.getProducts();
+        for (Product product : homeproducts) {
+            ProductPanel item = productMap.get(product.getName());
+            if(Objects.equals(product.getName(), "Kanelbullar")) {
+                advertisementFlowPane.getChildren().add(item);
+            }
+            if(Objects.equals(product.getName(), "Mjölk")) {
+                advertisementFlowPane.getChildren().add(item);
+            }
+            if(Objects.equals(product.getName(), "Ägg")) {
+                advertisementFlowPane.getChildren().add(item);
+            }
+
+        }
+        home.toFront();
+        header.toFront();
+        shop.setVvalue(0.0);
     }
 
 }

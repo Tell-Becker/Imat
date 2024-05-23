@@ -19,6 +19,7 @@ import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.StackPane;
 import se.chalmers.cse.dat216.project.*;
 
+import javax.swing.*;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
@@ -115,6 +116,10 @@ public class CheckoutPanel extends StackPane implements ShoppingCartListener{
 
         @FXML private Label totalLabel3;
 
+        @FXML private Label timeErrorLabel;
+        @FXML private Label detailErrorLabel;
+        @FXML private Label cardErrorLabel;
+
 
 
         @FXML private ImageView backArrow;
@@ -122,6 +127,8 @@ public class CheckoutPanel extends StackPane implements ShoppingCartListener{
         @FXML private ImageView backArrow3;
 
         @FXML private ImageView backArrow4;
+
+        private Labeled selectedTime;
 
 
 
@@ -287,7 +294,7 @@ public class CheckoutPanel extends StackPane implements ShoppingCartListener{
         }
         for (Button button : getLista()) {
             if (button == clickedButton) {
-                Labeled selectedTime = button;
+                selectedTime = button;
                 button.getStyleClass().remove("normal-button");
                 button.getStyleClass().add("highlighted-button");
                 if (selectedTime == button0810) {
@@ -425,6 +432,16 @@ public class CheckoutPanel extends StackPane implements ShoppingCartListener{
         ///customer.setLastName(lnameTextField.getText());
         checkoutPane.toFront();
         mainController.closeCheckoutView();
+        //mainController.resetAllProductPanels();
+    }
+
+    @FXML public void closeCheckoutPanelFinished() {
+
+        // Save values
+        //  customer.setFirstName(fnameTextField.getText());
+        ///customer.setLastName(lnameTextField.getText());
+        checkoutPane.toFront();
+        mainController.closeCheckoutView();
         mainController.resetAllProductPanels();
     }
 
@@ -440,18 +457,48 @@ public class CheckoutPanel extends StackPane implements ShoppingCartListener{
         checkoutTimePane.toFront();
     }
     @FXML private void openCheckoutCard(ActionEvent event) {
-        updateCardPanel();
-        checkoutCardPane.toFront();
+        if (fNameTextField.getLength() !=0 && lNameTextField.getLength() !=0 && emailTextField.getLength() !=0 && phonenrTextField.getLength() !=0 && adressTextField.getLength() !=0 && postalnrTextField.getLength() !=0 && cityTextField.getLength() !=0)
+        {
+            updateCardPanel();
+            checkoutCardPane.toFront();
+            detailErrorLabel.setText("");
+        }
+        else {
+            detailErrorLabel.setText("Vänligen fyll i alla fält");
+        }
     }
+
     @FXML private void openCheckoutDetail(Event event) {
-        updateAccountDetail();
+        if (selectedTime != null) {
+            updateAccountDetail();
+            checkoutDetailPane.toFront();
+            timeErrorLabel.setText("");
+        }
+        else{
+            timeErrorLabel.setText("Vänligen välj en tid");
+        }
+    }
+
+    @FXML private void openCheckoutDetail2(Event event) {
         checkoutDetailPane.toFront();
     }
+
     @FXML private void openCheckoutFinished(ActionEvent event) {
-        BuyItems();
-        checkoutFlowPane.getChildren().clear();
-        mainController.shoppingCartFlowPane.getChildren().clear();
-        checkoutFinishedPane.toFront();
+        if (selectedTime != null && fNameTextField.getLength() !=0 && lNameTextField.getLength() !=0 && emailTextField.getLength() !=0 && phonenrTextField.getLength() !=0 && adressTextField.getLength() !=0 && postalnrTextField.getLength() !=0 && cityTextField.getLength() !=0 && numberTextField.getLength() != 0 && nameTextField.getLength() != 0 && cvcField.getLength() != 0) {
+            BuyItems();
+            checkoutFlowPane.getChildren().clear();
+            mainController.shoppingCartFlowPane.getChildren().clear();
+            mainController.updateLabel();
+            checkoutFinishedPane.toFront();
+            cardErrorLabel.setText("");
+        }
+        else if(numberTextField.getLength() != 0 && nameTextField.getLength() != 0 && cvcField.getLength() != 0)
+        {
+            cardErrorLabel.setText("Vänligen fyll i alla fält i de tidigare stegen");
+        }
+        else {
+            cardErrorLabel.setText("Vänligen fyll i alla fält");
+        }
     }
     void updateCardPanel() {
 
@@ -539,7 +586,7 @@ public class CheckoutPanel extends StackPane implements ShoppingCartListener{
         checkoutFlowPane.getChildren().clear();
 
         for (ShoppingItem item : items) {
-            checkoutFlowPane.getChildren().add(new CheckoutElement(item.getProduct(), item.getAmount()));
+            checkoutFlowPane.getChildren().add(new CheckoutElement(item.getProduct(), item.getAmount(), mainController, this));
         }
     }
 
@@ -558,5 +605,35 @@ public class CheckoutPanel extends StackPane implements ShoppingCartListener{
     public void shoppingCartChanged(CartEvent cartEvent) {
         double total = model.getShoppingCart().getTotal();
         updateTotalLabels(total);
+    }
+
+
+    @FXML public void wizard1(ActionEvent event) {
+        checkoutPane.toFront();
+        updateAccountDetail();
+        updateCardPanel();
+
+
+    }
+
+    @FXML public void wizard2(ActionEvent event) {
+        checkoutTimePane.toFront();
+        updateAccountDetail();
+        updateCardPanel();
+
+    }
+
+    @FXML public void wizard3(ActionEvent event) {
+        checkoutDetailPane.toFront();
+        updateAccountDetail();
+        updateCardPanel();
+
+    }
+
+    @FXML public void wizard4(ActionEvent event) {
+        checkoutCardPane.toFront();
+        updateAccountDetail();
+        updateCardPanel();
+
     }
 }

@@ -58,8 +58,8 @@
       </AnchorPane>
       <AnchorPane id="product" fx:id="addButtonPane" prefHeight="240.0" prefWidth="175.0" style="-fx-background-radius: 20;" stylesheets="@imat_app.css">
          <children>
-            <ImageView fx:id="imageView" fitHeight="116.0" fitWidth="128.0" layoutX="24.0" layoutY="36.0" pickOnBounds="true" preserveRatio="true" styleClass="product_images" />
-            <ImageView fx:id="productPanelInfo" fitHeight="20.0" fitWidth="16.0" layoutX="150.0" layoutY="8.0" onMouseClicked="#handleShowProductDetail" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="imageView" fitHeight="116.0" fitWidth="128.0" layoutX="24.0" layoutY="36.0" onMouseClicked="#handleShowProductDetail" pickOnBounds="true" preserveRatio="true" styleClass="images" />
+            <ImageView fx:id="productPanelInfo" fitHeight="24.0" fitWidth="24.0" layoutX="143.0" layoutY="6.0" onMouseClicked="#handleShowProductDetail" pickOnBounds="true" preserveRatio="true" styleClass="images">
                <image>
                   <Image url="@resources/info.png" />
                </image>
@@ -79,7 +79,7 @@
                   <Font size="14.0" />
                </font>
             </Label>
-            <ImageView fx:id="favoriteImageView" fitHeight="16.0" fitWidth="16.0" layoutX="15.0" layoutY="8.0" onMouseClicked="#handleShowFavorite" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="favoriteImageView" fitHeight="24.0" fitWidth="24.0" layoutX="12.0" layoutY="6.0" onMouseClicked="#handleShowFavorite" pickOnBounds="true" preserveRatio="true" styleClass="images" />
          </children>
          <effect>
             <DropShadow height="20.0" radius="9.5" width="20.0">

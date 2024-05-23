@@ -11,12 +11,12 @@
       <change beforePath="$PROJECT_DIR$/iMatApp/src/imat/CheckoutPanel.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/iMatApp/src/imat/CheckoutPanel.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/iMatApp/src/imat/CheckoutPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/iMatApp/src/imat/CheckoutPanel.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/iMatApp/src/imat/MainViewController.java" beforeDir="false" afterPath="$PROJECT_DIR$/iMatApp/src/imat/MainViewController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/iMatApp/src/imat/Model.java" beforeDir="false" afterPath="$PROJECT_DIR$/iMatApp/src/imat/Model.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/iMatApp/src/imat/NamePanel.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/iMatApp/src/imat/NamePanel.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/iMatApp/src/imat/NamePanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/iMatApp/src/imat/NamePanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/iMatApp/src/imat/OrderElement.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/iMatApp/src/imat/OrderElement.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/iMatApp/src/imat/OrderElement.java" beforeDir="false" afterPath="$PROJECT_DIR$/iMatApp/src/imat/OrderElement.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/iMatApp/src/imat/ProductPanel.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/iMatApp/src/imat/ProductPanel.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/iMatApp/src/imat/ProductPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/iMatApp/src/imat/ProductPanel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/iMatApp/src/imat/ShoppingCartElement.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/iMatApp/src/imat/ShoppingCartElement.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/iMatApp/src/imat/ShoppingCartElement.java" beforeDir="false" afterPath="$PROJECT_DIR$/iMatApp/src/imat/ShoppingCartElement.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/iMatApp/src/imat/imat_app.css" beforeDir="false" afterPath="$PROJECT_DIR$/iMatApp/src/imat/imat_app.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/iMatApp/src/imat/imat_app.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/iMatApp/src/imat/imat_app.fxml" afterDir="false" />
@@ -25,13 +25,13 @@
       <change beforePath="$PROJECT_DIR$/out/production/Imat/imat/CheckoutPanel.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Imat/imat/CheckoutPanel.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Imat/imat/CheckoutPanel.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Imat/imat/CheckoutPanel.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Imat/imat/MainViewController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Imat/imat/MainViewController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Imat/imat/Model.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Imat/imat/Model.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Imat/imat/NamePanel.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Imat/imat/NamePanel.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Imat/imat/NamePanel.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Imat/imat/NamePanel.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Imat/imat/OrderElement.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Imat/imat/OrderElement.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Imat/imat/OrderElement.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Imat/imat/OrderElement.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Imat/imat/ProductPanel.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Imat/imat/ProductPanel.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Imat/imat/ProductPanel.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Imat/imat/ProductPanel.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Imat/imat/ShoppingCartElement.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Imat/imat/ShoppingCartElement.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Imat/imat/ShoppingCartElement.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Imat/imat/ShoppingCartElement.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Imat/imat/imat_app.css" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Imat/imat/imat_app.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Imat/imat/imat_app.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Imat/imat/imat_app.fxml" afterDir="false" />
     </list>
@@ -65,7 +65,7 @@
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/lwtb0/Downloads/imat-371/imatjoel&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/lwtb0/Downloads/Imat-halvklar/Imat-halvklar-joel&quot;,
     &quot;project.structure.last.edited&quot;: &quot;Libraries&quot;,
     &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
     &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;

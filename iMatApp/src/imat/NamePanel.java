@@ -33,7 +33,7 @@ import java.util.function.UnaryOperator;
  *
  * @author oloft
  */
-public class NamePanel extends StackPane {
+public class NamePanel extends StackPane implements ShoppingCartListener {
 
 
     @FXML
@@ -123,6 +123,8 @@ public class NamePanel extends StackPane {
         updateAccountDetail();
         updateOrderElement(model.getOrders());
 
+
+        model.getShoppingCart().addShoppingCartListener(this);
         setupAccountPane();
 
         numberTextField.setTextFormatter(createNumericTextFormatter(16));
@@ -212,6 +214,10 @@ public class NamePanel extends StackPane {
     }
     @FXML
     private void openAccountPane(ActionEvent event) {
+        accountPane.toFront();
+    }
+
+    public void openAccountPanel() {
         accountPane.toFront();
     }
     @FXML
@@ -352,9 +358,15 @@ public class NamePanel extends StackPane {
 
     private void addToCart() {
         for (ShoppingItem item : currentOrder.getItems()) {
-            model.addToShoppingCart(item.getProduct());
-            mainController.updateShoppingCartElement(model.getShoppingCart().getItems());
+            for (int i = 0; i < item.getAmount() ; i++)
+            {
+                model.addToShoppingCart(item.getProduct());
+                mainController.updateProductQuantities();
+            }
+
         }
+        mainController.updateShoppingCartElement(model.getShoppingCart().getItems());
+        mainController.updateLabel();
         accountHistoryPane.toFront();
     }
 
@@ -367,5 +379,12 @@ public class NamePanel extends StackPane {
             return null;
         };
         return new TextFormatter<>(filter);
+    }
+
+    @Override
+    public void shoppingCartChanged(CartEvent cartEvent) {
+
+        updateOrderElement(model.getOrders());
+
     }
 }
